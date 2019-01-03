@@ -9,7 +9,7 @@ namespace Model
     public class Punchcard
     {
         public int Id { get; set; }
-        public int EmpId { get; set; }
+        public int EmpsId { get; set; }
         public string Signindate { get; set; }
         public string Signoutdate { get; set; }
 

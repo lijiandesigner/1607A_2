@@ -11,7 +11,7 @@ namespace Model
     public class Vacate
     {
         public int Id { get; set; }
-        public int EmpId { get; set; }
+        public int EmpsId { get; set; }
         public string Name { get; set; }
         public string Cause { get; set; }
         public string Remark { get; set; }

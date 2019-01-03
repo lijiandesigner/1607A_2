@@ -11,7 +11,7 @@ namespace Model
     {
         [Key]
         public int Id { get; set; }
-        public int EmpId { get; set; }
+        public int EmpsId { get; set; }
         public string LeaveType { get; set; }
         public string Yleavedate { get; set; }
         public string Xsettledate { get; set; }
