@@ -8,6 +8,5 @@ namespace DAL
 {
     class FinanceDal
     {
-        public int MyProperty { get; set; }
     }
 }
