@@ -15,9 +15,10 @@ namespace DAL
         /// 获取所有员工打卡数据
         /// </summary>
         /// <returns>List<Attendance></returns>
-        public List<Attendance> GetAllAttendance()
+        public List<Punchcard> GetAllAttendance()
         {
-            return my.Attendances.ToList();
+           
+            return my.Punchcards.ToList();
         }
         /// <summary>
         /// 打卡方法
@@ -26,7 +27,7 @@ namespace DAL
         /// <returns>int</returns>
         public int Punchcard(Attendance atte)
         {
-            my.Attendances.Add(atte);
+            my.Punchcards.Add(atte);
             return my.SaveChanges();
         }
         /// <summary>

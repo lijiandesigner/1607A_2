@@ -15,7 +15,7 @@ namespace BLL
         /// 获取所有员工打卡数据
         /// </summary>
         /// <returns>List<Attendance></returns>
-        public List<Attendance> GetAllAttendance()
+        public List<Punchcard> GetAllAttendance()
         {
             return dal.GetAllAttendance();
         }

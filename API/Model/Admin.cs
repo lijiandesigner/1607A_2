@@ -11,6 +11,6 @@ namespace Model
         public int Id { get; set; }
         public string UserName { get; set; }
         public string UserPwd { get; set; }
-        public string Permission { get; set; }
+        public int Permission { get; set; }
     }
 }
