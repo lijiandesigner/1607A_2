@@ -14,5 +14,6 @@ namespace Model
         public string Signoutdate { get; set; }
 
         public virtual Emp Emps { get; set; }
+        public int MyProperty { get; set; }
     }
 }
