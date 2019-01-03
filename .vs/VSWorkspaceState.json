@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BLL",
+    "\\DAL",
+    "\\Model",
+    "\\ShiXunXiangMu",
+    "\\ShiXunXiangMu\\Controllers"
   ],
+  "SelectedNode": "\\Model\\Vacate.cs",
   "PreviewInSolutionExplorer": false
 }
