@@ -12,7 +12,7 @@ namespace DAL
     {
         MyContent my = new MyContent();
         /// <summary>
-        /// 获取所有员工打卡数据
+        /// 获取所有员工打卡数据1
         /// </summary>
         /// <returns>List<Attendance></returns>
         public List<Punchcard> GetAllAttendance()
