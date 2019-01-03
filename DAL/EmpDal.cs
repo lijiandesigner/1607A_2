@@ -8,5 +8,6 @@ namespace DAL
 {
     class EmpDal
     {
+        public int MyProperty { get; set; }
     }
 }
