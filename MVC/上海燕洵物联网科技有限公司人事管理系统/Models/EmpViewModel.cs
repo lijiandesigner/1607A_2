@@ -8,6 +8,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Models
     public class EmpViewModel
     {
         public int Id { get; set; }
+        public int DepartmentsId { get; set; }
         public string Ename { get; set; }
         public string Esex { get; set; }
         public string Papersnum { get; set; }
