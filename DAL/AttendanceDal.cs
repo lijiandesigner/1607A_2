@@ -12,21 +12,22 @@ namespace DAL
     {
         MyContent my = new MyContent();
         /// <summary>
-        /// 获取所有员工打卡数据1
+        /// 获取所有员工打卡数据
         /// </summary>
         /// <returns>List<Attendance></returns>
         public List<Punchcard> GetAllAttendance()
         {
+           
             return my.Punchcards.ToList();
         }
         /// <summary>
-        /// 上班打卡
+        /// 打卡方法
         /// </summary>
         /// <param name="atte">打卡类</param>
         /// <returns>int</returns>
-        public int Punchcard(Punchcard punchcard)
+        public int Punchcard(Attendance atte)
         {
-            my.Punchcards.Add(punchcard);
+            my.Punchcards.Add(atte);
             return my.SaveChanges();
         }
         /// <summary>
@@ -46,16 +47,6 @@ namespace DAL
         public int VacateAttendance(Vacate vacate)
         {
             my.Vacates.Add(vacate);
-            return my.SaveChanges();
-        }
-        /// <summary>
-        /// 下班打卡
-        /// </summary>
-        /// <param name="vacate">打卡类</param>
-        /// <returns>int</returns>
-        public int UptPunchcard(Punchcard puncard)
-        {
-            my.Entry(puncard).State = EntityState.Modified;
             return my.SaveChanges();
         }
     }
