@@ -12,6 +12,7 @@ namespace Model
         public string PermissionName { get; set; }
         public int pid { get; set; }
         public int Permission { get; set; }
+        public int MyProperty { get; set; }
         
 
 
