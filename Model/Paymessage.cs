@@ -11,13 +11,13 @@ namespace Model
     {
         [Key]
         public int Id { get; set; }
-        public int DepartmentId { get; set; }
+        public int EmpsId { get; set; }
         public string Papersnum { get; set; }
         public string Entrydate { get; set; }
         public double TryMoney { get; set; }
         public double RegularMoney { get; set; }
         public double PresentMoney { get; set; }
 
-        public virtual Department Departments { get; set; }
+        public virtual Emp Emps { get; set; }
     }
 }
