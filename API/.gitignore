@@ -259,6 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-# ¹¤³ÌÎÄ¼þºÍ½â¾ö·½°¸ÎÄ¼þ
-.sln
-.scproj
+# å·¥ç¨‹æ–‡ä»¶å’Œè§£å†³æ–¹æ¡ˆæ–‡ä»¶
+*.sln
+*.scproj
+*.scproj.*
