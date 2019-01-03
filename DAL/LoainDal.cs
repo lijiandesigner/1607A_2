@@ -8,5 +8,6 @@ namespace DAL
 {
     class LoainDal
     {
+        public int MyProperty { get; set; }
     }
 }
