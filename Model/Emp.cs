@@ -10,6 +10,7 @@ namespace Model
     {
         [Key]
         public int Id { get; set; }
+        public int DepartmentsId { get; set; }
         public string Ename { get; set; }
         public string Esex { get; set; }
         public string Papersnum { get; set; }
@@ -19,5 +20,6 @@ namespace Model
         public string Tracttype { get; set; }
         public string Etype { get; set; }
         public string ERemark { get; set; }
+        public virtual Department Departments { get; set; }
     }
 }

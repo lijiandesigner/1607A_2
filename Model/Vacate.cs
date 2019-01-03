@@ -15,6 +15,7 @@ namespace Model
         public string Name { get; set; }
         public string Cause { get; set; }
         public string Remark { get; set; }
+        public int VacateState { get; set; }
 
         public virtual Emp Emps { get; set; }
     }

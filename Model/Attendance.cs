@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Model
 {
-   public  class Attendance
+    public class Attendance
     {
         public int Id { get; set; }
-        
+
         public int EmpId { get; set; }
-        public string AttenNum { get; set; }
-        
+        public int PunchcardsId { get; set; }
+
+        public virtual Punchcard Punchcards { get; set; }
         public virtual Emp Emps { get; set; }
     }
 }

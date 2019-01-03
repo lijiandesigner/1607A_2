@@ -12,7 +12,11 @@ namespace ShiXunXiangMu.Controllers
     public class AttendanceAPIController : ApiController
     {
         AttendanceBll bll = new AttendanceBll();
-        public List<Attendance> Get()
+        /// <summary>
+        /// 获取所有的员工打卡记录
+        /// </summary>
+        /// <returns></returns>
+        public List<Punchcard> Get()
         {
             return bll.GetAllAttendance();
         }
