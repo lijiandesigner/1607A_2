@@ -140,5 +140,24 @@ namespace DAL
             my.Entry(vacate).State = EntityState.Modified;
             return my.SaveChanges();
         }
+        /// <summary>
+        /// 显示请假信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Vacate> ShowVacate()
+        {
+            return my.Vacates.ToList();
+        }
+        /// <summary>
+        /// 删除请假信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DeleteVacate(int id)
+        {
+            var a = my.Vacates.Where(c => c.Id == id).FirstOrDefault();
+            my.Entry(a).State = EntityState.Deleted;
+            return my.SaveChanges();
+        }
     }
 }

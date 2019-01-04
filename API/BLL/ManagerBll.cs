@@ -121,5 +121,22 @@ namespace BLL
         {
             return dal.VacateEmp(vacate);
         }
+        /// <summary>
+        /// 显示请假信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Vacate> ShowVacate()
+        {
+            return dal.ShowVacate();
+        }
+        /// <summary>
+        /// 删除请假信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int DeleteVacate(int id)
+        {
+            return dal.DeleteVacate(id);
+        }
     }
 }

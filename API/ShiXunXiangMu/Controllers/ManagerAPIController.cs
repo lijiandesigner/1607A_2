@@ -197,5 +197,29 @@ namespace ShiXunXiangMu.Controllers
                 return "审批失败";
             }
         }
+        /// <summary>
+        /// 显示请假信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Vacate> ShowVacate()
+        {
+            return bll.ShowVacate();
+        }
+        /// <summary>
+        /// 删除请假信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string DeleteVacate(int id)
+        {
+            if( bll.DeleteVacate(id)>0)
+            {
+                return "删除成功";
+            }
+            else
+            {
+                return "删除失败";
+            }
+        }
     }
 }
