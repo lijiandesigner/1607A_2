@@ -7,7 +7,7 @@ using DAL;
 using Model;
 namespace BLL
 {
-   public class ManagerBll
+    public class ManagerBll
     {
         ManagerDal dal = new ManagerDal();
         public List<Department> ShowDepart()
@@ -86,15 +86,7 @@ namespace BLL
         {
             return dal.DeleteEmp(id);
         }
-        /// <summary>
-        /// 打卡方法
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int Punchcard(int id)
-        {
-            return dal.Punchcard(id);
-        }
+
         /// <summary>
         /// 显示个人工资
         /// </summary>
@@ -103,6 +95,31 @@ namespace BLL
         public Paymessage ShowMoney(int id)
         {
             return dal.ShowMoney(id);
+        }
+        /// <summary>
+        /// 上班打卡
+        /// </summary>
+        /// <param name="atte">打卡类</param>
+        /// <returns>int</returns>
+        public int Punchcard(Punchcard puncard)
+        {
+            return dal.Punchcard(puncard);
+        }
+        /// <summary>
+        /// 下班打卡
+        /// </summary>
+        /// <param name="vacate">打卡类</param>
+        /// <returns>int</returns>
+        public int UptPunchcard(Punchcard puncard)
+        {
+            return dal.UptPunchcard(puncard);
+        }
+        /// <summary>
+        /// 请假审批
+        /// </summary>
+        public int VacateEmp(Vacate vacate)
+        {
+            return dal.VacateEmp(vacate);
         }
     }
 }
