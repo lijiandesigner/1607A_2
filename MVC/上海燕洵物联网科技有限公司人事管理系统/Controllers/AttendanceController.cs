@@ -19,7 +19,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult GetAllAttend()
         {
-            string json=HttpClientHelper.Send("get", "api/AttendanceAPIController/GetAllAttendance");
+            string json=HttpClientHelper.Seng("get", "api/AttendanceAPIController/GetAllAttendance",null);
             return View(JsonConvert.DeserializeObject<List<PunchcardViewModel>>(json));
         }
         /// <summary>
@@ -36,7 +36,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             PunchcardViewModel punchcard = new PunchcardViewModel() { EmpsId = Id, Signindate = DateTime.Now.ToString() };
             string json = JsonConvert.SerializeObject(punchcard);
-            string result=HttpClientHelper.Send("post", "api/AttendanceAPIController/Punchcard", json);
+            string result=HttpClientHelper.Seng("post", "api/AttendanceAPIController/Punchcard", json);
             if (result.Contains("成功"))
 	        {
                 return Content("打卡成功");
@@ -52,7 +52,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult ShowMoney(int Id)
         {
-            string json = HttpClientHelper.Send("get", "api/AttendanceAPIController/ShowMoney?Id="+Id);
+            string json = HttpClientHelper.Seng("get", "api/AttendanceAPIController/ShowMoney?Id="+Id,null);
             return View(JsonConvert.DeserializeObject<PaymessageViewModel>(json));
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult VacateAttendance(VacateViewModel vacate)
         {
             string json = JsonConvert.SerializeObject(vacate);
-            string result = HttpClientHelper.Send("post","api/AttendanceAPIController/VacateAttendance",json);
+            string result = HttpClientHelper.Seng("post","api/AttendanceAPIController/VacateAttendance",json);
             if (result.Contains("成功"))
 	        {
                 return Content("提交成功");
