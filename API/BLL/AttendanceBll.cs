@@ -20,13 +20,13 @@ namespace BLL
             return dal.GetAllAttendance();
         }
         /// <summary>
-        /// 打卡方法
+        /// 上班打卡
         /// </summary>
         /// <param name="atte">打卡类</param>
         /// <returns>int</returns>
-        public int Punchcard(Attendance atte)
+        public int Punchcard(Punchcard punchcard)
         {
-            return dal.Punchcard(atte);
+            return dal.Punchcard(punchcard);
         }
         /// <summary>
         /// 显示个人工资方法
@@ -45,6 +45,15 @@ namespace BLL
         public int VacateAttendance(Vacate vacate)
         {
             return dal.VacateAttendance(vacate);
+        }
+        /// <summary>
+        /// 下班打卡
+        /// </summary>
+        /// <param name="atte">打卡类</param>
+        /// <returns>int</returns>       
+        public int UptPunchcard(Punchcard punchcard)
+        {
+            return dal.UptPunchcard(punchcard);
         }
     }
 }

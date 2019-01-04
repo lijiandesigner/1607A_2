@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using Model;
+using System.Data.EntityClient;
 
 namespace DAL
 {
@@ -17,17 +18,16 @@ namespace DAL
         /// <returns>List<Attendance></returns>
         public List<Punchcard> GetAllAttendance()
         {
-           
             return my.Punchcards.ToList();
         }
         /// <summary>
-        /// 打卡方法
+        /// 上班打卡
         /// </summary>
         /// <param name="atte">打卡类</param>
         /// <returns>int</returns>
-        public int Punchcard(Attendance atte)
+        public int Punchcard(Punchcard punchcard)
         {
-            my.Punchcards.Add(atte);
+            my.Punchcards.Add(punchcard);
             return my.SaveChanges();
         }
         /// <summary>
@@ -47,6 +47,16 @@ namespace DAL
         public int VacateAttendance(Vacate vacate)
         {
             my.Vacates.Add(vacate);
+            return my.SaveChanges();
+        }
+        /// <summary>
+        /// 下班打卡
+        /// </summary>
+        /// <param name="puncard">打卡类</param>
+        /// <returns>int</returns>
+        public int UptPunchcard(Punchcard puncard)
+        {
+            my.Entry(puncard).State = EntityState.Modified;
             return my.SaveChanges();
         }
     }
