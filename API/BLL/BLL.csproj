@@ -44,7 +44,7 @@
     <Compile Include="AttendanceBll.cs" />
     <Compile Include="EmpBll.cs" />
     <Compile Include="FinanceBll.cs" />
-    <Compile Include="LoainBll.cs" />
+    <Compile Include="LoginBll.cs" />
     <Compile Include="ManagerBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -54,7 +54,7 @@
     <Compile Include="AttendanceDal.cs" />
     <Compile Include="EmpDal.cs" />
     <Compile Include="FinanceDal.cs" />
-    <Compile Include="LoainDal.cs" />
+    <Compile Include="LoginDal.cs" />
     <Compile Include="ManagerDal.cs" />
     <Compile Include="Migrations\201901020705126_mymig.cs" />
     <Compile Include="Migrations\201901020705126_mymig.Designer.cs">
