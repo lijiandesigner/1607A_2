@@ -1,0 +1,63 @@
+﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PaymessageViewModel>
+
+@{
+    ViewBag.Title = "ShowMoney";
+}
+
+<h2>ShowMoney</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentsId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Papersnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Entrydate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TryMoney)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegularMoney)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PresentMoney)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Papersnum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entrydate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TryMoney)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegularMoney)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PresentMoney)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

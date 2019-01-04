@@ -1,0 +1,98 @@
+﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.EmpViewModel
+
+@{
+    ViewBag.Title = "Showinfo";
+}
+
+<h2>Showinfo</h2>
+
+<div>
+    <h4>EmpViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentsId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentsId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Esex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Esex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Papersnum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Papersnum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eduty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eduty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tracttype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tracttype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Etype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Etype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ERemark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ERemark)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
