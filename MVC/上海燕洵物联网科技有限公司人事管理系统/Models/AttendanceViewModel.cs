@@ -9,7 +9,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Models
     {
         public int Id { get; set; }
         public int EmpsId { get; set; }
-        public int DepartmentsId  { get; set; }
+        public int PunchcardsId { get; set; }
 
     }
 }

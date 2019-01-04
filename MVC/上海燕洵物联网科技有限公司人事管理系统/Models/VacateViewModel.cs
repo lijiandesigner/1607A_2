@@ -12,5 +12,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Models
         public string Name { get; set; }
         public string Cause { get; set; }
         public string Remark { get; set; }
+        public int VacateState { get; set; }
     }
 }
