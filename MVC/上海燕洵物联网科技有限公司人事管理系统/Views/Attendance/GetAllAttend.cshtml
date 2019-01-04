@@ -1,0 +1,40 @@
+﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PunchcardViewModel>
+
+@{
+    ViewBag.Title = "GetAllAttend";
+}
+
+<h2>GetAllAttend</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpsId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Signindate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Signoutdate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Signindate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Signoutdate)
+        </td>
+    </tr>
+}
+
+</table>
