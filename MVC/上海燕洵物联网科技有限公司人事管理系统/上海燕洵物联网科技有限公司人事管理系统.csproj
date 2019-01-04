@@ -310,11 +310,9 @@
     <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Manager\ShowMoney.cshtml" />
     <Content Include="Views\Manager\Punchcard.cshtml" />
-    <Content Include="Views\Login\GetoneLogin.cshtml" />
-    <Content Include="Views\Emps\Showinfo.cshtml" />
-    <Content Include="Views\Emps\Punchcard.cshtml" />
-    <Content Include="Views\Emps\ShowMoney.cshtml" />
-    <Content Include="Views\Emps\VacateEmp.cshtml" />
+    <Content Include="Views\Finance\Punchcard.cshtml" />
+    <Content Include="Views\Finance\ShowMoney.cshtml" />
+    <Content Include="Views\Finance\Vacatefinance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
