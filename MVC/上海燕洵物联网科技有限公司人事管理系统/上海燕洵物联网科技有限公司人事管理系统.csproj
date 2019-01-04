@@ -308,6 +308,9 @@
     <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Manager\ShowMoney.cshtml" />
     <Content Include="Views\Manager\Punchcard.cshtml" />
+    <Content Include="Views\Finance\Punchcard.cshtml" />
+    <Content Include="Views\Finance\ShowMoney.cshtml" />
+    <Content Include="Views\Finance\Vacatefinance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
