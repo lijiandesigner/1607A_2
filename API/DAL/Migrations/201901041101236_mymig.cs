@@ -14,7 +14,7 @@ namespace DAL.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         UserName = c.String(),
                         UserPwd = c.String(),
-                        Permission = c.String(),
+                        Permission = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -23,18 +23,18 @@ namespace DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        EmpId = c.Int(nullable: false),
-                        AttenNum = c.String(),
+                        EmpsId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Emps", t => t.EmpId, cascadeDelete: true)
-                .Index(t => t.EmpId);
+                .ForeignKey("dbo.Emps", t => t.EmpsId, cascadeDelete: true)
+                .Index(t => t.EmpsId);
             
             CreateTable(
                 "dbo.Emps",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        DepartmentsId = c.Int(nullable: false),
                         Ename = c.String(),
                         Esex = c.String(),
                         Papersnum = c.String(),
@@ -45,7 +45,9 @@ namespace DAL.Migrations
                         Etype = c.String(),
                         ERemark = c.String(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Departments", t => t.DepartmentsId, cascadeDelete: true)
+                .Index(t => t.DepartmentsId);
             
             CreateTable(
                 "dbo.Departments",
@@ -62,7 +64,7 @@ namespace DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        EmpId = c.Int(nullable: false),
+                        EmpsId = c.Int(nullable: false),
                         LeaveType = c.String(),
                         Yleavedate = c.String(),
                         Xsettledate = c.String(),
@@ -72,8 +74,8 @@ namespace DAL.Migrations
                         Lastworkdate = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Emps", t => t.EmpId, cascadeDelete: true)
-                .Index(t => t.EmpId);
+                .ForeignKey("dbo.Emps", t => t.EmpsId, cascadeDelete: true)
+                .Index(t => t.EmpsId);
             
             CreateTable(
                 "dbo.Menus",
@@ -91,7 +93,7 @@ namespace DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        DepartmentId = c.Int(nullable: false),
+                        EmpsId = c.Int(nullable: false),
                         Papersnum = c.String(),
                         Entrydate = c.String(),
                         TryMoney = c.Double(nullable: false),
@@ -99,21 +101,21 @@ namespace DAL.Migrations
                         PresentMoney = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Departments", t => t.DepartmentId, cascadeDelete: true)
-                .Index(t => t.DepartmentId);
+                .ForeignKey("dbo.Emps", t => t.EmpsId, cascadeDelete: true)
+                .Index(t => t.EmpsId);
             
             CreateTable(
                 "dbo.Punchcards",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        EmpId = c.Int(nullable: false),
+                        EmpsId = c.Int(nullable: false),
                         Signindate = c.String(),
                         Signoutdate = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Emps", t => t.EmpId, cascadeDelete: true)
-                .Index(t => t.EmpId);
+                .ForeignKey("dbo.Emps", t => t.EmpsId, cascadeDelete: true)
+                .Index(t => t.EmpsId);
             
             CreateTable(
                 "dbo.Transfers",
@@ -132,29 +134,32 @@ namespace DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        EmpId = c.Int(nullable: false),
+                        EmpsId = c.Int(nullable: false),
                         Name = c.String(),
                         Cause = c.String(),
                         Remark = c.String(),
+                        VacateState = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Emps", t => t.EmpId, cascadeDelete: true)
-                .Index(t => t.EmpId);
+                .ForeignKey("dbo.Emps", t => t.EmpsId, cascadeDelete: true)
+                .Index(t => t.EmpsId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Vacates", "EmpId", "dbo.Emps");
-            DropForeignKey("dbo.Punchcards", "EmpId", "dbo.Emps");
-            DropForeignKey("dbo.Paymessages", "DepartmentId", "dbo.Departments");
-            DropForeignKey("dbo.Dimissions", "EmpId", "dbo.Emps");
-            DropForeignKey("dbo.Attendances", "EmpId", "dbo.Emps");
-            DropIndex("dbo.Vacates", new[] { "EmpId" });
-            DropIndex("dbo.Punchcards", new[] { "EmpId" });
-            DropIndex("dbo.Paymessages", new[] { "DepartmentId" });
-            DropIndex("dbo.Dimissions", new[] { "EmpId" });
-            DropIndex("dbo.Attendances", new[] { "EmpId" });
+            DropForeignKey("dbo.Vacates", "EmpsId", "dbo.Emps");
+            DropForeignKey("dbo.Punchcards", "EmpsId", "dbo.Emps");
+            DropForeignKey("dbo.Paymessages", "EmpsId", "dbo.Emps");
+            DropForeignKey("dbo.Dimissions", "EmpsId", "dbo.Emps");
+            DropForeignKey("dbo.Attendances", "EmpsId", "dbo.Emps");
+            DropForeignKey("dbo.Emps", "DepartmentsId", "dbo.Departments");
+            DropIndex("dbo.Vacates", new[] { "EmpsId" });
+            DropIndex("dbo.Punchcards", new[] { "EmpsId" });
+            DropIndex("dbo.Paymessages", new[] { "EmpsId" });
+            DropIndex("dbo.Dimissions", new[] { "EmpsId" });
+            DropIndex("dbo.Emps", new[] { "DepartmentsId" });
+            DropIndex("dbo.Attendances", new[] { "EmpsId" });
             DropTable("dbo.Vacates");
             DropTable("dbo.Transfers");
             DropTable("dbo.Punchcards");

@@ -12,6 +12,12 @@ namespace DAL
         public MyContent() : base("BaseContext") {
 
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<Department> Departments { get; set; }

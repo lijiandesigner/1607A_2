@@ -10,8 +10,7 @@ namespace Model
     {
         public int Id { get; set; }
 
-        public int EmpsId { get; set; }
-      
+        public int EmpsId { get; set; } 
         public virtual Emp Emps { get; set; }
     }
 }

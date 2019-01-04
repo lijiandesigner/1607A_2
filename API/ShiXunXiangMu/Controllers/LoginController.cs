@@ -5,15 +5,18 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BLL;
+using Newtonsoft.Json;
+using Model;
 namespace ShiXunXiangMu.Controllers
 {
     public class LoginController : ApiController
     {
         LoginBll lb = new LoginBll();
         [HttpGet]
-        public int Login(string name,string pwd)
+        public Admin Login(string name,string pwd)
         {
             return lb.Login(name,pwd);
+            
         }
     }
 }

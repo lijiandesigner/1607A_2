@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using Model;
 namespace BLL
 {
     public class LoginBll
     {
         LoginDal ld = new LoginDal();
-        public int Login(string name,string pwd)
+        public Admin Login(string name,string pwd)
         {
             return ld.login(name,pwd);
         }
