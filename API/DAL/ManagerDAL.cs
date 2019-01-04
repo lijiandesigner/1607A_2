@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
+using System.Data;
+using System.Data.Entity;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace DAL
 {
+
     public class ManagerDal
     {
-         MyContent my = new MyContent();
+        MyContent my = new MyContent();
         /// <summary>
         /// 显示部门信息
         /// </summary>
@@ -34,7 +39,7 @@ namespace DAL
         /// <returns></returns>
         public int UpdateDepart(Department department)
         {
-            my.Entry(department).State= EntityState.Modified;
+            my.Entry(department).State = EntityState.Modified;
             return my.SaveChanges();
         }
         /// <summary>
@@ -82,8 +87,8 @@ namespace DAL
         /// <returns></returns>
         public List<Emp> SearchEmp(int id)
         {
-            return my.Emps.Where(c => c.Departmentid == id).ToList();
-            
+            return my.Emps.Where(c => c.DepartmentsId == id).ToList();
+
         }
         /// <summary>
         /// 删除员工
@@ -97,14 +102,25 @@ namespace DAL
             return my.SaveChanges();
         }
         /// <summary>
-        /// 打卡方法
+        /// 上班打卡
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int Punchcard(int id)
+        /// <param name="puncard">打卡类</param>
+        /// <returns>int</returns>
+        public int Punchcard(Punchcard puncard)
         {
-           Punchcard a = my.Punchcards.Where(c => c.EmpId == id).FirstOrDefault();
-            my.Punchcards.Add(a);
+            my.Punchcards.Add(puncard);
+            return my.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// 下班打卡
+        /// </summary>
+        /// <param name="puncard">打卡类</param>
+        /// <returns>int</returns>
+        public int UptPunchcard(Punchcard puncard)
+        {
+            my.Entry(puncard).State = EntityState.Modified;
             return my.SaveChanges();
         }
         /// <summary>
@@ -115,6 +131,14 @@ namespace DAL
         public Paymessage ShowMoney(int id)
         {
             return my.Paymessages.Where(c => c.Id == id).FirstOrDefault();
+        }
+        /// <summary>
+        /// 请假审批
+        /// </summary>
+        public int VacateEmp(Vacate vacate)
+        {
+            my.Entry(vacate).State = EntityState.Modified;
+            return my.SaveChanges();
         }
     }
 }
