@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace DAL
 {
-    class LoainBll
+    class LoginDal
     {
     }
 }
