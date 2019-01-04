@@ -261,6 +261,6 @@ paket-files/
 __pycache__/
 *.pyc
 # 工程文件和解决方案文件
-*.sln
+#*.sln
 *.scproj
 *.scproj.*
