@@ -11,9 +11,7 @@ namespace Model
         public int Id { get; set; }
 
         public int EmpsId { get; set; }
-        public int PunchcardsId { get; set; }
-
-        public virtual Punchcard Punchcards { get; set; }
+      
         public virtual Emp Emps { get; set; }
     }
 }
