@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using Model;
-namespace BLL
+using System.Data;
+using System.Data.Entity;
+using EntityState = System.Data.Entity.EntityState;
+
+namespace DAL
 {
-    public class ManagerBll
+
+    public class ManagerDal
     {
-        ManagerDal dal = new ManagerDal();
+        MyContent my = new MyContent();
+        /// <summary>
+        /// 显示部门信息
+        /// </summary>
+        /// <returns></returns>
         public List<Department> ShowDepart()
         {
-            return dal.ShowDepart();
+            return my.Departments.ToList();
         }
         /// <summary>
         /// 添加部门
@@ -21,7 +29,8 @@ namespace BLL
         /// <returns></returns>
         public int AddDepart(Department department)
         {
-            return dal.AddDepart(department);
+            my.Departments.Add(department);
+            return my.SaveChanges();
         }
         /// <summary>
         /// 修改部门
@@ -30,7 +39,8 @@ namespace BLL
         /// <returns></returns>
         public int UpdateDepart(Department department)
         {
-            return dal.UpdateDepart(department);
+            my.Entry(department).State = EntityState.Modified;
+            return my.SaveChanges();
         }
         /// <summary>
         /// 删除部门
@@ -39,7 +49,9 @@ namespace BLL
         /// <returns></returns>
         public int DeleteDepart(int id)
         {
-            return dal.DeleteDepart(id);
+            var a = my.Departments.Where(c => c.Id == id);
+            my.Entry(a).State = EntityState.Deleted;
+            return my.SaveChanges();
         }
         /// <summary>
         /// 获取所有员工信息
@@ -47,7 +59,7 @@ namespace BLL
         /// <returns></returns>
         public List<Emp> GetAllEmp()
         {
-            return dal.GetAllEmp();
+            return my.Emps.ToList();
         }
         /// <summary>
         /// 获取单个部门
@@ -56,7 +68,7 @@ namespace BLL
         /// <returns></returns>
         public Department GetOneDepart(int id)
         {
-            return dal.GetOneDepart(id);
+            return my.Departments.Where(c => c.Id == id).FirstOrDefault();
         }
         /// <summary>
         /// 添加员工
@@ -65,7 +77,8 @@ namespace BLL
         /// <returns></returns>
         public int AddEmp(Emp emp)
         {
-            return dal.AddEmp(emp);
+            my.Emps.Add(emp);
+            return my.SaveChanges();
         }
         /// <summary>
         ///根据部门查询员工
@@ -74,7 +87,7 @@ namespace BLL
         /// <returns></returns>
         public List<Emp> SearchEmp(int id)
         {
-            return dal.SearchEmp(id);
+            return my.Emps.Where(c => c.DepartmentsId == id).ToList();
 
         }
         /// <summary>
@@ -84,9 +97,32 @@ namespace BLL
         /// <returns></returns>
         public int DeleteEmp(int id)
         {
-            return dal.DeleteEmp(id);
+            var a = my.Emps.Where(c => c.Id == id).FirstOrDefault();
+            my.Entry(a).State = EntityState.Deleted;
+            return my.SaveChanges();
+        }
+        /// <summary>
+        /// 上班打卡
+        /// </summary>
+        /// <param name="puncard">打卡类</param>
+        /// <returns>int</returns>
+        public int Punchcard(Punchcard puncard)
+        {
+            my.Punchcards.Add(puncard);
+            return my.SaveChanges();
         }
 
+
+        /// <summary>
+        /// 下班打卡
+        /// </summary>
+        /// <param name="puncard">打卡类</param>
+        /// <returns>int</returns>
+        public int UptPunchcard(Punchcard puncard)
+        {
+            my.Entry(puncard).State = EntityState.Modified;
+            return my.SaveChanges();
+        }
         /// <summary>
         /// 显示个人工资
         /// </summary>
@@ -94,32 +130,15 @@ namespace BLL
         /// <returns></returns>
         public Paymessage ShowMoney(int id)
         {
-            return dal.ShowMoney(id);
-        }
-        /// <summary>
-        /// 上班打卡
-        /// </summary>
-        /// <param name="atte">打卡类</param>
-        /// <returns>int</returns>
-        public int Punchcard(Punchcard puncard)
-        {
-            return dal.Punchcard(puncard);
-        }
-        /// <summary>
-        /// 下班打卡
-        /// </summary>
-        /// <param name="vacate">打卡类</param>
-        /// <returns>int</returns>
-        public int UptPunchcard(Punchcard puncard)
-        {
-            return dal.UptPunchcard(puncard);
+            return my.Paymessages.Where(c => c.Id == id).FirstOrDefault();
         }
         /// <summary>
         /// 请假审批
         /// </summary>
         public int VacateEmp(Vacate vacate)
         {
-            return dal.VacateEmp(vacate);
+            my.Entry(vacate).State = EntityState.Modified;
+            return my.SaveChanges();
         }
     }
 }
