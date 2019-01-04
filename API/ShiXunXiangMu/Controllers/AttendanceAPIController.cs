@@ -16,6 +16,7 @@ namespace ShiXunXiangMu.Controllers
         /// 获取所有的员工打卡记录
         /// </summary>
         /// <returns>list</returns>
+        [HttpGet]
         public List<Punchcard> GetAllAttendance()
         {
             return bll.GetAllAttendance();
