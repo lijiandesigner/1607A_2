@@ -17,14 +17,31 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult GetAllAttend()
         {
-            return View();
+            string json=ClientHelper.Send("Get", "api/AttendanceAPIController");
+            return View(JsonConvert.DeserializeObject<List<Punchcard>>(json));
         }
         /// <summary>
         /// 打卡
         /// </summary>
         /// <returns>int</returns>
+        [HttpGet]
         public ActionResult Punchcard()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Punchcard(Punchcard punchcard)
+        {
+            string json = JsonConvert.SerializeObject(punchcard);
+            string result=ClientHelper.Send("Post", "api/AttendanceAPIController", json);
+            if (result.Contains("成功"))
+	        {
+                return Content("打卡成功");
+	        }
+            else
+	        {
+                return Content("打卡失败");
+	        }
             return View();
         }
         /// <summary>
