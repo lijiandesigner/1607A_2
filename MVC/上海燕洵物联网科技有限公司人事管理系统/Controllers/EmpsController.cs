@@ -43,19 +43,19 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// </summary>
         /// <param name="punchcard"></param>
         /// <returns></returns>
-        public string UptPunchcard(PunchcardViewModel punchcard)
+        public ActionResult UptPunchcard(PunchcardViewModel punchcard)
         {
             string str1 = JsonConvert.SerializeObject(punchcard);
             string str = HttpClientHelper.Seng("post", "api/EmpsAPIController/Punchcard", str1);
             if (str.Contains("成功"))
             {
-
-                return "下班";
+                Response.Write("<script>alert('打卡成功')</script>");
             }
             else
             {
-                return "失败";
+                Response.Write("<script>alert('打卡失败')</script>");
             }
+            return View("Punchcard");
         }
         /// <summary>
         /// 显示个人工资信息
@@ -69,7 +69,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 
         }
         /// <summary>
-        /// 请假
+        /// 请假提交
         /// </summary>
         /// <returns>int</returns>
         public ActionResult VacateEmp(VacateViewModel vacate)

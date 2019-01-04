@@ -16,11 +16,14 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 显示部门信息
         /// </summary>
         /// <returns>list集合</returns>
-        public ActionResult ShowDepart()
+        public ActionResult ShowDepart(int pageindex = 1)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowDepart", null);
+            string str = HttpClientHelper.Seng("get", "/api/ManagerAPIController/ShowDepart", null);
             List<DepartmentViewModel> list = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str);
-            return View(list);
+            ViewBag.currentindex = pageindex;
+            ViewBag.totaldata = list.Count;
+            ViewBag.totalpage = Math.Round(list.Count * 1.0 / 5);
+            return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
         /// 添加部门信息
@@ -45,18 +48,20 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 修改部门
         /// </summary>
         /// <returns>int</returns>
-        public string UpdateDepart(DepartmentViewModel department)
+        public ActionResult UpdateDepart(DepartmentViewModel department)
         {
             string jsonstr = JsonConvert.SerializeObject(department);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPIController/UpdateDepart", jsonstr);
             if (str.Contains("成功"))
             {
-                return "修改成功";
+                Response.Write("<script>alert('修改成功')</script>");
             }
             else
             {
-                return "修改失败";
+                Response.Write("<script>alert('修改失败')</script>");
+                
             }
+            return View();
         }
         /// <summary>
         /// 获取一个部门信息
@@ -74,26 +79,31 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 删除部门
         /// </summary>
         /// <returns>int</returns>
-        public void DeleteDepart(int id)
+        public ActionResult DeleteDepart(int id)
         {
             string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteDepart/?Id=" + id, "null");
             if (str.Contains("成功"))
             {
-                Response.Write("<script>alert('删除成功')</script>");
+                Content("删除成功");
             }
             else
             {
-                Response.Write("<script>alert('删除失败')</script>");
+                Content("删除失败");
             }
+            return View("GetAllEmp");
         }
         /// <summary>
         /// 获取所有员工信息
         /// </summary>
         /// <returns>list集合</returns>
-        public ActionResult GetAllEmp()
+        public ActionResult GetAllEmp(int pageindex = 1)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowDepart", null);
-            return View();
+            string str = HttpClientHelper.Seng("get", "/api/ManagerAPIController/GetAllEmp", null);
+            List<EmpViewModel> emps = JsonConvert.DeserializeObject<List<EmpViewModel>>(str);
+            ViewBag.currentindex = pageindex;
+            ViewBag.totaldata = emps.Count;
+            ViewBag.totalpage = Math.Round(emps.Count * 1.0 / 5);
+            return View(emps.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
         /// 添加员工
@@ -111,7 +121,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             {
                 Content("添加失败");
             }
-            return View();
+            return View("GetAllEmp");
         }
         /// <summary>
         /// 根据部门查看员工
@@ -128,35 +138,36 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 请假审批
         /// </summary>
         /// <returns>int</returns>
-        public string VacateEmp(VacateViewModel vacate)
+        public ActionResult VacateEmp(VacateViewModel vacate)
         {
             string jsonstr = JsonConvert.SerializeObject(vacate);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPIController/VacateEmp/", jsonstr);
             if (str.Contains("成功"))
             {
-                return "修改成功";
+                Response.Write("<script>alert('修改成功')</script>");
             }
             else
             {
-                return "修改失败";
+                Response.Write("<script>alert('修改失败')<script>");
             }
-
+            return View();
         }
         /// <summary>
         /// 删除员工
         /// </summary>
         /// <returns>int</returns>
-        public string DeleteEmp(int id)
+        public ActionResult DeleteEmp(int id)
         {
             string str = HttpClientHelper.Seng("delete", "api/ManagerAPIController/DeleteEmp/?id=" + id, null);
             if (str.Contains("成功"))
             {
-                return "删除成功";
+                 Content("删除成功");
             }
             else
             {
-                return "删除失败";
+                 Content("删除失败");
             }
+            return View("GetALLEmp");
         }
         /// <summary>
         /// 上班打卡
@@ -181,19 +192,22 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// </summary>
         /// <param name="punchcard"></param>
         /// <returns></returns>
-        public string UptPunchcard(PunchcardViewModel punchcard)
+        public ActionResult UptPunchcard(PunchcardViewModel punchcard)
         {
             string str1 = JsonConvert.SerializeObject(punchcard);
             string str = HttpClientHelper.Seng("post", "api/ManagerAPIController/Punchcard/", str1);
             if (str.Contains("成功"))
             {
+                Response.Write("<script>alert('修改成功')</script>");
+               
 
-                return "下班";
             }
             else
             {
-                return "失败";
+                Response.Write("<script>alert('修改失败')</script>");
+
             }
+            return View();
         }
         /// <summary>
         /// 显示个人工资
@@ -204,6 +218,38 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowMoney/?id=" + id, null);
             PaymessageViewModel paymessage = JsonConvert.DeserializeObject<PaymessageViewModel>(str);
             return paymessage;
+        }
+        /// <summary>
+        /// 显示请假信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ShowVacate(int pageindex=1)
+        {
+            string str = HttpClientHelper.Seng("get","api/ManagerAPIController/ShowVacate",null);
+            List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str);
+            ViewBag.currentindex = pageindex;
+            ViewBag.totaldata = list.Count;
+            ViewBag.totalpage = Math.Round(list.Count * 1.0 / 5);
+            return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
+        }
+        /// <summary>
+        /// 删除请假信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteVacate(int id)
+        {
+            string str = HttpClientHelper.Seng("delete","api/ManagerAPIController/DeleteVacate/?id="+id,null);
+           
+            if(str.Contains("成功"))
+            {
+                 Content("删除成功");
+            }
+            else
+            {
+                 Content("删除失败");
+            }
+            return View("ShowVacate");
         }
     }
    
