@@ -315,6 +315,7 @@
     <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Finance\Vacatefinance.cshtml" />
     <Content Include="Views\Login\GetoneLogin.cshtml" />
+    <Content Include="Views\Login\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
