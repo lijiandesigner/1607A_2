@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using Model;
 using System.Data.Entity;
-using System.Data.Entity.EntityState;
 
 namespace DAL
 {

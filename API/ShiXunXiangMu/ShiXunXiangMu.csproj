@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AttendanceAPIController.cs" />
     <Compile Include="Controllers\EmpsAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManagerAPIController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
