@@ -40,5 +40,10 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             return View();
         }
+        public ActionResult showmenu()
+        {
+            string result = HttpClientHelper.Seng("get", "api/login/showmenu?permission=" + Session["permission"], null);
+            return Content(result);
+        }
     }
 }

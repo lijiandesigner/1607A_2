@@ -11,8 +11,11 @@ namespace DAL
         MyContent mc = new MyContent();
         public Admin login(string name, string pwd)
         {
-            return mc.Admins.Where(a => a.UserName.Equals(name) && a.UserPwd.Equals(pwd)).FirstOrDefault(); ;
-            
+            return mc.Admins.Where(a => a.UserName.Equals(name) && a.UserPwd.Equals(pwd)).FirstOrDefault();
+        }
+        public List<Menu> showmenu(int Permission)
+        {
+            return mc.Menus.Where(c => c.Permission==(c.Permission&Permission)).ToList(); 
         }
     }
 }

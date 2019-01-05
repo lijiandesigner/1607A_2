@@ -208,6 +208,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\snw.png" />
+    <Content Include="images\loggeduser.png" />
     <Content Include="images\logo.PNG" />
     <Content Include="js\bootstrap-datetimepicker.min.js" />
     <Content Include="js\bootstrap-editable.min.js" />
@@ -315,6 +317,7 @@
     <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Finance\Vacatefinance.cshtml" />
     <Content Include="Views\Login\GetoneLogin.cshtml" />
+    <Content Include="Views\Login\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

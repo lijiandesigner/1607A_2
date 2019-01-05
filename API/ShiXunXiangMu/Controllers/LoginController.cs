@@ -16,7 +16,11 @@ namespace ShiXunXiangMu.Controllers
         public Admin Login(string name,string pwd)
         {
             return lb.Login(name,pwd);
-            
+        }
+        [HttpGet]
+        public List<Menu> showmenu(int Permission)
+        {
+            return lb.showmenu(Permission);
         }
     }
 }

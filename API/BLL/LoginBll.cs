@@ -14,5 +14,9 @@ namespace BLL
         {
             return ld.login(name,pwd);
         }
+        public List<Menu> showmenu(int Permission)
+        {
+            return ld.showmenu(Permission);
+        }
     }
 }
