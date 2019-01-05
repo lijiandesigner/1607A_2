@@ -26,7 +26,7 @@
                     <li class="nav-parent ">
                         <a href="#"><i class="fa fa-home"></i><span>用户管理</span></a>
                         <ul class="nav-children">
-                            <li><a href="#"><span>还好吧</span></a></li>
+                            <li><i class="fa fa-home"></i><span>还好吧</span></li>
                             <li><a href="#"><span>还好吧</span></a></li>
                         </ul>
                     </li>
@@ -49,8 +49,9 @@
                         <li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <img src="~/images/loggeduser.png" alt="" />
-                                     @Session["Name"]
+                                    @*<img src="~/images/loggeduser.png" alt="" />*@
+                                    <img src="~/images/snw.png" alt="" />
+                                    @Session["Name"]
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
