@@ -29,6 +29,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 添加部门信息
         /// </summary>
         /// <returns>int</returns>
+        [HttpGet]
+        public ActionResult AddDepart()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult AddDepart(DepartmentViewModel department)
         {
 
@@ -109,6 +115,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 添加员工
         /// </summary>
         /// <returns>int</returns>
+        [HttpGet]
+        public ActionResult AddEmp()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult AddEmp(EmpViewModel emp)
         {
             string emps = JsonConvert.SerializeObject(emp);
