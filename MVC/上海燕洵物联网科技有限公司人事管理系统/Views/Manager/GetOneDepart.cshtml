@@ -1,0 +1,35 @@
+﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.DepartmentViewModel
+
+@{
+    ViewBag.Title = "GetOneDepart";
+}
+
+<h2>GetOneDepart</h2>
+
+<div>
+    <h4>DepartmentViewModel</h4>
+    <hr />
+    @Html.HiddenFor(model=>model.Id)
+    <dl class="dl-horizontal">
+        <dt>
+           部门名称
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BName)
+        </dd>
+
+        <dt>
+           部门描述
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bremark)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("修改部门信息", "UpdateDepart", new { id = Model.Id }) |
+    @Html.ActionLink("返回部门列表", "ShowDepart")
+</p>
