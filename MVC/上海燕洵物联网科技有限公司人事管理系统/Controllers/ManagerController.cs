@@ -18,7 +18,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult ShowDepart(int pageindex = 1)
         {
-            string str = HttpClientHelper.Seng("get", "/api/ManagerAPIController/ShowDepart", null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowDepart", null);
             List<DepartmentViewModel> list = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;
@@ -46,7 +46,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             }
             else
             {
-                Response.Write("<script>alert('添加成功')</script>");
+                Response.Write("<script>alert('添加失败')</script>");
             }
             return View();
         }
