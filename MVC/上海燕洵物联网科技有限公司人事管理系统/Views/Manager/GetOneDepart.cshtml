@@ -9,10 +9,10 @@
 <div>
     <h4>DepartmentViewModel</h4>
     <hr />
-    @Html.HiddenFor(model=>model.Id)
+   
     <dl class="dl-horizontal">
         <dt>
-           部门名称
+            @Html.Label("部门名称")
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-           部门描述
+            @Html.Label("部门描述");
         </dt>
 
         <dd>
@@ -30,6 +30,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("修改部门信息", "UpdateDepart", new { id = Model.Id }) |
-    @Html.ActionLink("返回部门列表", "ShowDepart")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
