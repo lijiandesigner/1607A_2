@@ -80,7 +80,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public DepartmentViewModel GetOneDepart(int id)
         {
 
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetOneDepart/?Id=" + id, "null");
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetOneDepart?Id=" + id, "null");
             DepartmentViewModel depart = JsonConvert.DeserializeObject<DepartmentViewModel>(str);
             return depart;
 
@@ -91,7 +91,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>int</returns>
         public ActionResult DeleteDepart(int id)
         {
-            string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteDepart/?Id=" + id, "null");
+            string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteDepart?Id=" + id, "null");
             if (str.Contains("成功"))
             {
                 Content("删除成功");
@@ -175,7 +175,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 
         public List<EmpViewModel> SearchEmp(int id)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/SearchEmp/?id=" + id, null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/SearchEmp?id=" + id, null);
             List<EmpViewModel> emps = JsonConvert.DeserializeObject<List<EmpViewModel>>(str);
             return emps;
         }
@@ -203,7 +203,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>int</returns>
         public ActionResult DeleteEmp(int id)
         {
-            string str = HttpClientHelper.Seng("delete", "api/ManagerAPIController/DeleteEmp/?id=" + id, null);
+            string str = HttpClientHelper.Seng("delete", "api/ManagerAPIController/DeleteEmp?id=" + id, null);
             if (str.Contains("成功"))
             {
                  Content("删除成功");
@@ -260,7 +260,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>类名</returns>
         public PaymessageViewModel ShowMoney(int id)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowMoney/?id=" + id, null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowMoney?id=" + id, null);
             PaymessageViewModel paymessage = JsonConvert.DeserializeObject<PaymessageViewModel>(str);
             return paymessage;
         }
@@ -284,7 +284,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns></returns>
         public ActionResult DeleteVacate(int id)
         {
-            string str = HttpClientHelper.Seng("delete","api/ManagerAPIController/DeleteVacate/?id="+id,null);
+            string str = HttpClientHelper.Seng("delete","api/ManagerAPIController/DeleteVacate?id="+id,null);
            
             if(str.Contains("成功"))
             {
