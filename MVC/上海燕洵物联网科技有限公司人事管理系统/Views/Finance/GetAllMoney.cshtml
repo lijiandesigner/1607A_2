@@ -1,27 +1,28 @@
 ﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PaymessageViewModel>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DepartmentsId)
+            员工编号
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Papersnum)
+            员工姓名
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Entrydate)
+            身份证号
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TryMoney)
+            入职日期
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RegularMoney)
+            本月基本工资
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PresentMoney)
+            各项社会保险费
+        </th>
+        <th>
+            应得工资
         </th>
         <th></th>
     </tr>
@@ -29,7 +30,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DepartmentsId)
+            @Html.DisplayFor(modelItem => item.EmpsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Papersnum)

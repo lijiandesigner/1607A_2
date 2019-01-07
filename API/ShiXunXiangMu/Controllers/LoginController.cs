@@ -18,9 +18,9 @@ namespace ShiXunXiangMu.Controllers
             return lb.Login(name,pwd);
         }
         [HttpGet]
-        public List<Menu> showmenu(int Permission)
+        public List<Menu> ShowMenu(int Permission)
         {
-            return lb.showmenu(Permission);
+            return lb.ShowMenu(Permission);
         }
     }
 }

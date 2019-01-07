@@ -5,46 +5,52 @@
 }
 
 <h2>GetAllEmp</h2>
-
+<script src="~/Content/jquery-3.1.1.js"></script>
 <p>
     @Html.ActionLink("新增员工", "AddEmp")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Ename)
+            @Html.Label("员工名称")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Esex)
+            @Html.Label("部门名称")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Papersnum)
+            @Html.Label("员工性别")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ephone)
+            @Html.Label("身份证号")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Eduty)
+            @Html.Label("员工电话")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.Label("员工职务")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tracttype)
+            @Html.Label("员工邮箱")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Etype)
+            @Html.Label("合同类型")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ERemark)
+            @Html.Label("员工类型")
         </th>
-        <th></th>
+        <th>
+            @Html.Label("备注文本")
+        </th>
+        <th>操作</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Ename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem=>item.Bname)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Esex)
@@ -71,11 +77,20 @@
             @Html.DisplayFor(modelItem => item.ERemark)
         </td>
         <td>
-            @Html.ActionLink("修改", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("详情", "Details", new { id=item.Id }) |
-            @Html.ActionLink("删除", "Delete", new { id=item.Id })
+            <input id="Btndelete" type="button" value="删除员工" onclick="Delete(@item.Id)"/>
+            <input id="Btnxiang" type="button" value="查看该员工" onclick="Xiang(@item.Id)"/>
         </td>
     </tr>
 }
 
 </table>
+<script>
+    function Delete(id) {
+        if (confirm("，此为员工主页面，删除后无法还原，确认删除员工？")) {
+            location.href = "/Manager/DeleteEmp?id=" + id;
+        }
+    }
+    function Xiang(id) {
+        location.href = "/Emps/Showinfo?id=" + id;
+    }
+</script>

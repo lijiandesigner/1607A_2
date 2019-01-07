@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "ShowDepart";
 }
-
+<script src="~/Content/jquery-3.1.1.js"></script>
 <h2>ShowDepart</h2>
 
 <p>
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BName)
+            @Html.Label("部门名称")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Bremark)
+            @Html.Label("部门描述")
         </th>
         <th></th>
     </tr>
@@ -29,11 +29,41 @@
             @Html.DisplayFor(modelItem => item.Bremark)
         </td>
         <td>
-            @Html.ActionLink("修改", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("详情", "Details", new { id=item.Id }) |
-            @Html.ActionLink("删除", "Delete", new { id=item.Id })
+            @Html.ActionLink("修改", "UpdateDepart", new { id=item.Id }) |
+            @Html.ActionLink("详情", "GetOneDepart", new { id=item.Id }) |
+            @Html.ActionLink("删除", "DeleteDepart", new { id=item.Id })
         </td>
     </tr>
 }
 
 </table>
+<p>
+    <span>
+        <span>当前第</span>
+        <span id="currentindex">@ViewBag.currentindex</span>
+        <span>页，总共</span>
+        <span id="totalpage">@ViewBag.totalpage</span>
+        <span>页</span>
+
+    </span>
+    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()"/>
+    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()"/>
+</p>
+<script>
+    function BtnUp() {
+        if ($("#currentindex").text != 1) {
+            location.href = "/Manager/ShowDepart/?pageindex=" + Number(Number(@ViewBag.currentindex) - 1);
+        }
+        else {
+            alert('已经是首页了');
+            return;
+        }
+        function BtnDown() {
+            if ($("#currentindex").text != $("#totalpage").text) {
+            location.href = "/Manager/ShowDepart/?pageindex=" + Number(Number(@ViewBag.currentindex) + 1);
+        }
+        else {
+            alert('已经是尾页了');
+            return;
+        }
+</script>
