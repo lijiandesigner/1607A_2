@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace 上海燕洵物联网科技有限公司人事管理系统.Models
+namespace Model
 {
-    public class PaymessageViewModel
+    public class TempPaymessage
     {
         public int Id { get; set; }
         public int EmpsId { get; set; }

@@ -168,6 +168,7 @@
     <Compile Include="Models\TransferViewModel.cs" />
     <Compile Include="Models\VacateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShouQuanAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -318,11 +319,20 @@
     <Content Include="Views\Finance\Vacatefinance.cshtml" />
     <Content Include="Views\Login\GetoneLogin.cshtml" />
     <Content Include="Views\Login\Show.cshtml" />
-    <Content Include="Views\Manager\GetOneDepart.cshtml" />
+    <Content Include="Views\Emps\Punchcard.cshtml" />
+    <Content Include="Views\Emps\Showinfo.cshtml" />
+    <Content Include="Views\Emps\ShowMoney.cshtml" />
+    <Content Include="Views\Emps\UptPunchcard.cshtml" />
+    <Content Include="Views\Emps\VacateEmp.cshtml" />
+    <Content Include="Views\Attendance\GetAllAttend.cshtml" />
+    <Content Include="Views\Attendance\Punchcard.cshtml" />
+    <Content Include="Views\Attendance\ShowMoney.cshtml" />
+    <Content Include="Views\Attendance\VacateAttendance.cshtml" />
+    <Content Include="Views\Manager\ShowVacate.cshtml" />
+    <Content Include="Views\Manager\UptPunchcard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Attendance\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

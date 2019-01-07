@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Newtonsoft.Json;
+using 上海燕洵物联网科技有限公司人事管理系统.Models;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
     public class FinanceController : Controller
@@ -15,7 +16,10 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult GetAllMoney()
         {
-            return View();
+            var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney",null);
+            var list = JsonConvert.DeserializeObject<List<PaymessageViewModel>>(result);
+
+            return View(list);
         }
         /// <summary>
         /// 打卡
