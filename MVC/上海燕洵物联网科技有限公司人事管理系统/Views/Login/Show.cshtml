@@ -15,7 +15,7 @@
             success: function (data) {
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href=""><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
                 
@@ -24,6 +24,9 @@
          
         })
 
+    }
+    function skip(PermissionName) {
+        location.href = '/Login/function?PermissionName=' + PermissionName;
     }
 </script>
 
