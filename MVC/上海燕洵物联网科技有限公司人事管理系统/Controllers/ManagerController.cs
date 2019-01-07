@@ -110,7 +110,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             string str2 = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
             DataTable dt = JsonConvert.DeserializeObject<DataTable>(str2);
-            string str = HttpClientHelper.Seng("get", "/api/ManagerAPI/GetAllEmp", null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetAllEmp", null);
             DataTable dt1 = JsonConvert.DeserializeObject<DataTable>(str);
             //List<EmpViewModel> emps = JsonConvert.DeserializeObject<List<EmpViewModel>>(str);
             var emps = from s in dt.AsEnumerable()

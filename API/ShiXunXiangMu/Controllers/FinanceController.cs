@@ -28,7 +28,30 @@ namespace ShiXunXiangMu.Controllers
             else
             {
                 return "提交失败";
-            }
+            }    
         }
+
+        [HttpGet]
+        public IEnumerable<TempFinance> Emps()
+        {
+            ManagerBll managerBll = new ManagerBll();
+            var list = managerBll.GetAllEmp();
+            var result = from data in list
+                         select new TempFinance
+                         {
+                             Id=data.Id,
+                             Ename=data.Ename,
+                             Email=data.Email,
+                             Eduty=data.Eduty,
+                             Ephone=data.Ephone,
+                             Esex=data.Esex,
+                             Etype=data.Etype,
+                             Papersnum=data.Papersnum,
+                             Tracttype=data.Tracttype,
+                             BName=data.Departments.BName
+                         };
+            return result;
+        }
+
     }
 }
