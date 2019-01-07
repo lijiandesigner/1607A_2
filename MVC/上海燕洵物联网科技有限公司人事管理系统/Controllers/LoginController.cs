@@ -19,7 +19,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             return View();
         }
-       [HttpPost]
+        [HttpPost]
         public ActionResult GetoneLogin(string UserName, string UserPwd)
         {
             string result= HttpClientHelper.Seng("get","api/login/login/?name="+UserName+"&pwd="+UserPwd+" ",null);
@@ -40,10 +40,11 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             return View();
         }
-        public ActionResult showmenu()
+        public ActionResult ShowMenu()
         {
-            string result = HttpClientHelper.Seng("get", "api/login/showmenu?permission=" + Session["permission"], null);
+            string result = HttpClientHelper.Seng("get", "api/login/ShowMenu?permission=" + Session["permission"], null);
             return Content(result);
         }
+
     }
 }

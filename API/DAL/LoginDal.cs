@@ -13,7 +13,7 @@ namespace DAL
         {
             return mc.Admins.Where(a => a.UserName.Equals(name) && a.UserPwd.Equals(pwd)).FirstOrDefault();
         }
-        public List<Menu> showmenu(int Permission)
+        public List<Menu> ShowMenu(int Permission)
         {
             return mc.Menus.Where(c => c.Permission==(c.Permission&Permission)).ToList(); 
         }
