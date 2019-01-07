@@ -171,6 +171,15 @@
     <Compile Include="ShouQuanAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\layer\layer.js" />
+    <Content Include="Areas\layer\mobile\layer.js" />
+    <Content Include="Areas\layer\mobile\need\layer.css" />
+    <Content Include="Areas\layer\theme\default\icon-ext.png" />
+    <Content Include="Areas\layer\theme\default\icon.png" />
+    <Content Include="Areas\layer\theme\default\layer.css" />
+    <Content Include="Areas\layer\theme\default\loading-0.gif" />
+    <Content Include="Areas\layer\theme\default\loading-1.gif" />
+    <Content Include="Areas\layer\theme\default\loading-2.gif" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -319,7 +328,7 @@
     <Content Include="Views\Finance\Vacatefinance.cshtml" />
     <Content Include="Views\Login\GetoneLogin.cshtml" />
     <Content Include="Views\Login\Show.cshtml" />
-    <Content Include="Views\Emps\Punchcard.cshtml" />
+	 <Content Include="Views\Emps\Punchcard.cshtml" />
     <Content Include="Views\Emps\Showinfo.cshtml" />
     <Content Include="Views\Emps\ShowMoney.cshtml" />
     <Content Include="Views\Emps\UptPunchcard.cshtml" />

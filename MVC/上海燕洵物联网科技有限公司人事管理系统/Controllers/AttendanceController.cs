@@ -19,7 +19,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult GetAllAttend()
         {
-            string json=HttpClientHelper.Seng("get", "api/AttendanceAPIController/GetAllAttendance",null);
+            string json=HttpClientHelper.Seng("get", "api/AttendanceAPI/GetAllAttendance",null);
             return View(JsonConvert.DeserializeObject<List<PunchcardViewModel>>(json));
         }
         /// <summary>
