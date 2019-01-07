@@ -9,6 +9,10 @@ namespace DAL
     public class FinanceDal
     {
         MyContent my = new MyContent();
+        /// <summary>
+        /// 显示所有员工工资
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<TempPaymessage> GetAllMoney()
         {
             var list = my.Paymessages.ToList();
@@ -25,6 +29,15 @@ namespace DAL
                              RegularMoney=data.RegularMoney
                          };
             return result;
+        }
+        /// <summary>
+        /// 请假方法
+        /// </summary>
+        /// <returns></returns>
+        public int Vacatefinance(Vacate vacate)
+        {
+            my.Vacates.Add(vacate);
+            return my.SaveChanges();
         }
     }
 }
