@@ -39,7 +39,9 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 return Content("<script>alert('登录失败',location.href='/login/GetoneLogin')</script>");
             }
         }
-
+        /// <summary>
+        /// 根据Session中存入的名称找到其对应的员工Id
+        /// </summary>
         private void GetEmpsId()
         {
             var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney", null);
@@ -49,23 +51,34 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             Session["EmpsId"] = theOne.EmpsId;
         }
 
+        /// <summary>
+        /// 显示页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Show()
         {
             return View();
         }
+        /// <summary>
+        /// 获取权限值对应的菜单
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ShowMenu()
         {
             string result = HttpClientHelper.Seng("get", "api/login/ShowMenu?permission=" + Session["permission"], null);
             return Content(result);
         }
+
+        /// <summary>
+        /// 根据点击的菜单名称,跳转到对应的页面
+        /// </summary>
+        /// <param name="PermissionName"></param>
+        /// <returns></returns>
         public ActionResult funmenu(string PermissionName = "")
         {
             string result = "";
             switch (PermissionName)
             {
-                case "个人系统":
-                    result = "<script>location.href='/Emps/Showinfo'</script>";
-                    break;
                 case "职员信息":
                     result = "<script>location.href='/Finance/ShowMoney'</script>";
                     break;
@@ -81,26 +94,14 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 case "每日打卡":
                     result = "<script>location.href=''</script>";
                     break;
-                case "工资管理":
-                    result = "<script>location.href=''</script>";
-                    break;
                 case "工资列表":
                     result = "<script>location.href='/Finance/GetAllMoney'</script>";
-                    break;
-                case "考勤管理":
-                    result = "<script>location.href=''</script>";
                     break;
                 case "考勤列表":
                     result = "<script>location.href='/Attendance/GetAllAttend'</script>";
                     break;
-                case "部门管理":
-                    result = "<script>location.href=''</script>";
-                    break;
                 case "部门列表":
                     result = "<script>location.href='/Manager/ShowDepart'</script>";
-                    break;
-                case "员工管理":
-                    result = "<script>location.href=''</script>";
                     break;
                 case "员工列表":
                     result = "<script>location.href='/Manager/GetAll'</script>";
