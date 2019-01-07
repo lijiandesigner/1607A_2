@@ -17,7 +17,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [ShouQuan]
         public ActionResult Showinfo(int id)
         {
-            string str = HttpClientHelper.Seng("get", "api/EmpsAPIController/Showinfo/?id=" + id, null);
+            string str = HttpClientHelper.Seng("get", "api/EmpsAPIController/Showinfo?id=" + id, null);
             EmpViewModel emp = JsonConvert.DeserializeObject<EmpViewModel>(str);
             return View(emp);
         }
@@ -64,7 +64,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>类名</returns>
         public PaymessageViewModel ShowMoney(int id)
         {
-            string str = HttpClientHelper.Seng("get", "api/EmpsAPIController/ShowMoney/?id=" + id, null);
+            string str = HttpClientHelper.Seng("get", "api/EmpsAPIController/ShowMoney?id=" + id, null);
             PaymessageViewModel paymessage = JsonConvert.DeserializeObject<PaymessageViewModel>(str);
             return paymessage;
 
