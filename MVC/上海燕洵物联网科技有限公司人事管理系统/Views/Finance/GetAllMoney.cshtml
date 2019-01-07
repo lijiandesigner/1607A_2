@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PaymessageViewModel>
-
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 
 <table class="table">
     <tr>
@@ -54,3 +54,24 @@
 }
 
 </table>
+<script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType:"application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+    }
+</script>

@@ -6,43 +6,65 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>请假</h2>
 
-@using (Html.BeginForm("Vacatefinance","Finance",FormMethod.Post)) 
+@using (Html.BeginForm("Vacatefinance", "Finance", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.Label("请假人", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input id="Text1" type="text" name="Name" value="@Session["Name"]" />
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("请假原因", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.RadioButtonFor(model => model.Cause, "事假", new { @checked = "checked" })事假
-            @Html.RadioButtonFor(model => model.Cause, "产假", new { @checked = "checked" })产假
-            @Html.RadioButtonFor(model => model.Cause, "丧假", new { @checked = "checked" })丧假
-            @Html.RadioButtonFor(model => model.Cause, "病假", new { @checked = "checked" })病假
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("请假人", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Text1" type="text" name="Name" value="@Session["Name"]" />
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Remark)
-            @Html.ValidationMessageFor(model => model.Remark)
+        <div class="form-group">
+            @Html.Label("请假原因", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.Cause, "事假", new { @checked = "checked" })事假
+                @Html.RadioButtonFor(model => model.Cause, "产假", new { @checked = "checked" })产假
+                @Html.RadioButtonFor(model => model.Cause, "丧假", new { @checked = "checked" })丧假
+                @Html.RadioButtonFor(model => model.Cause, "病假", new { @checked = "checked" })病假
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="提交" class="btn btn-default" />
+        <div class="form-group">
+            @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Remark)
+                @Html.ValidationMessageFor(model => model.Remark)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="提交" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
+    <script>
+        fun();
+        function fun() {
+            $("[name=Menu]").empty();
+            $.ajax({
+                url: "../Login/ShowMenu",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var li = '';
+                    for (var i in data) {
+                        li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    }
+                    $("[name=Menu]").append(li);
+                }
+
+            })
+
+        }
+    </script>
+
