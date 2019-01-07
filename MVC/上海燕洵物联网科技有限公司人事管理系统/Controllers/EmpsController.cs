@@ -14,6 +14,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 显示个人信息
         /// </summary>
         /// <returns>类名</returns>
+        [ShouQuan]
         public ActionResult Showinfo(int id)
         {
             string str = HttpClientHelper.Seng("get", "api/EmpsAPIController/Showinfo/?id=" + id, null);
