@@ -63,10 +63,10 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                     result = "<script>location.href=''</script>";
                     break;
                 case "打卡系统":
-                    result = "<script>location.href='/Attendance/Punchcard'</script>";
+                    result = "<script>location.href=''</script>";
                     break;
                 case "每日打卡":
-                    result = "<script>location.href=''</script>";
+                    result = "<script>location.href='/Attendance/Punchcard'</script>";
                     break;
                 case "工资管理":
                     result = "<script>location.href=''</script>";

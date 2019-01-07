@@ -26,6 +26,30 @@ namespace BLL
         /// <returns>int</returns>
         public int Punchcard(Punchcard punchcard)
         {
+            //说明是上班打卡或者下午下班打卡
+            DateTime date=Convert.ToDateTime(punchcard.Signindate);
+            //正常上班
+            if (date>=Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 00:00:00") &&date<=Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 08:00:00"))
+            {
+                return dal.Punchcard(punchcard);
+            }
+            //晚到一个小时
+            else if(date> Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 08:00:00")&&date<Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 09:00:00"))
+            {
+                punchcard.Signindate = "迟到";
+            }
+            else if(date >= Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 11:30:00") && date <= Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 13:30:00"))
+            {
+                return dal.Punchcard(punchcard);
+            }
+            else if(date > Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 13:30:00") && date < Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 14:30:00"))
+            {
+                punchcard.Signindate = "迟到";
+            }
+            else
+            {
+                punchcard.Signindate = "旷工";
+            }
             return dal.Punchcard(punchcard);
         }
         /// <summary>
@@ -53,6 +77,30 @@ namespace BLL
         /// <returns>int</returns>       
         public int UptPunchcard(Punchcard punchcard)
         {
+            DateTime date = Convert.ToDateTime(punchcard.Signoutdate);
+            //正常下班
+            if (date >= Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 11:30:00")&&date<=Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 13:30:00"))
+            {
+                return dal.UptPunchcard(punchcard);
+            }
+            //正常下班
+            else if (date >= Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 18:00:00") && date <= Convert.ToDateTime(DateTime.Now.AddDays(1).ToShortDateString() + " 00:00:00"))
+            {
+                return dal.UptPunchcard(punchcard);
+            }
+            //早退
+            else if (date < Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 11:30:00")&&date> Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 08:00:00"))
+            {
+                punchcard.Signoutdate = "早退";
+            }
+            else if (date<Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 18:00:00")&&date> Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 13:30:00"))
+            {
+                punchcard.Signoutdate = "早退";
+            }
+            else
+            {
+                punchcard.Signoutdate = "未打卡";
+            }
             return dal.UptPunchcard(punchcard);
         }
     }
