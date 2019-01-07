@@ -165,6 +165,7 @@
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\PaymessageViewModel.cs" />
     <Compile Include="Models\PunchcardViewModel.cs" />
+    <Compile Include="Models\TempFinanceViewModel.cs" />
     <Compile Include="Models\TransferViewModel.cs" />
     <Compile Include="Models\VacateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -352,15 +353,13 @@
     <Content Include="Views\Manager\UpdateDepart.cshtml" />
     <Content Include="Views\Manager\GetAllEmp.cshtml" />
     <Content Include="Views\Manager\AddEmp.cshtml" />
-    <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Manager\ShowMoney.cshtml" />
     <Content Include="Views\Manager\Punchcard.cshtml" />
     <Content Include="Views\Finance\Punchcard.cshtml" />
-    <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Finance\Vacatefinance.cshtml" />
     <Content Include="Views\Login\GetoneLogin.cshtml" />
     <Content Include="Views\Login\Show.cshtml" />
-	 <Content Include="Views\Emps\Punchcard.cshtml" />
+    <Content Include="Views\Emps\Punchcard.cshtml" />
     <Content Include="Views\Emps\Showinfo.cshtml" />
     <Content Include="Views\Emps\ShowMoney.cshtml" />
     <Content Include="Views\Emps\UptPunchcard.cshtml" />
@@ -371,6 +370,7 @@
     <Content Include="Views\Attendance\VacateAttendance.cshtml" />
     <Content Include="Views\Manager\ShowVacate.cshtml" />
     <Content Include="Views\Manager\UptPunchcard.cshtml" />
+    <Content Include="Views\Finance\ShowMoney.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

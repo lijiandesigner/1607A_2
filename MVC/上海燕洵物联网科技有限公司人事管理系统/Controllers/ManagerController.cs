@@ -19,7 +19,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult ShowDepart(int pageindex = 1)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowDepart", null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
             List<DepartmentViewModel> list = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;
@@ -42,7 +42,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
 
             string str = JsonConvert.SerializeObject(department);
-            string str1 = HttpClientHelper.Seng("post", "api/ManagerAPIController/AddDepart", str);
+            string str1 = HttpClientHelper.Seng("post", "api/ManagerAPI/AddDepart", str);
             if (str1.Contains("成功"))
             {
                 Response.Write("<script>alert('添加成功')</script>");
@@ -61,7 +61,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult UpdateDepart(DepartmentViewModel department)
         {
             string jsonstr = JsonConvert.SerializeObject(department);
-            string str = HttpClientHelper.Seng("put", "api/ManagerAPIController/UpdateDepart", jsonstr);
+            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/UpdateDepart", jsonstr);
             if (str.Contains("成功"))
             {
                 Response.Write("<script>alert('修改成功')</script>");
@@ -80,7 +80,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public DepartmentViewModel GetOneDepart(int id)
         {
 
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetOneDepart/?Id=" + id, "null");
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetOneDepart?Id=" + id, "null");
             DepartmentViewModel depart = JsonConvert.DeserializeObject<DepartmentViewModel>(str);
             return depart;
 
@@ -91,7 +91,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>int</returns>
         public ActionResult DeleteDepart(int id)
         {
-            string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteDepart/?Id=" + id, "null");
+            string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteDepart?Id=" + id, "null");
             if (str.Contains("成功"))
             {
                 Content("删除成功");
@@ -108,9 +108,9 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>list集合</returns>
         public ActionResult GetAllEmp(int pageindex = 1,string departname="")
         {
-            string str2 = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowDepart", null);
+            string str2 = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
             DataTable dt = JsonConvert.DeserializeObject<DataTable>(str2);
-            string str = HttpClientHelper.Seng("get", "/api/ManagerAPIController/GetAllEmp", null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetAllEmp", null);
             DataTable dt1 = JsonConvert.DeserializeObject<DataTable>(str);
             //List<EmpViewModel> emps = JsonConvert.DeserializeObject<List<EmpViewModel>>(str);
             var emps = from s in dt.AsEnumerable()
@@ -142,7 +142,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpGet]
         public ActionResult AddEmp()
         {
-            string str2 = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowDepart", null);
+            string str2 = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
             DataTable dt = JsonConvert.DeserializeObject<DataTable>(str2);
             var list = from s in dt.AsEnumerable()
                        select new SelectListItem()
@@ -157,7 +157,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult AddEmp(EmpViewModel emp)
         {
             string emps = JsonConvert.SerializeObject(emp);
-            string str = HttpClientHelper.Seng("post", "api/ManagerAPIController/AddEmp", emps);
+            string str = HttpClientHelper.Seng("post", "api/ManagerAPI/AddEmp", emps);
             if (str.Contains("成功"))
             {
                 Response.Write("<script>alert('添加成功')</script>");
@@ -175,7 +175,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 
         public List<EmpViewModel> SearchEmp(int id)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/SearchEmp/?id=" + id, null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/SearchEmp?id=" + id, null);
             List<EmpViewModel> emps = JsonConvert.DeserializeObject<List<EmpViewModel>>(str);
             return emps;
         }
@@ -186,7 +186,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
             string jsonstr = JsonConvert.SerializeObject(vacate);
-            string str = HttpClientHelper.Seng("put", "api/ManagerAPIController/VacateEmp/", jsonstr);
+            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp/", jsonstr);
             if (str.Contains("成功"))
             {
                 Response.Write("<script>alert('修改成功')</script>");
@@ -203,7 +203,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>int</returns>
         public ActionResult DeleteEmp(int id)
         {
-            string str = HttpClientHelper.Seng("delete", "api/ManagerAPIController/DeleteEmp/?id=" + id, null);
+            string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteEmp?id=" + id, null);
             if (str.Contains("成功"))
             {
                  Content("删除成功");
@@ -221,7 +221,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult Punchcard(PunchcardViewModel punchcard)
         {
             string str1 = JsonConvert.SerializeObject(punchcard);
-            string str = HttpClientHelper.Seng("post", "api/ManagerAPIController/Punchcard/", str1);
+            string str = HttpClientHelper.Seng("post", "api/ManagerAPI/Punchcard/", str1);
             if (str.Contains("成功"))
             {
                 Response.Write("<script>alert('打卡成功')</script>");
@@ -240,7 +240,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult UptPunchcard(PunchcardViewModel punchcard)
         {
             string str1 = JsonConvert.SerializeObject(punchcard);
-            string str = HttpClientHelper.Seng("post", "api/ManagerAPIController/Punchcard/", str1);
+            string str = HttpClientHelper.Seng("post", "api/ManagerAPI/Punchcard/", str1);
             if (str.Contains("成功"))
             {
                 Response.Write("<script>alert('修改成功')</script>");
@@ -260,7 +260,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>类名</returns>
         public PaymessageViewModel ShowMoney(int id)
         {
-            string str = HttpClientHelper.Seng("get", "api/ManagerAPIController/ShowMoney/?id=" + id, null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowMoney?id=" + id, null);
             PaymessageViewModel paymessage = JsonConvert.DeserializeObject<PaymessageViewModel>(str);
             return paymessage;
         }
@@ -270,7 +270,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns></returns>
         public ActionResult ShowVacate(int pageindex=1)
         {
-            string str = HttpClientHelper.Seng("get","api/ManagerAPIController/ShowVacate",null);
+            string str = HttpClientHelper.Seng("get","api/ManagerAPI/ShowVacate",null);
             List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;
@@ -284,7 +284,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns></returns>
         public ActionResult DeleteVacate(int id)
         {
-            string str = HttpClientHelper.Seng("delete","api/ManagerAPIController/DeleteVacate/?id="+id,null);
+            string str = HttpClientHelper.Seng("delete","api/ManagerAPI/DeleteVacate?id="+id,null);
            
             if(str.Contains("成功"))
             {

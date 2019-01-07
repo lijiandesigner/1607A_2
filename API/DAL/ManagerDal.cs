@@ -57,7 +57,7 @@ namespace DAL
         /// 获取所有员工信息
         /// </summary>
         /// <returns></returns>
-        public List<Emp> GetAllEmp()
+        public  List<Emp> GetAllEmp()
         {
             return my.Emps.ToList();
         }
