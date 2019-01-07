@@ -16,5 +16,19 @@ namespace ShiXunXiangMu.Controllers
         {
            return FinanceBll.GetAllMoney();
         }
+
+        [HttpPost]
+        public string Vacatefinance(Vacate vacate)
+        {
+            int n = FinanceBll.Vacatefinance(vacate);
+            if (n>0)
+            {
+                return "提交成功!等待审核";
+            }
+            else
+            {
+                return "提交失败";
+            }
+        }
     }
 }
