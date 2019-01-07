@@ -18,9 +18,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney",null);
             var list = JsonConvert.DeserializeObject<List<PaymessageViewModel>>(result);
-            string name = Session["Name"].ToString();
-            var theOne= list.Where(a => a.EmpName == name).FirstOrDefault();
-            Session["EmpsId"] = theOne.EmpsId;
             return View(list);
         }
         /// <summary>
@@ -54,7 +51,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             vacate.EmpsId = Convert.ToInt32(Session["EmpsId"]);
             string str = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post", "api/Finance/Vacatefinance",str);
-            return Content("<script>('添加成功')</script>");
+            return Content("<script>(alert("+result+",location.href='/login/Show'))</script>");
         }
     }
 }

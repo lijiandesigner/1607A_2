@@ -28,12 +28,25 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 var list = JsonConvert.DeserializeObject<AdminViewModel>(result);
                 Session["Name"] = list.UserName;
                 Session["permission"] = list.Permission;
-                return Content("<script>alert('登录成功',location.href='/login/Show')</script>");
+
+                //获取所有职员信息,并根据登录名称获取职员的Id,存入Session
+                GetEmpsId();
+
+                return Content("<script>location.href='/login/Show'</script>");
             }
             else
             {
                 return Content("<script>alert('登录失败',location.href='/login/GetoneLogin')</script>");
             }
+        }
+
+        private void GetEmpsId()
+        {
+            var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney", null);
+            var list = JsonConvert.DeserializeObject<List<PaymessageViewModel>>(result);
+            string name = Session["Name"].ToString();
+            var theOne = list.Where(a => a.EmpName == name).FirstOrDefault();
+            Session["EmpsId"] = theOne.EmpsId;
         }
 
         public ActionResult Show()
@@ -57,7 +70,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                     result = "<script>location.href='/Manager/GetAllEmp'</script>";
                     break;
                 case "我要请假":
-                    result = "<script>location.href=''</script>";
+                    result = "<script>location.href='/Finance/Vacatefinance'</script>";
                     break;
                 case "我要离职":
                     result = "<script>location.href=''</script>";
