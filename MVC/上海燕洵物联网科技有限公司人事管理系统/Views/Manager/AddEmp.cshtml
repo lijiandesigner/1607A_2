@@ -12,98 +12,105 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>EmpViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ename, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model=>model.Ename)
-                @Html.ValidationMessageFor(model=>model.Ename)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Esex, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.RadioButtonFor(model=>model.Esex,"男",new { @checked="checked"})男
-                @Html.RadioButtonFor(model=>model.Esex,"女")女
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Papersnum, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Papersnum)
-                @Html.ValidationMessageFor(model => model.Papersnum)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ephone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Ephone)
-                @Html.ValidationMessageFor(model => model.Ephone)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Eduty, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="Select1">
-                    <option>经理</option>
-                    <option>.Net开发工程师</option>
-                    <option>财务会计</option>
-                    <option>考勤经理</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model=>model.Email)
-                @Html.ValidationMessageFor(model=>model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tracttype, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="Select1">
-                    <option>实习合同</option>
-                    <option>正式合同</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Etype, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="Select1">
-                    <option>实习生</option>
-                    <option>正式员工</option>
-                    <option>部门经理</option>
-                    <option>技术总监</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ERemark, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ERemark)
-                @Html.ValidationMessageFor(model => model.ERemark)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <h4>EmpViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ename, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Ename)
+            @Html.ValidationMessageFor(model => model.Ename)
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Esex, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.RadioButtonFor(model => model.Esex, "男", new { @checked = "checked" })男
+            @Html.RadioButtonFor(model => model.Esex, "女")女
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DepartmentsId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model=>model.DepartmentsId,ViewBag.Showdepart as List<SelectListItem>)
+           
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Papersnum, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Papersnum)
+            @Html.ValidationMessageFor(model => model.Papersnum)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ephone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Ephone)
+            @Html.ValidationMessageFor(model => model.Ephone)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Eduty, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="Select1">
+                <option>经理</option>
+                <option>.Net开发工程师</option>
+                <option>财务会计</option>
+                <option>考勤经理</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tracttype, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="Select1">
+                <option>实习合同</option>
+                <option>正式合同</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Etype, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="Select1">
+                <option>实习生</option>
+                <option>正式员工</option>
+                <option>部门经理</option>
+                <option>技术总监</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ERemark, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.ERemark)
+            @Html.ValidationMessageFor(model => model.ERemark)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
