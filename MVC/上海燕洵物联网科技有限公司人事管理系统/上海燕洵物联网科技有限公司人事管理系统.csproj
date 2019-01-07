@@ -352,7 +352,6 @@
     <Content Include="Views\Manager\UpdateDepart.cshtml" />
     <Content Include="Views\Manager\GetAllEmp.cshtml" />
     <Content Include="Views\Manager\AddEmp.cshtml" />
-    <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Manager\ShowMoney.cshtml" />
     <Content Include="Views\Manager\Punchcard.cshtml" />
     <Content Include="Views\Finance\Punchcard.cshtml" />
@@ -360,7 +359,7 @@
     <Content Include="Views\Finance\Vacatefinance.cshtml" />
     <Content Include="Views\Login\GetoneLogin.cshtml" />
     <Content Include="Views\Login\Show.cshtml" />
-	 <Content Include="Views\Emps\Punchcard.cshtml" />
+    <Content Include="Views\Emps\Punchcard.cshtml" />
     <Content Include="Views\Emps\Showinfo.cshtml" />
     <Content Include="Views\Emps\ShowMoney.cshtml" />
     <Content Include="Views\Emps\UptPunchcard.cshtml" />
