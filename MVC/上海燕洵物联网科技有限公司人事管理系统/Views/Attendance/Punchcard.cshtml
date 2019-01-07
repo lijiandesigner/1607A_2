@@ -5,8 +5,11 @@
 
 <h2>打卡</h2>
 <div>
-    <p>请输入员工号<input id="Text1" type="text" /></p>
-    <input id="Button1" type="button" value="打卡" />
+    @using (Html.BeginForm())
+    {
+        <p>请输入员工号<input id="Text1" type="text" /></p>
+        <input id="Button1" type="submit" value="打卡" />
+    }
 </div>
 
 
