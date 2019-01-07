@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BName)
+            @Html.Label("部门名称")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Bremark)
+            @Html.Label("部门描述")
         </th>
         <th></th>
     </tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.Bremark)
         </td>
         <td>
-            @Html.ActionLink("修改", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("详情", "Details", new { id=item.Id }) |
-            @Html.ActionLink("删除", "Delete", new { id=item.Id })
+            @Html.ActionLink("修改", "UpdateDepart", new { id=item.Id }) |
+            @Html.ActionLink("详情", "GetOneDepart", new { id=item.Id }) |
+            @Html.ActionLink("删除", "DeleteDepart", new { id=item.Id })
         </td>
     </tr>
 }

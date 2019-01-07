@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.BName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("添加部门名称：", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.BName)
                 @Html.ValidationMessageFor(model => model.BName)
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Bremark, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("添加部门描述", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Bremark)
                 @Html.ValidationMessageFor(model => model.Bremark)
@@ -33,7 +33,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="添加部门" class="btn btn-default" />
             </div>
         </div>
     </div>
