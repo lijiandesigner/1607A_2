@@ -21,15 +21,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             return View(list);
         }
         /// <summary>
-        /// 打卡
-        /// </summary>
-        /// <returns>int</returns>
-        public ActionResult Punchcard()
-        {
-
-            return View();
-        }
-        /// <summary>
         /// 显示职工信息
         /// </summary>
         /// <returns>list集合</returns>
@@ -56,6 +47,23 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post", "api/Finance/Vacatefinance",str);
             return Content("<script>(alert("+result+",location.href='/login/Show'))</script>");
+        }
+
+        [HttpGet]
+        public ActionResult LiZhi()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LiZhi(DimissionViewModel dimission,string[] reason)
+        {
+            dimission.LeaveReason= string.Join(",",reason);
+            dimission.EmpsId = Convert.ToInt32( Session["EmpsId"]);
+            var str= JsonConvert.SerializeObject(dimission);
+            string result = HttpClientHelper.Seng("post", "api/Finance/Dimission",str);
+            return Content("<script>(alert(" + result + ",location.href='/login/Show'))</script>");
         }
     }
 }

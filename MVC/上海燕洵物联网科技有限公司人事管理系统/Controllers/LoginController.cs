@@ -86,7 +86,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                     result = "<script>location.href='/Finance/Vacatefinance'</script>";
                     break;
                 case "我要离职":
-                    result = "<script>location.href=''</script>";
+                    result = "<script>location.href='/Finance/LiZhi'</script>";
                     break;
                 case "打卡系统":
                     result = "<script>location.href=''</script>";
