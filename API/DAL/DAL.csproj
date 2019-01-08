@@ -56,6 +56,10 @@
     <Compile Include="FinanceDal.cs" />
     <Compile Include="LoginDal.cs" />
     <Compile Include="ManagerDal.cs" />
+    <Compile Include="Migrations\201901071117234_mymig.cs" />
+    <Compile Include="Migrations\201901071117234_mymig.Designer.cs">
+      <DependentUpon>201901071117234_mymig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901071117234_mymig.resx">
+      <DependentUpon>201901071117234_mymig.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

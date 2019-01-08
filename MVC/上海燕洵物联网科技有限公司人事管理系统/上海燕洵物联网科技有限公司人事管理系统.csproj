@@ -370,6 +370,7 @@
     <Content Include="Views\Attendance\VacateAttendance.cshtml" />
     <Content Include="Views\Manager\ShowVacate.cshtml" />
     <Content Include="Views\Manager\UptPunchcard.cshtml" />
+    <Content Include="Views\Manager\VacateEmp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

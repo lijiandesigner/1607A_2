@@ -1,0 +1,73 @@
+﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.VacateViewModel
+ 
+@{
+    ViewBag.Title = "VacateEmp";
+}
+<script src="~/Content/jquery-3.1.1.js"></script>
+<h2>VacateEmp</h2>
+
+<div>
+    <h4>VacateViewModel</h4>
+
+    <hr />
+    @Html.HiddenFor(model=>model.Id)
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpsId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpsId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cause)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cause)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        
+        
+    </dl>
+    <p>
+        <input id="Btn1" type="button" value="审核通过" onclick="Yes(@Model.Id)"/>
+        <input id="Btn2" type="button" value="驳回" onclick="No(@Model.Id)"/>
+    </p>
+</div>
+
+<p>
+ 
+    @Html.ActionLink("返回请假列表", "ShowVacate")
+</p>
+<script>
+    function Yes(id) {
+        var o = new Object;
+        o.Id = id;
+        o.VacateState = 2;
+        location.href = "/Manager/VacateEmp?vacate=" + JSON.stringify(o);
+    }
+    function No(id) {
+        var o = new Object;
+        o.Id = id;
+        o.VacateState = 3;
+        location.href = "/Manager/VacateEmp?vacate=" + JSON.stringify(o);
+    }
+</script>

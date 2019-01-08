@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.VacateViewModel>
+@using 上海燕洵物联网科技有限公司人事管理系统.Controllers
 
 @{
     ViewBag.Title = "ShowVacate";
@@ -23,10 +24,11 @@
         <th>
             @Html.DisplayNameFor(model => model.VacateState)
         </th>
-        <th></th>
+        <th>操作</th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.EmpsId)
@@ -41,12 +43,25 @@
             @Html.DisplayFor(modelItem => item.Remark)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VacateState)
+            @{StateInfo s = (StateInfo)item.VacateState;}
+            @s
         </td>
+       
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (s == StateInfo.审核通过)
+            {
+                @:已通过
+            }
+            else if (s == StateInfo.待审核)
+            {
+                @Html.ActionLink("审批", "VacateEmp", new { id = item.Id })
+                             else
+                           {
+                        @:已驳回
+                       
+            }
+
+           @Html.ActionLink("删除", "DeleteVacate", new { id = item.Id })
         </td>
     </tr>
 }
