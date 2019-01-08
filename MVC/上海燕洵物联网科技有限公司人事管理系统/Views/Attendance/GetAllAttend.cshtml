@@ -17,7 +17,9 @@
         <th>
             签退时间
         </th>
-        <th></th>
+        <th>
+            打卡状态
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -32,10 +34,43 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Signoutdate)
             </td>
+            <td>
+                @if (item.AttenState == 1)
+                {
+                    @:正常工作
+                }
+                else if (item.AttenState == 2)
+                {
+                    @:迟到
+                }
+                else if (item.AttenState == 3)
+                {
+                    @:早退
+                }
+                else if (item.AttenState == 4)
+                {
+                    @:旷工
+                }
+                else
+                {
+                    @:未打卡
+                }
+            </td>
         </tr>
     }
 
 </table>
+
+<ul class="pagination" style="margin-left:300px">
+    <li><a href="#">上一页</a></li>
+    @for (int i = 1; i < Convert.ToInt32(ViewBag.ZongSize); i++)
+    {
+        <li><a href="#">@i</a></li>
+    }
+    <li><a href="#">下一页</a></li>
+</ul>
+<span>当前页 @Session["pageIndex"]</span>
+
 <script>
     fun();
     function fun() {
