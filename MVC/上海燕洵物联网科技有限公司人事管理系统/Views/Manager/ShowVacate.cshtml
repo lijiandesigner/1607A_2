@@ -64,7 +64,7 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("删除", "DeleteVacate", new { id = item.Id })
+                <a href="#" onclick="Del(@item.Id,this)">删除</a>
             </td>
         </tr>
     }
@@ -104,8 +104,7 @@
             location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#totalpage").text()));
         }
     }
-</script>
-<script>
+
     fun();
     function fun() {
         $("[name=Menu]").empty();
@@ -125,5 +124,15 @@
         })
 
 
+    }
+    function Del(Id, obj) {
+        $.ajax({
+            url: "/Manager/DeleteVacate?Id=" + Id,
+            success: function (data) {
+                alert(data);
+                $(obj).parent().parent().remove();
+            }
+
+        })
     }
 </script>
