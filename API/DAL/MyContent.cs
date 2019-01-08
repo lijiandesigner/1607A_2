@@ -28,5 +28,6 @@ namespace DAL
         public virtual DbSet<Punchcard> Punchcards { get; set; }
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<Vacate> Vacates { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
     }
 }

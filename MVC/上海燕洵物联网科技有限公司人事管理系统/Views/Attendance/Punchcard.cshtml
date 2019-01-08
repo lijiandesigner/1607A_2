@@ -8,7 +8,7 @@
 <div>
     @using (Html.BeginForm())
     {
-        <p>请输入员工号<input id="Text1" type="text" name="Id" /></p>
+        <p>员工号<input id="Text1" type="text" name="Id" value="@Session["EmpsId"]" /></p>
         <input id="Button1" type="submit" value="打卡" />
     }       
 </div>

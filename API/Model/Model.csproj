@@ -49,6 +49,7 @@
     <Compile Include="Emp.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Paymessage.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Punchcard.cs" />
     <Compile Include="TempFinance.cs" />
