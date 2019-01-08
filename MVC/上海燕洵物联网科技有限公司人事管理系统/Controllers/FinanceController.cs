@@ -53,7 +53,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             vacate.EmpsId = Convert.ToInt32(Session["EmpsId"]);
             string str = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post", "api/Finance/Vacatefinance",str);
-            return Content("<script>(alert("+result+",location.href='/login/Show'))</script>");
+            return Content("<script>alert("+result+"),location.href='/login/Show'</script>");
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             dimission.EmpsId = Convert.ToInt32( Session["EmpsId"]);
             var str= JsonConvert.SerializeObject(dimission);
             string result = HttpClientHelper.Seng("post", "api/Finance/Dimission",str);
-            return Content("<script>(alert(" + result + ",location.href='/login/Show'))</script>");
+            return Content("<script>alert(" + result + "),location.href='/login/Show'</script>");
         }
     }
 }

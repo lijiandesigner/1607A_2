@@ -3,21 +3,18 @@
 @{
     ViewBag.Title = "AddEmp";
 }
-
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>添加员工</h2>
-<script src="~/My97DatePicker/WdatePicker.js"></script>
-<script src="~/My97DatePicker/lang/zh-cn.js"></script>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AddEmp", "Manager",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>EmpViewModel</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Ename, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("职员姓名:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.Ename)
             @Html.ValidationMessageFor(model => model.Ename)
@@ -25,22 +22,22 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Esex, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("职员性别:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.RadioButtonFor(model => model.Esex, "男", new { @checked = "checked" })男
             @Html.RadioButtonFor(model => model.Esex, "女")女
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.DepartmentsId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("部门:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model=>model.DepartmentsId,ViewBag.Showdepart as List<SelectListItem>)
+            @Html.DropDownListFor(model=>model.DepartmentsId,ViewBag.Showdepart as IEnumerable<SelectListItem>)
            
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Papersnum, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("身份证号:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.Papersnum)
             @Html.ValidationMessageFor(model => model.Papersnum)
@@ -48,7 +45,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Ephone, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("联系电话:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.Ephone)
             @Html.ValidationMessageFor(model => model.Ephone)
@@ -56,9 +53,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Eduty, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <select id="Select1">
+            <select id="Select1" name="Eduty">
                 <option>经理</option>
                 <option>.Net开发工程师</option>
                 <option>财务会计</option>
@@ -68,7 +65,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("个人邮箱", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
@@ -76,29 +73,29 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Tracttype, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("合同类型", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <select id="Select1">
+            <select id="Select1" name="Tracttype">
                 <option>实习合同</option>
-                <option>正式合同</option>
+                <option>劳动合同</option>
             </select>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Etype, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("员工类型", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <select id="Select1">
-                <option>实习生</option>
-                <option>正式员工</option>
-                <option>部门经理</option>
-                <option>技术总监</option>
+            <select id="Select1" name="Etype">
+                <option>全职</option>
+                <option>兼职</option>
+                <option>实习</option>
+                <option>外派</option>
             </select>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ERemark, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextAreaFor(model => model.ERemark)
             @Html.ValidationMessageFor(model => model.ERemark)
@@ -107,7 +104,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="确定" class="btn btn-default" />
         </div>
     </div>
 </div>
@@ -117,9 +114,6 @@
     @Html.ActionLink("返回员工列表", "GetAllEmp")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 <script>
     fun();
     function fun() {
