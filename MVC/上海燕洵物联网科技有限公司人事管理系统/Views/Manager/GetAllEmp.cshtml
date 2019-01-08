@@ -1,131 +1,85 @@
-﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.EmpViewModel>
+﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.TempFinanceViewModel>
 
 @{
     ViewBag.Title = "GetAllEmp";
 }
 
 <h2>GetAllEmp</h2>
-<script src="~/Content/jquery-3.1.1.js"></script>
+
 <p>
-    @Html.ActionLink("新增员工", "AddEmp")
+    @Html.ActionLink("员工入职", "AddEmp")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.Label("员工名称")
+            @Html.DisplayName("员工姓名")
         </th>
         <th>
-            @Html.Label("部门名称")
+            @Html.DisplayName("所属部门")
         </th>
         <th>
-            @Html.Label("员工性别")
+            @Html.DisplayName("员工性别")
         </th>
         <th>
-            @Html.Label("身份证号")
+            @Html.DisplayName("身份证号")
         </th>
         <th>
-            @Html.Label("员工电话")
+            @Html.DisplayName("手机号")
         </th>
         <th>
-            @Html.Label("员工职务")
+            @Html.DisplayName("职务名称")
         </th>
         <th>
-            @Html.Label("员工邮箱")
+            @Html.DisplayName("个人邮箱")
         </th>
         <th>
-            @Html.Label("合同类型")
+            @Html.DisplayName("合同类型")
         </th>
         <th>
-            @Html.Label("员工类型")
+            @Html.DisplayName("员工类型")
         </th>
-        <th>
-            @Html.Label("备注文本")
-        </th>
-        <th>操作</th>
+        <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ename)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Esex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Papersnum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ephone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Eduty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tracttype)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Etype)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ERemark)
-            </td>
-            <td>
-                <input id="Btndelete" type="button" value="删除员工" onclick="Delete(@item.Id)" />
-                <input id="Btnxiang" type="button" value="查看该员工" onclick="Xiang(@item.Id)" />
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Esex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Papersnum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Eduty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tracttype)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etype)
+        </td>
+
+        <td>
+            @Html.ActionLink("员工调职", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("开除员工", "DeleteEmp", new { id = item.Id })
+        </td>
+    </tr>
+}
 
 </table>
-<p>
-    <span>
-        <span>当前第</span>
-        <span id="currentindex">@ViewBag.currentindex</span>
-        <span>页，总共</span>
-        <span id="totalpage">@ViewBag.totalpage</span>
-        <span>页</span>
-
-    </span>
-    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
-    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
-</p>
-<script>
-    function BtnUp() {
-        if ($("#currentindex").text != 1) {
-            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) - 1);
-        }
-        else {
-            alert('已经是首页了');
-            return;
-        }
-        function BtnDown() {
-            if ($("#currentindex").text != $("#totalpage").text) {
-            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) + 1);
-        }
-        else {
-            alert('已经是尾页了');
-            return;
-        }
-</script>
-<script>
-    function Delete(id) {
-        if (confirm("，此为员工主页面，删除后无法还原，确认删除员工？")) {
-            location.href = "/Manager/DeleteEmp?id=" + id;
-        }
-    }
-    function Xiang(id) {
-        location.href = "/Emps/Showinfo?id=" + id;
-    }
-
-</script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
     fun();
     function fun() {
@@ -138,7 +92,7 @@
                 console.log(data);
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
             }

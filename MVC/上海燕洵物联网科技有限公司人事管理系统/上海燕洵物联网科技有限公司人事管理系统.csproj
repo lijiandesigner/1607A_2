@@ -351,7 +351,6 @@
     <Content Include="Views\Manager\ShowDepart.cshtml" />
     <Content Include="Views\Manager\AddDepart.cshtml" />
     <Content Include="Views\Manager\UpdateDepart.cshtml" />
-    <Content Include="Views\Manager\GetAllEmp.cshtml" />
     <Content Include="Views\Manager\AddEmp.cshtml" />
     <Content Include="Views\Manager\ShowMoney.cshtml" />
     <Content Include="Views\Manager\Punchcard.cshtml" />
@@ -374,6 +373,8 @@
     <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Finance\LiZhi.cshtml" />
+    <Content Include="Views\Manager\GetOneDepart.cshtml" />
+    <Content Include="Views\Manager\GetAllEmp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
