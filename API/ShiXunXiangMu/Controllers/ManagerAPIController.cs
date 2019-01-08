@@ -223,5 +223,15 @@ namespace ShiXunXiangMu.Controllers
                 return "删除失败";
             }
         }
+
+        /// <summary>
+        /// 获取所有职位信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<Position> GetPositions(int id)
+        {
+            return bll.GetPositions(id);
+        }
     }
 }
