@@ -159,5 +159,22 @@ namespace DAL
             my.Entry(a).State = EntityState.Deleted;
             return my.SaveChanges();
         }
+
+        /// <summary>
+        /// 获取所有职位
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Position> GetPositions(int id) {
+            var list= my.Positions.Where(a=>a.DepartmentsId==id).ToList();
+            var result = from data in list
+                         select new Position
+                         {
+                             Id = data.Id,
+                             DepartmentsId = data.DepartmentsId,
+                             Pname = data.Pname
+                         };
+            return result;
+        }
+            
     }
 }
