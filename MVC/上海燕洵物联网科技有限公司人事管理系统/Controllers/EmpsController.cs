@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using 上海燕洵物联网科技有限公司人事管理系统.Models;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
+    [ShouQuan]
     public class EmpsController : Controller
     {
         // GET: Emps

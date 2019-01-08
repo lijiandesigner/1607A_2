@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using 上海燕洵物联网科技有限公司人事管理系统.Models;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
+    [ShouQuan]
     public class FinanceController : Controller
     {
         // GET: Finance
@@ -32,7 +33,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             return View(theOne);
         }
         /// <summary>
-        /// 请假
+        /// 请假页面显示
         /// </summary>
         /// <returns>int</returns>
         [HttpGet]
@@ -40,6 +41,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 获取请假信息
+        /// </summary>
+        /// <param name="vacate"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Vacatefinance(VacateViewModel vacate)
         {
@@ -49,13 +56,22 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             return Content("<script>(alert("+result+",location.href='/login/Show'))</script>");
         }
 
+        /// <summary>
+        /// 显示离职页面
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult LiZhi()
         {
 
             return View();
         }
-
+        /// <summary>
+        /// 接收离职信息
+        /// </summary>
+        /// <param name="dimission"></param>
+        /// <param name="reason"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult LiZhi(DimissionViewModel dimission,string[] reason)
         {
