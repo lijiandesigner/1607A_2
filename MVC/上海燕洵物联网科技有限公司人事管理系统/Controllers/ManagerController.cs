@@ -138,7 +138,15 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                            Value=s.Id.ToString()
                        };
             ViewBag.Showdepart = list.ToList();
+            ViewBag.position = new List<SelectListItem>();
             return View();
+        }
+        
+        [HttpPost]
+        public ActionResult ErJi(int id)
+        {
+            var list = HttpClientHelper.Seng("get", "api/ManagerAPI/GetPositions?id="+id, null);
+            return Json(list);
         }
         [HttpPost]
         public ActionResult AddEmp(EmpViewModel emp)

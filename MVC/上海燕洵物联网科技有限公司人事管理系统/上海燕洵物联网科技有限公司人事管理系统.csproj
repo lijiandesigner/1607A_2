@@ -164,6 +164,7 @@
     <Compile Include="Models\EmpViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\PaymessageViewModel.cs" />
+    <Compile Include="Models\PositionViewModel.cs" />
     <Compile Include="Models\PunchcardViewModel.cs" />
     <Compile Include="Models\TempFinanceViewModel.cs" />
     <Compile Include="Models\TransferViewModel.cs" />
