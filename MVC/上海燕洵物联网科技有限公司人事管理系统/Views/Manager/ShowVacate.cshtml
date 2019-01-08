@@ -131,6 +131,7 @@
             success: function (data) {
                 alert(data);
                 $(obj).parent().parent().remove();
+                $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
             }
 
         })

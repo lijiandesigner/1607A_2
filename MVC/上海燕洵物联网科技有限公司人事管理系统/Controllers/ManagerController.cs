@@ -188,35 +188,21 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
-            vacate.VacateState = 3;
-            string jsonstr = JsonConvert.SerializeObject(vacate);
-            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
-            if (str.Contains("成功"))
-            {
-                return Content("<script>alert('删除成功'),location.href='/login/Show'</script>");
-            }
-            else
-            {
-                return Content("<script>alert('删除成功'),location.href='/login/Show'</script>");
-            }
          
-        }
-        [HttpPost]
-        public ActionResult VacateEmps(VacateViewModel vacate)
-        {
-            vacate.VacateState = 2;
             string jsonstr = JsonConvert.SerializeObject(vacate);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
-            if (str.Contains("成功"))
+            if (str.Contains("完成"))
             {
-                return Content("操作成功");
+                Response.Write("<script>alert('操作成功')</script>");
             }
             else
             {
-                return Content("操作失败");
+                Response.Write("<script>alert('操作失败')</script>");
             }
-
+            return View();
         }
+        
+       
         /// <summary>
         /// 删除员工
         /// </summary>
