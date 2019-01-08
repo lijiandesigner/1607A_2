@@ -66,5 +66,23 @@ namespace ShiXunXiangMu.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 离职方法
+        /// </summary>
+        /// <param name="dimission"></param>
+        /// <returns></returns>
+        public string Dimission(Dimission dimission)
+        {
+            int n = FinanceBll.Dimission(dimission);
+            if (n>0)
+            {
+                return "提交成功";
+            }
+            else
+            {
+                return "提交失败";
+            }
+        }
+
     }
 }

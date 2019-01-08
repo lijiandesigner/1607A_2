@@ -39,5 +39,16 @@ namespace DAL
             my.Vacates.Add(vacate);
             return my.SaveChanges();
         }
+
+        /// <summary>
+        /// 提交离职
+        /// </summary>
+        /// <param name="dimission"></param>
+        /// <returns></returns>
+        public int Dimission(Dimission dimission)
+        {
+            my.Dimissions.Add(dimission);
+            return my.SaveChanges();
+        }
     }
 }

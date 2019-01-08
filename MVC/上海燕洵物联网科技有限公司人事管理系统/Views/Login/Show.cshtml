@@ -13,10 +13,9 @@
             contentType:"application/json",
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li); 
             }

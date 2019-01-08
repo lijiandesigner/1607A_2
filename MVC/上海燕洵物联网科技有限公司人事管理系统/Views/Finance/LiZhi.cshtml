@@ -1,0 +1,124 @@
+﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.DimissionViewModel
+
+@{
+    ViewBag.Title = "LiZhi";
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/My97DatePicker/WdatePicker.js"></script>
+<script src="~/My97DatePicker/lang/en.js"></script>
+<script src="~/My97DatePicker/calendar.js"></script>
+<script src="~/My97DatePicker/config.js"></script>
+<link href="~/My97DatePicker/开发包/skin/WdatePicker.css" rel="stylesheet" />
+
+@using (Html.BeginForm("LiZhi","Finance",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>DimissionViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.Label("离职员工", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Text1" type="text" value="@Session["Name"]" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("离职意愿", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Radio1" type="radio" name="LeaveType" value="主动" />主动
+                <input id="Radio1" type="radio" name="LeaveType" value="被动" />被动
+                <input id="Radio1" type="radio" name="LeaveType" value="其他" />其他
+                @Html.ValidationMessageFor(model => model.LeaveType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("预计离职日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Text1" class="Wdate" name="Yleavedate" type="text" onclick="WdatePicker()" />
+                @Html.ValidationMessageFor(model => model.Yleavedate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("薪资结算日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Text1" class="Wdate" name="Xsettledate" type="text" onclick="WdatePicker()" />
+                @Html.ValidationMessageFor(model => model.Xsettledate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("申请日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Text1" class="Wdate" name="Applydate" type="text" onclick="WdatePicker()" />
+                @Html.ValidationMessageFor(model => model.Applydate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("离职原因", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Checkbox1" type="checkbox" name="Reason" value="薪资福利" />薪资福利
+                <input id="Checkbox1" type="checkbox" name="Reason" value="工作环境" />工作环境
+                <input id="Checkbox1" type="checkbox" name="Reason" value="工作时间" />工作时间
+                <input id="Checkbox1" type="checkbox" name="Reason" value="家庭原因" />家庭原因
+                <input id="Checkbox1" type="checkbox" name="Reason" value="晋升机会" />晋升机会
+                <input id="Checkbox1" type="checkbox" name="Reason" value="被动离职" />被动离职
+                <input id="Checkbox1" type="checkbox" name="Reason" value="退休" />退休
+                @Html.ValidationMessageFor(model => model.LeaveReason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("最后工作日期", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Text1" class="Wdate" name="Lastworkdate" type="text" onclick="WdatePicker()" />
+                @Html.ValidationMessageFor(model => model.Lastworkdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="提交" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+    }
+</script>
+

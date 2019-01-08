@@ -373,6 +373,7 @@
     <Content Include="Views\Manager\UptPunchcard.cshtml" />
     <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Manager\VacateEmp.cshtml" />
+    <Content Include="Views\Finance\LiZhi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

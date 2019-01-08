@@ -28,5 +28,14 @@ namespace BLL
             return FinanceDal.Vacatefinance(vacate);
         }
 
+        /// <summary>
+        /// 提交离职
+        /// </summary>
+        /// <param name="dimission"></param>
+        /// <returns></returns>
+        public int Dimission(Dimission dimission)
+        {
+           return FinanceDal.Dimission(dimission);
+        }
     }
 }

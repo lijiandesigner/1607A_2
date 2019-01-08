@@ -4,12 +4,35 @@
 }
 
 <h2>打卡</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <div>
     @using (Html.BeginForm())
     {
         <p>请输入员工号<input id="Text1" type="text" name="Id" /></p>
         <input id="Button1" type="submit" value="打卡" />
-    }
+    }       
 </div>
+<script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+    }
+</script>
+
 
 

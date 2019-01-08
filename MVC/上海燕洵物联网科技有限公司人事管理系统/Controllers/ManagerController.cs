@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Data;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
+    [ShouQuan]
     public class ManagerController : Controller
     {
         // GET: Manager
