@@ -68,53 +68,5 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string result = HttpClientHelper.Seng("get", "api/login/ShowMenu?permission=" + Session["permission"], null);
             return Content(result);
         }
-
-        /// <summary>
-        /// 根据点击的菜单名称,跳转到对应的页面
-        /// </summary>
-        /// <param name="PermissionName"></param>
-        /// <returns></returns>
-        public ActionResult funmenu(string PermissionName = "")
-        {
-            string result = "";
-            switch (PermissionName)
-            {
-                case "职员信息":
-                    result = "<script>location.href='/Finance/ShowMoney'</script>";
-                    break;
-                case "我要请假":
-                    result = "<script>location.href='/Finance/Vacatefinance'</script>";
-                    break;
-                case "我要离职":
-                    result = "<script>location.href='/Finance/LiZhi'</script>";
-                    break;
-                case "打卡系统":
-                    result = "<script>location.href=''</script>";
-                    break;
-                case "每日打卡":
-                    result = "<script>location.href='/Attendance/Punchcard'</script>";
-                    break;
-                case "工资列表":
-                    result = "<script>location.href='/Finance/GetAllMoney'</script>";
-                    break;
-                case "考勤列表":
-                    result = "<script>location.href='/Attendance/GetAllAttend'</script>";
-                    break;
-                case "部门列表":
-                    result = "<script>location.href='/Manager/ShowDepart'</script>";
-                    break;
-                case "员工列表":
-                    result = "<script>location.href='/Manager/GetAll'</script>";
-                    break;
-                case "审批管理":
-                    result = "<script>location.href='/Manager/VacateEmp'</script>";
-                    break;
-                case "请假列表":
-                    result = "<script>location.href='/Manager/ShowVacate'</script>";
-                    break;
-            }
-            return Content(result);
-        }
-
     }
 }
