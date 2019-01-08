@@ -189,19 +189,28 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 请假审批
         /// </summary>
         /// <returns>int</returns>
+        [HttpGet]
+        public ActionResult VacateEmp(int id)
+        {
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowVacate", null);
+            List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str);
+            VacateViewModel list1 = list.Where(c => c.Id == id).FirstOrDefault();
+            return View(list1);
+        }
+        [HttpPost]
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
             string jsonstr = JsonConvert.SerializeObject(vacate);
-            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp/", jsonstr);
+            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
             if (str.Contains("成功"))
             {
-                Response.Write("<script>alert('操作成功')</script>");
+                return Content("操作成功");
             }
             else
             {
-                Response.Write("<script>alert('操作失败')<script>");
+                return Content("操作失败");
             }
-            return View();
+         
         }
         /// <summary>
         /// 删除员工
@@ -276,7 +285,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns></returns>
         public ActionResult ShowVacate(int pageindex=1)
         {
-            string str = HttpClientHelper.Seng("get","api/ManagerAPI/ShowVacate",null);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowVacate", null);
             List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;

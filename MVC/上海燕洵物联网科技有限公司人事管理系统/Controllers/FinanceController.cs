@@ -52,10 +52,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult Vacatefinance(VacateViewModel vacate)
         {
+            vacate.VacateState = 1;
             vacate.EmpsId = Convert.ToInt32(Session["EmpsId"]);
             string str = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post", "api/Finance/Vacatefinance",str);
             return Content("<script>(alert("+result+",location.href='/login/Show'))</script>");
         }
+       
     }
 }

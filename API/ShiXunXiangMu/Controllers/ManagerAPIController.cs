@@ -201,6 +201,7 @@ namespace ShiXunXiangMu.Controllers
         /// 显示请假信息
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public List<Vacate> ShowVacate()
         {
             return bll.ShowVacate();
@@ -210,6 +211,7 @@ namespace ShiXunXiangMu.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpDelete]
         public string DeleteVacate(int id)
         {
             if( bll.DeleteVacate(id)>0)

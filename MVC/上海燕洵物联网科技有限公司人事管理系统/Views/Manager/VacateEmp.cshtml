@@ -1,5 +1,5 @@
 ﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.VacateViewModel
- 
+
 @{
     ViewBag.Title = "VacateEmp";
 }
@@ -10,7 +10,7 @@
     <h4>VacateViewModel</h4>
 
     <hr />
-    @Html.HiddenFor(model=>model.Id)
+    @Html.HiddenFor(model => model.Id)
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.EmpsId)
@@ -44,30 +44,55 @@
             @Html.DisplayFor(model => model.Remark)
         </dd>
 
-        
-        
+
+
     </dl>
     <p>
-        <input id="Btn1" type="button" value="审核通过" onclick="Yes(@Model.Id)"/>
-        <input id="Btn2" type="button" value="驳回" onclick="No(@Model.Id)"/>
+        <input id="Btn1" type="button" value="审核通过" onclick="Yes(@Model.Id)" />
+        <input id="Btn2" type="button" value="驳回" onclick="No(@Model.Id)" />
     </p>
 </div>
 
 <p>
- 
+
     @Html.ActionLink("返回请假列表", "ShowVacate")
 </p>
 <script>
     function Yes(id) {
-        var o = new Object;
-        o.Id = id;
-        o.VacateState = 2;
-        location.href = "/Manager/VacateEmp?vacate=" + JSON.stringify(o);
+      @Model.VacateState=2;
+        $.ajax({
+            uri: "../Manager/VacateEmp",
+            data: { vacate:@Model},
+            type:"post",
+            success: function (data) {
+                alert(data);
+            }
+        })
+
+
     }
     function No(id) {
-        var o = new Object;
-        o.Id = id;
-        o.VacateState = 3;
-        location.href = "/Manager/VacateEmp?vacate=" + JSON.stringify(o);
+     @Model.VacateState=3;
+        location.href = "/Manager/VacateEmp/vacate=" + @Model;
     }
 </script>
+ fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType:"application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+
+    }
