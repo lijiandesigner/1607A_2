@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("新增部门", "AddDepart")
+    <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 </p>
 <table class="table">
     <tr>
@@ -31,7 +32,8 @@
         <td>
             @Html.ActionLink("修改", "UpdateDepart", new { id=item.Id }) |
             @Html.ActionLink("详情", "GetOneDepart", new { id=item.Id }) |
-            @Html.ActionLink("删除", "DeleteDepart", new { id=item.Id })
+           <a href="#" onclick="Del(@item.Id,this)">删除</a>
+        
         </td>
     </tr>
 }
@@ -42,7 +44,7 @@
         <span>当前第</span>
         <span id="currentindex">@ViewBag.currentindex</span>
         <span>页，总共</span>
-        <span id="totalpage">@ViewBag.totalpage</span>
+        <span id="totalpage"></span>
         <span>页</span>
 
     </span>
@@ -50,24 +52,27 @@
     <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()"/>
 </p>
 <script>
+    $(function () {
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+    })
     function BtnUp() {
-        if ($("#currentindex").text != 1) {
-            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) - 1);
+        if ($("#currentindex").text() != 1) {
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
             alert('已经是首页了');
-            return;
+            location.href = "/Manager/ShowDepart?pageindex=1";
         }
-        function BtnDown() {
-            if ($("#currentindex").text != $("#totalpage").text) {
-            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) + 1);
+    }
+    function BtnDown() {
+        if ($("#currentindex").text() != $("#totalpage").text()) {
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
             alert('已经是尾页了');
-            return;
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#totalpage").text()));
         }
-</script>
-<script>
+    }
     fun();
     function fun() {
         $("[name=Menu]").empty();
@@ -79,7 +84,7 @@
                 console.log(data);
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
             }
@@ -88,4 +93,14 @@
 
 
     }
+    function Del(id, obj) {
+        $.ajax({
+            url: "/Manager/DeleteDepart?Id=" + id,
+            success: function (data) {
+                alert(data);
+                $(obj).parent().parent().remove();
+            }
+        })
+    }
 </script>
+

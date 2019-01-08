@@ -6,7 +6,7 @@
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
 <h2>ShowVacate</h2>
-
+<span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 <table class="table">
     <tr>
         <th>
@@ -83,22 +83,27 @@
     <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
 </p>
 <script>
+    $(function () {
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+    })
     function BtnUp() {
-        if ($("#currentindex").text != 1) {
-            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) - 1);
+        if ($("#currentindex").text() != 1) {
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
             alert('已经是首页了');
-            return;
+            location.href = "/Manager/ShowDepart?pageindex=1";
         }
-        function BtnDown() {
-            if ($("#currentindex").text != $("#totalpage").text) {
-            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) + 1);
+    }
+    function BtnDown() {
+        if ($("#currentindex").text() != $("#totalpage").text()) {
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
             alert('已经是尾页了');
-            return;
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number($("#totalpage").text()));
         }
+    }
 </script>
 <script>
     fun();
@@ -112,7 +117,7 @@
                 console.log(data);
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
             }

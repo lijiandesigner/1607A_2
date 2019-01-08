@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.EmpsId)
         </dt>
 
-        <dd>
+        <dd id="EmpsId">
             @Html.DisplayFor(model => model.EmpsId)
         </dd>
 
@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
-        <dd>
+        <dd id="Name">
             @Html.DisplayFor(model => model.Name)
         </dd>
 
@@ -32,7 +32,7 @@
             @Html.DisplayNameFor(model => model.Cause)
         </dt>
 
-        <dd>
+        <dd id="Cause">
             @Html.DisplayFor(model => model.Cause)
         </dd>
 
@@ -40,7 +40,7 @@
             @Html.DisplayNameFor(model => model.Remark)
         </dt>
 
-        <dd>
+        <dd id="Remark">
             @Html.DisplayFor(model => model.Remark)
         </dd>
 
@@ -58,11 +58,39 @@
     @Html.ActionLink("返回请假列表", "ShowVacate")
 </p>
 <script>
-    function Yes(id) {
-      @Model.VacateState=2;
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
         $.ajax({
-            uri: "../Manager/VacateEmp",
-            data: { vacate:@Model},
+            url: "/Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+
+    }
+    
+    function Yes(id) {
+        var o = {
+            Id:id,
+            EmpsId: $("#EmpsId").text().trim(),
+            Name: $("#Name").text().trim(),
+            Cause: $("#Cause").text().trim(),
+            Remark: $("#Remark").text().trim(),
+            VacateState:2
+        };
+        $.ajax({
+            uri: "/Manager/VacateEmp",
+            data: { vacate: o},
             type:"post",
             success: function (data) {
                 alert(data);
@@ -72,27 +100,22 @@
 
     }
     function No(id) {
-     @Model.VacateState=3;
-        location.href = "/Manager/VacateEmp/vacate=" + @Model;
+        var o = {
+            Id: id,
+            EmpsId: $("#EmpsId").text().trim(),
+            Name: $("#Name").text().trim(),
+            Cause: $("#Cause").text().trim(),
+            Remark: $("#Remark").text().trim(),
+            VacateState: 3
+        };
+        $.ajax({
+            uri: "/Manager/VacateEmp",
+            data: { vacate: o },
+            type: "post",
+            success: function (data) {
+                alert(data);
+            }
+        })
     }
 </script>
- fun();
-    function fun() {
-        $("[name=Menu]").empty();
-        $.ajax({
-            url: "../Login/ShowMenu",
-            contentType:"application/json",
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                var li = '';
-                for (var i in data) {
-                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
-                }
-                $("[name=Menu]").append(li);
-            }
 
-        })
-
-
-    }

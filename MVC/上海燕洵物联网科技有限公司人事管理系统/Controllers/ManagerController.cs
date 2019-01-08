@@ -24,7 +24,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             List<DepartmentViewModel> list = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;
-            ViewBag.totalpage = Math.Round(list.Count * 1.0 / 5);
+            ViewBag.totalpage = Math.Round((list.Count() * 1.0) / 5);
             return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
@@ -34,7 +34,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpGet]
         public ActionResult AddDepart()
         {
-           
             return View();
         }
        
@@ -60,9 +59,13 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// </summary>
         /// <returns>int</returns>
         [HttpGet]
-        public ActionResult UpdateDepart()
+        public ActionResult UpdateDepart(int id)
         {
-            return View();
+            string str2 = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
+            List<DepartmentViewModel> list = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str2);
+            DepartmentViewModel list1 = list.Where(c => c.Id == id).FirstOrDefault();
+            return View(list1);
+           
         }
         [HttpPost]
         public ActionResult UpdateDepart(DepartmentViewModel department)
@@ -84,12 +87,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取一个部门信息
         /// </summary>
         /// <returns>类名</returns>
-        public DepartmentViewModel GetOneDepart(int id)
+        public ActionResult GetOneDepart(int id)
         {
 
             string str = HttpClientHelper.Seng("get", "api/ManagerAPI/GetOneDepart?Id=" + id, "null");
             DepartmentViewModel depart = JsonConvert.DeserializeObject<DepartmentViewModel>(str);
-            return depart;
+            return View(depart);
 
         }
         /// <summary>
@@ -101,13 +104,13 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("delete", "api/ManagerAPI/DeleteDepart?Id=" + id, "null");
             if (str.Contains("成功"))
             {
-                Content("删除成功");
+                return Content("删除成功");
             }
             else
             {
-                Content("删除失败");
+               return Content("删除失败");
             }
-            return View("GetAllEmp");
+           
         }
         /// <summary>
         /// 获取所有员工信息
@@ -177,6 +180,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
+            vacate.VacateState = 3;
             string jsonstr = JsonConvert.SerializeObject(vacate);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
             if (str.Contains("成功"))
@@ -188,6 +192,22 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 return Content("<script>alert('删除成功'),location.href='/login/Show'</script>");
             }
          
+        }
+        [HttpPost]
+        public ActionResult VacateEmps(VacateViewModel vacate)
+        {
+            vacate.VacateState = 2;
+            string jsonstr = JsonConvert.SerializeObject(vacate);
+            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
+            if (str.Contains("成功"))
+            {
+                return Content("操作成功");
+            }
+            else
+            {
+                return Content("操作失败");
+            }
+
         }
         /// <summary>
         /// 删除员工
@@ -265,8 +285,8 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowVacate", null);
             List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str);
             ViewBag.currentindex = pageindex;
-            ViewBag.totaldata = list.Count;
-            ViewBag.totalpage = Math.Round(list.Count * 1.0 / 5);
+            ViewBag.totaldata = list.Count();
+            ViewBag.totalpage = Math.Round((list.Count() * 1.0)/ 5);
             return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
