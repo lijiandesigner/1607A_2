@@ -17,7 +17,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取所有的打卡信息
         /// </summary>
         /// <returns>list集合</returns>
-        public ActionResult GetAllAttend(int pageIndex=1,int pageSize=3)
+        public ActionResult GetAllAttend()
         {
             string json=HttpClientHelper.Seng("get", "api/AttendanceAPI/GetAllAttendance",null);
             var pun = JsonConvert.DeserializeObject<List<PunchcardViewModel>>(json);           
