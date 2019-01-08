@@ -138,5 +138,13 @@ namespace BLL
         {
             return dal.DeleteVacate(id);
         }
+        /// <summary>
+        /// 获取所有职位
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Position> GetPositions(int id)
+        {
+            return dal.GetPositions(id);
+        }
     }
 }

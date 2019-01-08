@@ -1,7 +1,7 @@
 ﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.EmpViewModel
 
 @{
-    ViewBag.Title = "AddEmp";
+    ViewBag.Title = "添加员工";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>添加员工</h2>
@@ -31,7 +31,7 @@
     <div class="form-group">
         @Html.Label("部门:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model=>model.DepartmentsId,ViewBag.Showdepart as IEnumerable<SelectListItem>)
+            @Html.DropDownListFor(model=>model.DepartmentsId,ViewBag.Showdepart as IEnumerable<SelectListItem>,"请选择")
            
         </div>
     </div>
@@ -55,12 +55,7 @@
     <div class="form-group">
         @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <select id="Select1" name="Eduty">
-                <option>经理</option>
-                <option>.Net开发工程师</option>
-                <option>财务会计</option>
-                <option>考勤经理</option>
-            </select>
+            @Html.DropDownListFor(Model=>Model.Eduty,ViewBag.position as IEnumerable<SelectListItem>,"请选择");
         </div>
     </div>
 
@@ -113,7 +108,20 @@
 <div>
     @Html.ActionLink("返回员工列表", "GetAllEmp")
 </div>
-
+<script>
+    $("#DepartmentsId").change(function () {
+        var id = $("#DepartmentsId").val();
+        $.ajax({
+            url: '/Manager/ErJi',
+            data: { id: id },
+            type:"post",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    })
+</script>
 <script>
     fun();
     function fun() {
