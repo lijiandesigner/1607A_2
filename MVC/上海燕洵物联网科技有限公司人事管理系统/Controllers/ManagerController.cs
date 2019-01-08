@@ -58,6 +58,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 修改部门
         /// </summary>
         /// <returns>int</returns>
+        [HttpGet]
+        public ActionResult UpdateDepart()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult UpdateDepart(DepartmentViewModel department)
         {
             string jsonstr = JsonConvert.SerializeObject(department);
@@ -189,11 +195,11 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp/", jsonstr);
             if (str.Contains("成功"))
             {
-                Response.Write("<script>alert('修改成功')</script>");
+                Response.Write("<script>alert('操作成功')</script>");
             }
             else
             {
-                Response.Write("<script>alert('修改失败')<script>");
+                Response.Write("<script>alert('操作失败')<script>");
             }
             return View();
         }
@@ -296,8 +302,13 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             }
             return View("ShowVacate");
         }
-       
+        
     }
-   
-               
+    public enum StateInfo
+    {
+        待审核 = 1,
+        审核通过 = 2,
+        驳回 = 3
+    }
+
 }

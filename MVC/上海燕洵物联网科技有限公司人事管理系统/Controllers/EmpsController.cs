@@ -75,6 +75,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>int</returns>
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
+            vacate.VacateState = 1;
             string str = JsonConvert.SerializeObject(vacate);
             string str1 = HttpClientHelper.Seng("post", "api/EmpsAPI/VacateEmp", str);
             if (str1.Contains("成功"))
@@ -86,6 +87,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 Response.Write("<script>alert('请假提交失败')</script>");
             }
             return View();
+        }
+        public enum Staticinfo
+        {
+            待审核 = 1,
+            审核通过 = 2,
+            驳回 = 3
         }
     }
 
