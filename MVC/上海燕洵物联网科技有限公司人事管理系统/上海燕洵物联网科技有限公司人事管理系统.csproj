@@ -374,6 +374,7 @@
     <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Finance\LiZhi.cshtml" />
+    <Content Include="Views\Manager\GetOneDepart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

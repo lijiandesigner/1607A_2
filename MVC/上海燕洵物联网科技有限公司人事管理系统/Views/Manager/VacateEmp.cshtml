@@ -58,8 +58,29 @@
     @Html.ActionLink("返回请假列表", "ShowVacate")
 </p>
 <script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+
+    }
     function Yes(id) {
-      @Model.VacateState=2;
+      
+    
         $.ajax({
             uri: "../Manager/VacateEmp",
             data: { vacate:@Model},
@@ -72,27 +93,15 @@
 
     }
     function No(id) {
-     @Model.VacateState=3;
-        location.href = "/Manager/VacateEmp/vacate=" + @Model;
-    }
-</script>
- fun();
-    function fun() {
-        $("[name=Menu]").empty();
+      
         $.ajax({
-            url: "../Login/ShowMenu",
-            contentType:"application/json",
-            dataType: "json",
+            uri: "../Manager/VacateEmps",
+            data: { vacate:@Model},
+            type:"post",
             success: function (data) {
-                console.log(data);
-                var li = '';
-                for (var i in data) {
-                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
-                }
-                $("[name=Menu]").append(li);
+                alert(data);
             }
-
         })
-
-
     }
+  
+</script>
