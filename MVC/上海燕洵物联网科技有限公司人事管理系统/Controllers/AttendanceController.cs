@@ -54,7 +54,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                     Response.Write("<script>alert('打卡失败')</script>");
                 }
             }
-            else
+            else if(pun.Signoutdate==null)
             {
                 pun.Signoutdate = DateTime.Now.ToString();
                 string json = JsonConvert.SerializeObject(pun);

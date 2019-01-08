@@ -203,7 +203,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             string jsonstr = JsonConvert.SerializeObject(vacate);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
-            if (str.Contains("成功"))
+            if (str.Contains("完成"))
             {
                 return Content("操作成功");
             }
@@ -291,6 +291,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;
             ViewBag.totalpage = Math.Round(list.Count * 1.0 / 5);
+
             return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
@@ -304,13 +305,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
            
             if(str.Contains("成功"))
             {
-                 Content("删除成功");
+                return Content("删除成功");
             }
             else
             {
-                 Content("删除失败");
+                return Content("删除失败");
             }
-            return View("ShowVacate");
         }
         
     }
