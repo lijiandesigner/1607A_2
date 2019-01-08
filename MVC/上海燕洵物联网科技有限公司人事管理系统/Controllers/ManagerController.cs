@@ -300,13 +300,13 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
            
             if(str.Contains("成功"))
             {
-                 Content("删除成功");
+               return  Content("删除成功");
             }
             else
             {
-                 Content("删除失败");
+                return Content("删除失败");
             }
-            return View("ShowVacate");
+           
         }
         
     }
