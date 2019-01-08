@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "ShowVacate";
 }
-
+<script src="~/Content/jquery-3.1.1.js"></script>
 <h2>ShowVacate</h2>
 
 <table class="table">
@@ -24,49 +24,82 @@
         <th>
             @Html.DisplayNameFor(model => model.VacateState)
         </th>
-        <th>操作</th>
+        <th>审批操作</th>
+        <th>删除操作</th>
     </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmpsId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cause)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remark)
-        </td>
-        <td>
-            @{StateInfo s = (StateInfo)item.VacateState;}
-            @s
-        </td>
-       
-        <td>
-            @if (s == StateInfo.审核通过)
-            {
-                @:已通过
-            }
-            else if (s == StateInfo.待审核)
-            {
-                @Html.ActionLink("审批", "VacateEmp", new { id = item.Id })
-                             else
-                           {
-                        @:已驳回
-                       
-            }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cause)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                @{StateInfo s = (StateInfo)item.VacateState;}
+                @s
+            </td>
 
-           @Html.ActionLink("删除", "DeleteVacate", new { id = item.Id })
-        </td>
-    </tr>
-}
+            <td>
+                @if (s == StateInfo.审核通过)
+                {
+                    @:已通过
+                }
+                else if (s == StateInfo.待审核)
+                {
+                    @Html.ActionLink("审批", "VacateEmp", new { id = item.Id })
+                }
+                else
+                {
+                    @:已驳回
+
+                }
+            </td>
+            <td>
+                @Html.ActionLink("删除", "DeleteVacate", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+<p>
+    <span>
+        <span>当前第</span>
+        <span id="currentindex">@ViewBag.currentindex</span>
+        <span>页，总共</span>
+        <span id="totalpage">@ViewBag.totalpage</span>
+        <span>页</span>
+
+    </span>
+    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
+    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+</p>
+<script>
+    function BtnUp() {
+        if ($("#currentindex").text != 1) {
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) - 1);
+        }
+        else {
+            alert('已经是首页了');
+            return;
+        }
+        function BtnDown() {
+            if ($("#currentindex").text != $("#totalpage").text) {
+            location.href = "/Manager/ShowDepart?pageindex=" + Number(Number(@ViewBag.currentindex) + 1);
+        }
+        else {
+            alert('已经是尾页了');
+            return;
+        }
+</script>
 <script>
     fun();
     function fun() {

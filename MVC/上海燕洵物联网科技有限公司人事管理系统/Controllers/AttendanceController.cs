@@ -10,6 +10,7 @@ using 上海燕洵物联网科技有限公司人事管理系统.Models;
 
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
+    [ShouQuan]
     public class AttendanceController : Controller
     {
         // GET: Attendance
@@ -90,6 +91,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult VacateAttendance(VacateViewModel vacate)
         {
+            vacate.VacateState = 1;
             string json = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post","api/AttendanceAPIController/VacateAttendance",json);
             if (result.Contains("成功"))

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using 上海燕洵物联网科技有限公司人事管理系统.Models;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
+    [ShouQuan]
     public class FinanceController : Controller
     {
         // GET: Finance
@@ -21,15 +22,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             return View(list);
         }
         /// <summary>
-        /// 打卡
-        /// </summary>
-        /// <returns>int</returns>
-        public ActionResult Punchcard()
-        {
-
-            return View();
-        }
-        /// <summary>
         /// 显示职工信息
         /// </summary>
         /// <returns>list集合</returns>
@@ -41,7 +33,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             return View(theOne);
         }
         /// <summary>
-        /// 请假
+        /// 请假页面显示
         /// </summary>
         /// <returns>int</returns>
         [HttpGet]
@@ -49,6 +41,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 获取请假信息
+        /// </summary>
+        /// <param name="vacate"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Vacatefinance(VacateViewModel vacate)
         {
@@ -56,6 +54,32 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post", "api/Finance/Vacatefinance",str);
             return Content("<script>(alert("+result+",location.href='/login/Show'))</script>");
+        }
+
+        /// <summary>
+        /// 显示离职页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult LiZhi()
+        {
+
+            return View();
+        }
+        /// <summary>
+        /// 接收离职信息
+        /// </summary>
+        /// <param name="dimission"></param>
+        /// <param name="reason"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult LiZhi(DimissionViewModel dimission,string[] reason)
+        {
+            dimission.LeaveReason= string.Join(",",reason);
+            dimission.EmpsId = Convert.ToInt32( Session["EmpsId"]);
+            var str= JsonConvert.SerializeObject(dimission);
+            string result = HttpClientHelper.Seng("post", "api/Finance/Dimission",str);
+            return Content("<script>(alert(" + result + ",location.href='/login/Show'))</script>");
         }
     }
 }

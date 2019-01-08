@@ -49,7 +49,7 @@ namespace DAL
         /// <returns></returns>
         public int DeleteDepart(int id)
         {
-            var a = my.Departments.Where(c => c.Id == id);
+            Department a = (Department)my.Departments.Where(c => c.Id == id);
             my.Entry(a).State = EntityState.Deleted;
             return my.SaveChanges();
         }

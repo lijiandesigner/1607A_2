@@ -1,8 +1,8 @@
 ﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.TempFinanceViewModel
-
 @{
     ViewBag.Title = "ShowMoney";
 }
+
 <style>
     tr {
         vertical-align: middle;
@@ -13,65 +13,68 @@
 <script src="~/Scripts/bootstrap.js"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-    <h4>职员个人信息</h4>
-    <hr />
-    <table class="table-hover" style=" width:500px;height:350px;margin-left:400px;" >
-        <tr>
-            <td>@Html.DisplayName("职员姓名:")</td>
-            <td>@Html.DisplayFor(model => model.Ename)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("职员姓名:")</td>
-            <td>@Html.DisplayFor(model => model.Esex)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("身份证号:")</td>
-            <td>@Html.DisplayFor(model => model.Papersnum)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("手机号:")</td>
-            <td>@Html.DisplayFor(model => model.Ephone)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("职务名称:")</td>
-            <td>@Html.DisplayFor(model => model.Eduty)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("邮箱地址:")</td>
-            <td>@Html.DisplayFor(model => model.Email)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("合同类型:")</td>
-            <td>@Html.DisplayFor(model => model.Tracttype)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("员工类型:")</td>
-            <td>@Html.DisplayFor(model => model.Etype)</td>
-        </tr>
-        <tr>
-            <td>@Html.DisplayName("部门名称:")</td>
-            <td>@Html.DisplayFor(model => model.BName)</td>
-        </tr>
-    </table>
-    <script>
-        fun();
-        function fun() {
-            $("[name=Menu]").empty();
-            $.ajax({
-                url: "../Login/ShowMenu",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                    var li = '';
-                    for (var i in data) {
-                        li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
-                    }
-                    $("[name=Menu]").append(li);
+<h4>职员个人信息</h4>
+<hr />
+<table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
+    <tr>
+        <td>@Html.DisplayName("职员姓名:")</td>
+        <td>@Html.DisplayFor(model => model.Ename)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("职员姓名:")</td>
+        <td>@Html.DisplayFor(model => model.Esex)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("身份证号:")</td>
+        <td>@Html.DisplayFor(model => model.Papersnum)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("手机号:")</td>
+        <td>@Html.DisplayFor(model => model.Ephone)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("职务名称:")</td>
+        <td>@Html.DisplayFor(model => model.Eduty)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("邮箱地址:")</td>
+        <td>@Html.DisplayFor(model => model.Email)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("合同类型:")</td>
+        <td>@Html.DisplayFor(model => model.Tracttype)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("员工类型:")</td>
+        <td>@Html.DisplayFor(model => model.Etype)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayName("部门名称:")</td>
+        <td>@Html.DisplayFor(model => model.BName)</td>
+    </tr>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
+                $("[name=Menu]").append(li);
+            }
 
-            })
+        })
+    }
+</script>
 
-        }
-    </script>
 

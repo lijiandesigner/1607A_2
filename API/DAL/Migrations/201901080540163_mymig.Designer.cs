@@ -13,12 +13,12 @@ namespace DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201901071117234_mymig"; }
+            get { return "201901080540163_mymig"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target
