@@ -27,9 +27,17 @@ namespace ShiXunXiangMu.Controllers
         /// <param name="punchcard">打卡类</param>
         /// <returns>int</returns>
         [HttpPost]
-        public int Punchcard(Punchcard punchcard)
+        public string Punchcard(Punchcard punchcard)
         {
-            return bll.Punchcard(punchcard);
+            int result=bll.Punchcard(punchcard);
+            if (result>0)
+            {
+                return "打卡成功";
+            }
+            else
+            {
+                return "打卡失败";
+            }
         }
         /// <summary>
         /// 显示个人工资
@@ -57,9 +65,17 @@ namespace ShiXunXiangMu.Controllers
         /// <param name="atte">打卡类</param>
         /// <returns>int</returns>      
         [HttpPut]
-        public int UptPunchcard(Punchcard punchcard)
+        public string UptPunchcard(Punchcard punchcard)
         {
-            return bll.UptPunchcard(punchcard);
+            int result=bll.UptPunchcard(punchcard);
+            if (result>0)
+            {
+                return "打卡成功";
+            }
+            else
+            {
+                return "打卡失败";
+            }
         }
     }
 }

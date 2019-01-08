@@ -26,15 +26,19 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <returns>int</returns>
         public ActionResult Punchcard()
         {
+
             return View();
         }
         /// <summary>
-        /// 显示个人工资
+        /// 显示职工信息
         /// </summary>
         /// <returns>list集合</returns>
         public ActionResult ShowMoney()
         {
-            return View();
+           var list = HttpClientHelper.Seng("get", "api/Finance/Emps", null);
+           var result=  JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(list);
+            var theOne= result.Where(a=>a.Ename==Session["Name"].ToString()).FirstOrDefault();
+            return View(theOne);
         }
         /// <summary>
         /// 请假

@@ -27,5 +27,6 @@ namespace BLL
         {
             return FinanceDal.Vacatefinance(vacate);
         }
+
     }
 }

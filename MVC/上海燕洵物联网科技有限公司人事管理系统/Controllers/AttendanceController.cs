@@ -34,17 +34,31 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult Punchcard(int Id)
         {
-            PunchcardViewModel punchcard = new PunchcardViewModel() { EmpsId = Id, Signindate = DateTime.Now.ToString() };
-            string json = JsonConvert.SerializeObject(punchcard);
-            string result=HttpClientHelper.Seng("post", "api/AttendanceAPIController/Punchcard", json);
+            string result;
+            string Showjson = HttpClientHelper.Seng("get", "api/AttendanceAPI/GetAllAttendance", null);
+            List<PunchcardViewModel> punchcards = JsonConvert.DeserializeObject<List<PunchcardViewModel>>(Showjson);
+            var pun = punchcards.Where(c => c.EmpsId == Id).FirstOrDefault();
+            if (pun == null)
+            {
+                PunchcardViewModel punchcard = new PunchcardViewModel() { EmpsId = Id, Signindate = DateTime.Now.ToString() };
+                string json = JsonConvert.SerializeObject(punchcard);
+                result = HttpClientHelper.Seng("post", "api/AttendanceAPI/Punchcard", json);
+            }
+            else
+            {
+                pun.Signoutdate = DateTime.Now.ToString();
+                string json = JsonConvert.SerializeObject(pun);
+                result = HttpClientHelper.Seng("put", "api/AttendanceAPI/UptPunchcard", json);
+            }
             if (result.Contains("成功"))
 	        {
-                return Content("打卡成功");
+                Response.Write("<script>alert('打卡成功')<script>");
 	        }
             else
 	        {
-                return Content("打卡失败");
-	        }
+                Response.Write("<script>alert('打卡失败')<script>");
+            }
+            return View();
         }
         /// <summary>
         /// 显示个人工资方法
