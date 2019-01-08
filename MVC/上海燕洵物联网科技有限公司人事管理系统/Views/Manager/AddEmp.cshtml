@@ -55,7 +55,7 @@
     <div class="form-group">
         @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(Model=>Model.Eduty,ViewBag.position as IEnumerable<SelectListItem>,"请选择");
+            @Html.DropDownListFor(Model=>Model.Eduty,ViewBag.position as IEnumerable<SelectListItem>,"请选择")
         </div>
     </div>
 
@@ -111,13 +111,19 @@
 <script>
     $("#DepartmentsId").change(function () {
         var id = $("#DepartmentsId").val();
+        $("#Eduty").empty();
+        var str = '<option value="1" >请选择</option>';
+        $("#Eduty").append(str);
         $.ajax({
             url: '/Manager/ErJi',
             data: { id: id },
             type:"post",
             dataType: "json",
             success: function (data) {
-                console.log(data);
+                for (var i in data) {
+                    var str = '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                    $("#Eduty").append(str);
+                }
             }
         })
     })

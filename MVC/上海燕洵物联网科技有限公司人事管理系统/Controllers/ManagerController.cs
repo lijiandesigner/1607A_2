@@ -146,7 +146,15 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult ErJi(int id)
         {
             var list = HttpClientHelper.Seng("get", "api/ManagerAPI/GetPositions?id="+id, null);
-            return Json(list);
+            var position = JsonConvert.DeserializeObject<List<PositionViewModel>>(list);
+            var result = from data in position
+                         select new SelectListItem
+                         {
+                             Text=data.Pname,
+                             Value=data.Pname
+                         };
+
+            return Json(result);
         }
         [HttpPost]
         public ActionResult AddEmp(EmpViewModel emp)
