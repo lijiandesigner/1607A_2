@@ -21,7 +21,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult GetAllAttend()
         {
             string json=HttpClientHelper.Seng("get", "api/AttendanceAPI/GetAllAttendance",null);
-            var pun = JsonConvert.DeserializeObject<List<PunchcardViewModel>>(json);           
+            var pun = JsonConvert.DeserializeObject<List<PunchcardViewModel>>(json);       
             return View(pun);
         }
         /// <summary>
@@ -47,11 +47,11 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 result = HttpClientHelper.Seng("post", "api/AttendanceAPI/Punchcard", json);
                 if (result.Contains("成功"))
                 {
-                    Response.Write("<script>alert('打卡成功')</script>");
+                    Response.Write("<script>layer.alert('打卡成功')</script>");
                 }
                 else
                 {
-                    Response.Write("<script>alert('打卡失败')</script>");
+                    Response.Write("<script>layer.alert('打卡失败')</script>");
                 }
             }
             else if(pun.Signoutdate==null)

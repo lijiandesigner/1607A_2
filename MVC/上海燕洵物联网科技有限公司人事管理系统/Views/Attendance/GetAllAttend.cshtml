@@ -12,6 +12,9 @@
             员工编号
         </th>
         <th>
+            员工名称
+        </th>
+        <th>
             签到时间
         </th>
         <th>
@@ -24,39 +27,42 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpsId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Signindate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Signoutdate)
-            </td>
-            <td>
-                @if (item.AttenState == 1)
-                {
-                    @:正常工作
-                }
-                else if (item.AttenState == 2)
-                {
-                    @:迟到
-                }
-                else if (item.AttenState == 3)
-                {
-                    @:早退
-                }
-                else if (item.AttenState == 4)
-                {
-                    @:旷工
-                }
-                else
-                {
-                    @:未打卡
-                }
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Emps.Ename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Signindate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Signoutdate)
+        </td>
+        <td>
+            @if (item.AttenState == 1)
+            {
+                @:正常工作
+            }
+            else if (item.AttenState == 2)
+            {
+                @:迟到
+            }
+            else if (item.AttenState == 3)
+            {
+                @:早退
+            }
+            else if (item.AttenState == 4)
+            {
+                @:旷工
+            }
+            else
+            {
+                @:未打卡
+            }
+        </td>
+    </tr>
     }
 
 </table>
@@ -82,7 +88,7 @@
             success: function (data) {
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href="\\Login\\funmenu?PermissionName=' + data[i].PermissionName + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
 
