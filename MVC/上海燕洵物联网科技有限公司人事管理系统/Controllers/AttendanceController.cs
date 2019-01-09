@@ -11,6 +11,7 @@ using 上海燕洵物联网科技有限公司人事管理系统.Models;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
     [ShouQuan]
+   [Authorize]
     public class AttendanceController : Controller
     {
         // GET: Attendance
@@ -18,6 +19,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取所有的打卡信息
         /// </summary>
         /// <returns>list集合</returns>
+        [Authorize(Users = "华家铮")]
         public ActionResult GetAllAttend()
         {
             string json=HttpClientHelper.Seng("get", "api/AttendanceAPI/GetAllAttendance",null);
