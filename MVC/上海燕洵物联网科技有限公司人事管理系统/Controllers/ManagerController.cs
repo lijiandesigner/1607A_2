@@ -341,6 +341,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             
             ViewBag.Bname = list10.Where(c => c.Id == list1.DepartmentsId).FirstOrDefault().BName;
             ViewBag.Zname = list1.Eduty;
+            ViewBag.Ename = list1.Ename;
             return View(list1);
     
         }

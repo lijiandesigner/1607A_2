@@ -18,7 +18,7 @@
     <tr>
         <td>
             @Html.Label("员工姓名：")
-            @Html.DisplayFor(model => model.Ename)
+            @ViewBag.Ename
         </td>
         
     </tr>
@@ -55,7 +55,7 @@
        
     </td>
     <td>
-        <input id="Btnfan" type="button" value="返回" onclick="Btnfan()"/>
+        <input id="Btnfan" type="button" value="返回" onclick="location.href = '/Manager/GetAllEmp?pageindex=1'"/>
     </td>
 </tr>
 </table>
@@ -102,7 +102,7 @@
         })
     })
     function Btnfan() {
-        location.href = "/Manager/GetAllEmp/?pageindex=1";
+        location.href = "/Manager/GetAllEmp?pageindex=1";
     }
   
 </script>

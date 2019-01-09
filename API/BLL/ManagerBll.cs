@@ -156,6 +156,7 @@ namespace BLL
             var s = dal.GetAllEmp().Where(c => c.Id == emp.Id).FirstOrDefault();
             s.DepartmentsId = emp.DepartmentsId;
             s.Eduty = emp.Eduty;
+            s.Ename = emp.Ename;
            return  dal.UpdateEmp(s);
         }
         /// <summary>
