@@ -1,0 +1,124 @@
+﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.VacateViewModel>
+@using 上海燕洵物联网科技有限公司人事管理系统.Controllers
+
+@{
+    ViewBag.Title = "显示员工请假信息";
+}
+<script src="~/Content/jquery-3.1.1.js"></script>
+<h2>显示个人请假信息</h2>
+<span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
+<table class="table">
+    <tr>
+        <th>
+            员工编号
+        </th>
+        <th>
+            员工姓名
+        </th>
+        <th>
+            请假原因
+        </th>
+        <th>
+            请假描述
+        </th>
+        <th>
+            请假状态
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cause)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                @{StateInfo s = (StateInfo)item.VacateState;}
+                @s
+            </td>
+
+           
+           
+        </tr>
+    }
+
+</table>
+<p>
+    <span>
+        <span>当前第</span>
+        <span id="currentindex">@ViewBag.currentindex</span>
+        <span>页，总共</span>
+        <span id="totalpage">@ViewBag.totalpage</span>
+        <span>页</span>
+
+    </span>
+    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
+    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+</p>
+<script>
+    $(function () {
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+    })
+    function BtnUp() {
+        if ($("#currentindex").text() != 1) {
+            location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
+        }
+        else {
+            alert('已经是首页了');
+            location.href = "/Emps/ShowVacate?pageindex=1";
+        }
+    }
+    function BtnDown() {
+        if ($("#currentindex").text() != $("#totalpage").text()) {
+            location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
+        }
+        else {
+            alert('已经是尾页了');
+            location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#totalpage").text()));
+        }
+    }
+
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+
+    }
+    function Del(Id, obj) {
+        $.ajax({
+            url: "/Manager/DeleteVacate?Id=" + Id,
+            success: function (data) {
+                alert(data);
+                $(obj).parent().parent().remove();
+                $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
+            }
+
+        })
+    }
+</script>
+
+
