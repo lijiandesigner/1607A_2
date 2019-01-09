@@ -233,5 +233,15 @@ namespace ShiXunXiangMu.Controllers
         {
             return bll.GetPositions(id);
         }
+        /// <summary>
+        /// 修改员工（调职）
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public int UpdateEmp(Emp emp)
+        {
+            return bll.UpdateEmp(emp);
+        }
     }
 }

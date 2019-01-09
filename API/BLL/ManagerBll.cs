@@ -146,5 +146,14 @@ namespace BLL
         {
             return dal.GetPositions(id);
         }
+        /// <summary>
+        /// 修改员工（调职）
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <returns></returns>
+        public int UpdateEmp(Emp emp)
+        {
+           return  dal.UpdateEmp(emp);
+        }
     }
 }

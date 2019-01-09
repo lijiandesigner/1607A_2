@@ -196,6 +196,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
+         
             string jsonstr = JsonConvert.SerializeObject(vacate);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
             if (str.Contains("完成"))
@@ -206,6 +207,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             {
                 return Content("操作失败");
             }
+       
         }
         
        
@@ -287,7 +289,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count();
             ViewBag.totalpage = Math.Round((list.Count() * 1.0)/ 5);
-            return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
+            return View(list.Skip((pageindex - 1) * 5).Take(5).ToList().OrderByDescending(c=>c.VacateState));
         }
         /// <summary>
         /// 删除请假信息
@@ -308,7 +310,48 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             }
            
         }
-        
+        /// <summary>
+        /// 修改员工（调职）
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult UpdateEmp(int id)
+        {
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
+            var department = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str);
+            var list = from s in department
+                       select new SelectListItem()
+                       {
+                           Text = s.BName,
+                           Value = s.Id.ToString()
+                       };
+            ViewBag.Showdepart = list.ToList();
+            ViewBag.position = new List<SelectListItem>();
+           
+            string str2 = HttpClientHelper.Seng("get", "api/ManagerAPI/GetAllEmp", null);
+            List<EmpViewModel> list6 = JsonConvert.DeserializeObject<List<EmpViewModel>>(str2);
+            EmpViewModel list1 = list6.Where(c => c.Id == id).FirstOrDefault();
+            ViewBag.Bname = list1.DepartmentsId;
+            ViewBag.Zname = list1.Eduty;
+            return View(list1);
+    
+        }
+        [HttpPost]
+        public ActionResult UpdateEmp(EmpViewModel emp)
+        {
+            string jsonstr = JsonConvert.SerializeObject(emp);
+            string str = HttpClientHelper.Seng("put", "api/ManagerAPI/UpdateEmp", jsonstr);
+            if (str.Contains("成功"))
+            {
+                Response.Write("<script>alert('修改成功')</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('修改失败')</script>");
+
+            }
+            return View();
+        }
     }
     public enum StateInfo
     {

@@ -376,6 +376,7 @@
     <Content Include="Views\Finance\LiZhi.cshtml" />
     <Content Include="Views\Manager\GetOneDepart.cshtml" />
     <Content Include="Views\Manager\GetAllEmp.cshtml" />
+    <Content Include="Views\Manager\UpdateEmp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
