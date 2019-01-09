@@ -165,7 +165,15 @@ namespace DAL
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Position> GetPositions(int id) {
-            return my.Positions.Where(a=>a.DepartmentsId==id);
+            var list= my.Positions.Where(a=>a.DepartmentsId==id).ToList();
+            var result = from data in list
+                         select new Position
+                         {
+                             Id = data.Id,
+                             DepartmentsId = data.DepartmentsId,
+                             Pname = data.Pname
+                         };
+            return result;
         }
             
     }
