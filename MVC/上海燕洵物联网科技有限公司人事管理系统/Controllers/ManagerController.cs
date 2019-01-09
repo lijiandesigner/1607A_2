@@ -188,18 +188,16 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult VacateEmp(VacateViewModel vacate)
         {
-         
             string jsonstr = JsonConvert.SerializeObject(vacate);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/VacateEmp", jsonstr);
             if (str.Contains("完成"))
             {
-                Response.Write("<script>alert('操作成功')</script>");
+                return Content("操作成功");
             }
             else
             {
-                Response.Write("<script>alert('操作失败')</script>");
+                return Content("操作失败");
             }
-            return View();
         }
         
        

@@ -90,10 +90,10 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("工资", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.ERemark)
-            @Html.ValidationMessageFor(model => model.ERemark)
+            @Html.TextBoxFor(model => model.TryMoney)
+            @Html.ValidationMessageFor(model => model.TryMoney)
         </div>
     </div>
 
