@@ -17,6 +17,9 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpGet]
         public ActionResult GetoneLogin()
         {
+            Session["Name"] = null;
+            Session["EmpsId"] = null;
+            Session["permission"] = null;
             return View();
         }
         [HttpPost]
