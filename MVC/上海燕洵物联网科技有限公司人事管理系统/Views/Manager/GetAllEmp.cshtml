@@ -72,8 +72,8 @@
         </td>
 
         <td>
-            @Html.ActionLink("员工调职", "UpdateEmp", new { id = item.Id }) |
-            @Html.ActionLink("开除员工", "DeleteEmp", new { id = item.Id })
+            @Html.ActionLink("员工调职", "Edit", new { id = item.Id }) |
+            <a href="#" onclick="Del(@item.Id,this)">开除员工</a>
         </td>
     </tr>
 }
@@ -100,5 +100,16 @@
         })
 
 
+    }
+    function Del(Id, obj) {
+        if (confirm("是否开除此员工？")) {
+            $.ajax({
+                url: "/Manager/DeleteEmp?Id=" + Id,
+                success: function (data) {
+                    alert(data);
+                    $(obj).parent().parent().remove();
+                }
+            })
+        }
     }
 </script>

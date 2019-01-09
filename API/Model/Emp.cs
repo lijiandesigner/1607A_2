@@ -19,7 +19,7 @@ namespace Model
         public string Email { get; set; }
         public string Tracttype { get; set; }
         public string Etype { get; set; }
-        public string ERemark { get; set; }
+        public double TryMoney { get; set; }
         public virtual Department Departments { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Models
         public string Email { get; set; }
         public string Tracttype { get; set; }
         public string Etype { get; set; }
-        public string ERemark { get; set; }
+        public double TryMoney { get; set; }
         public string Bname { get; set; }
     }
 }
