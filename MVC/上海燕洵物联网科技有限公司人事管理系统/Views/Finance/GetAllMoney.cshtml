@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PaymessageViewModel>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 
+<h4>员工工资列表</h4>
 <table class="table">
     <tr>
         <th>
@@ -27,31 +28,32 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmpsId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmpName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Papersnum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Entrydate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TryMoney)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegularMoney)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PresentMoney)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Papersnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entrydate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TryMoney)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegularMoney)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PresentMoney)
+            </td>
+        </tr>
+    }
 
 </table>
 <script>
@@ -71,6 +73,8 @@
                 $("[name=Menu]").append(li);
             }
 
-        })
+        })
+
+
     }
 </script>
