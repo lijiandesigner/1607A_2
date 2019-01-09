@@ -8,6 +8,7 @@ using 上海燕洵物联网科技有限公司人事管理系统.Models;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
 {
     [ShouQuan]
+    [Authorize]
     public class EmpsController : Controller
     {
         // GET: Emps
@@ -88,6 +89,23 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 Response.Write("<script>alert('请假提交失败')</script>");
             }
             return View();
+        }
+        /// <summary>
+        /// 显示个人请假信息
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <returns></returns>
+        public ActionResult ShowVacate(int pageindex = 1)
+        {
+            int id = Convert.ToInt32(Session["EmpsId"]);
+            string str = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowVacate", null);
+            List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str);
+           
+            List<VacateViewModel> list1 = list.Where(c => c.EmpsId == id).ToList();
+            ViewBag.currentindex = pageindex;
+            ViewBag.totaldata = list1.Count();
+            ViewBag.totalpage = Math.Round((list1.Count() * 1.0) / 5);
+            return View(list1.Skip((pageindex - 1) * 5).Take(5).ToList().OrderByDescending(c => c.VacateState));
         }
         public enum Staticinfo
         {
