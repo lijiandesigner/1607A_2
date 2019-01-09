@@ -175,6 +175,15 @@ namespace DAL
                          };
             return result;
         }
-            
+        /// <summary>
+        /// 修改员工（调职）
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <returns></returns>
+           public int UpdateEmp(Emp emp)
+        {
+            my.Entry(emp).State = EntityState.Modified;
+            return my.SaveChanges();
+        }
     }
 }
