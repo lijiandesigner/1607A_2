@@ -8,9 +8,11 @@
 <div>
     @using (Html.BeginForm())
     {
-        <p style="width:200px; margin:auto">员工号<input id="Text1" type="text" name="Id" value="@Session["EmpsId"]" /></p>
-        <p style="width:50px;margin:auto">
-            <input class="btn btn-danger" style="width:50px; height:50px; line-height:50px;text-align:center; border-radius:10px;" id="Button1" type="submit" value="打卡" />
+        
+        <p style="text-align:center;margin-top:200px;"> <span style="margin-right:50px">员工号</span> <input id="Text1" type="text" style="width:200px;" name="Id" value="@Session["EmpsId"]" /></p>
+       
+        <p style="text-align:center;margin-top:100px">
+            <input  class="btn btn-primary" id="Button1" type="submit" value="打卡" />
         </p>
     }
 </div>
