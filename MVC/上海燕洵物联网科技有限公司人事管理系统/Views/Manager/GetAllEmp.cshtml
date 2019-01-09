@@ -4,10 +4,11 @@
     ViewBag.Title = "员工信息";
 }
 
-<h2>GetAllEmp</h2>
-
+<h2>员工信息</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <p>
     @Html.ActionLink("员工入职", "AddEmp")
+    <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 </p>
 <table class="table">
     <tr>
@@ -41,51 +42,87 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Esex)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Papersnum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ephone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Eduty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tracttype)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Etype)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Esex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Papersnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eduty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tracttype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etype)
+            </td>
 
-        <td>
-            @Html.ActionLink("员工调职", "Edit", new { id = item.Id }) |
-            <a href="#" onclick="Del(@item.Id,this)">开除员工</a>
-        </td>
-    </tr>
-}
+            <td>
+                @Html.ActionLink("员工调职", "UpdateEmp", new { id = item.Id }) |
+                <a href="#" onclick="Del(@item.Id,this)">开除员工</a>
+            </td>
+        </tr>
+    }
 
 </table>
-<script src="~/Scripts/jquery-3.3.1.js"></script>
+<p>
+    <span>
+        <span>当前第</span>
+        <span id="currentindex">@ViewBag.currentindex</span>
+        <span>页，总共</span>
+        <span id="totalpage"></span>
+        <span>页</span>
+
+    </span>
+    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
+    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+</p>
+<script>
+    $(function () {
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+    })
+    function BtnUp() {
+        if ($("#currentindex").text() != 1) {
+            location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) - 1);
+        }
+        else {
+            alert('已经是首页了');
+            location.href = "/Manager/GetAllEmp?pageindex=1";
+        }
+    }
+    function BtnDown() {
+        if ($("#currentindex").text() != $("#totalpage").text()) {
+            location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) + 1);
+        }
+        else {
+            alert('已经是尾页了');
+            location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#totalpage").text()));
+        }
+    }
+</script>
+
 <script>
     fun();
     function fun() {
         $("[name=Menu]").empty();
         $.ajax({
-            url: "../Login/ShowMenu",
+            url: "/Login/ShowMenu",
             contentType: "application/json",
             dataType: "json",
             success: function (data) {
