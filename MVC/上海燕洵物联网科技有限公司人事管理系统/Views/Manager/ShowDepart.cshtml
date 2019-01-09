@@ -4,7 +4,7 @@
     ViewBag.Title = "显示部门信息";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-<h2>ShowDepart</h2>
+<h2>显示部门信息</h2>
 
 <p>
     @Html.ActionLink("新增部门", "AddDepart")
@@ -77,7 +77,7 @@
     function fun() {
         $("[name=Menu]").empty();
         $.ajax({
-            url: "../Login/ShowMenu",
+            url: "/Login/ShowMenu",
             contentType: "application/json",
             dataType: "json",
             success: function (data) {

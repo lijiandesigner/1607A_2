@@ -243,5 +243,15 @@ namespace ShiXunXiangMu.Controllers
         {
             return bll.UpdateEmp(emp);
         }
+        /// <summary>
+        /// 添加调职信息
+        /// </summary>
+        /// <param name="transfer"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int AddTranfer(Transfer transfer)
+        {
+            return bll.AddTranfer(transfer);
+        }
     }
 }

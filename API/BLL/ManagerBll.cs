@@ -153,7 +153,19 @@ namespace BLL
         /// <returns></returns>
         public int UpdateEmp(Emp emp)
         {
-           return  dal.UpdateEmp(emp);
+            var s = dal.GetAllEmp().Where(c => c.Id == emp.Id).FirstOrDefault();
+            s.DepartmentsId = emp.DepartmentsId;
+            s.Eduty = emp.Eduty;
+           return  dal.UpdateEmp(s);
+        }
+        /// <summary>
+        /// 添加调职信息
+        /// </summary>
+        /// <param name="transfer"></param>
+        /// <returns></returns>
+        public int AddTranfer(Transfer transfer)
+        {
+            return dal.AddTranfer(transfer);
         }
     }
 }

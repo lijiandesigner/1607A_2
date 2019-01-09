@@ -116,11 +116,15 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取所有员工信息
         /// </summary>
         /// <returns>list集合</returns>
-        public ActionResult GetAllEmp()
+        public ActionResult GetAllEmp(int pageindex=1)
         {
             var list = HttpClientHelper.Seng("get", "api/Finance/Emps", null);
             var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(list);
-            return View(result);
+            ViewBag.currentindex = pageindex;
+            ViewBag.totaldata = result.Count;
+            ViewBag.totalpage = Math.Round((result.Count() * 1.0) / 5);
+            return View(result.Skip((pageindex - 1) * 5).Take(5).ToList());
+           
         }
         /// <summary>
         /// 添加员工
@@ -331,26 +335,53 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str2 = HttpClientHelper.Seng("get", "api/ManagerAPI/GetAllEmp", null);
             List<EmpViewModel> list6 = JsonConvert.DeserializeObject<List<EmpViewModel>>(str2);
             EmpViewModel list1 = list6.Where(c => c.Id == id).FirstOrDefault();
-            ViewBag.Bname = list1.DepartmentsId;
+
+            string str10 = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
+            List<DepartmentViewModel> list10 = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str10);
+            
+            ViewBag.Bname = list10.Where(c => c.Id == list1.DepartmentsId).FirstOrDefault().BName;
             ViewBag.Zname = list1.Eduty;
             return View(list1);
     
         }
         [HttpPost]
-        public ActionResult UpdateEmp(EmpViewModel emp)
+        public ActionResult UpdateEmp(EmpViewModel emp,string Transferdate)
         {
+            string str10 = HttpClientHelper.Seng("get", "api/ManagerAPI/ShowDepart", null);
+            var department = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str10);
+            var list = from s in department
+                       select new SelectListItem()
+                       {
+                           Text = s.BName,
+                           Value = s.Id.ToString()
+                       };
+            ViewBag.Showdepart = list.ToList();
+            ViewBag.position = new List<SelectListItem>();
             string jsonstr = JsonConvert.SerializeObject(emp);
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/UpdateEmp", jsonstr);
-            if (str.Contains("成功"))
+            if (str.Contains("1"))
             {
                 Response.Write("<script>alert('修改成功')</script>");
+                TransferViewModel transfer = new TransferViewModel();
+                transfer.Ename = emp.Ename;
+                transfer.Transfertype = "调职";
+                transfer.Transferdate = Transferdate;
+                string str1 = JsonConvert.SerializeObject(transfer);
+                string strtran= HttpClientHelper.Seng("post", "api/ManagerAPI/AddTranfer", str1);
             }
             else
             {
                 Response.Write("<script>alert('修改失败')</script>");
 
             }
-            return View();
+            var Show = HttpClientHelper.Seng("get", "api/Finance/Emps", null);
+            var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(Show);
+            int pageindex = 1;
+            ViewBag.currentindex = 1;
+            ViewBag.totaldata = result.Count;
+            ViewBag.totalpage = Math.Round((result.Count() * 1.0) / 5);
+            return View("GetAllEmp",result.Skip((pageindex - 1) * 5).Take(5).ToList());
+           
         }
     }
     public enum StateInfo

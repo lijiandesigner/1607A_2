@@ -180,10 +180,22 @@ namespace DAL
         /// </summary>
         /// <param name="emp"></param>
         /// <returns></returns>
-           public int UpdateEmp(Emp emp)
+         public int UpdateEmp(Emp emp)
         {
             my.Entry(emp).State = EntityState.Modified;
             return my.SaveChanges();
         }
+        /// <summary>
+        /// 添加调职信息
+        /// </summary>
+        /// <param name="transfer"></param>
+        /// <returns></returns>
+         public int AddTranfer(Transfer transfer)
+        {
+            my.Transfers.Add(transfer);
+            return my.SaveChanges();
+        }
+        
+
     }
 }

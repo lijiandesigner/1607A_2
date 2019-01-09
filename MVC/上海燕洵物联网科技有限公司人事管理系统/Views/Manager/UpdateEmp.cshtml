@@ -4,7 +4,13 @@
     ViewBag.Title = "员工调职";
 }
 
+
 <script src="~/Content/jquery-3.1.1.js"></script>
+<a href="~/My97DatePicker/My97DatePicker.htm"></a>
+<script src="~/My97DatePicker/lang/en.js"></script>
+<script src="~/My97DatePicker/config.js"></script>
+<script src="~/My97DatePicker/calendar.js"></script>
+<script src="~/My97DatePicker/WdatePicker.js"></script>
 @Html.BeginForm()
 {
 @Html.HiddenFor(model=>model.Id)
@@ -40,7 +46,7 @@
     <tr>
         <td>
             @Html.Label("预计调入的时间")
-            <input id="Time" type="time" />
+            <input id="Text1" class="Wdate" name="Transferdate" type="text" onclick="WdatePicker()" />
         </td>
     </tr>
     <tr>
