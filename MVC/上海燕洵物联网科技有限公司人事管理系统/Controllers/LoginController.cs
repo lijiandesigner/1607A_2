@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using 上海燕洵物联网科技有限公司人事管理系统.Models;
+using System.Web.Security;
 namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
-{
+{[Authorize ]
     public class LoginController : Controller
     {
         // GET: Login
@@ -25,9 +26,11 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult GetoneLogin(string UserName, string UserPwd)
         {
+            
             string result= HttpClientHelper.Seng("get","api/login/login/?name="+UserName+"&pwd="+UserPwd+" ",null);
             if (result!="null")
             {
+                FormsAuthentication.SetAuthCookie(UserName, true);
                 var list = JsonConvert.DeserializeObject<AdminViewModel>(result);
                 Session["Name"] = list.UserName;
                 Session["permission"] = list.Permission;
@@ -58,6 +61,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 显示页面
         /// </summary>
         /// <returns></returns>
+        
         public ActionResult Show()
         {
             return View();
