@@ -11,8 +11,7 @@
 <script src="~/My97DatePicker/config.js"></script>
 <script src="~/My97DatePicker/calendar.js"></script>
 <script src="~/My97DatePicker/WdatePicker.js"></script>
-@Html.BeginForm()
-{
+
 @Html.HiddenFor(model=>model.Id)
 <table  class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
     <tr>
@@ -29,7 +28,7 @@
         </td>
         <td>
             @Html.Label("调入部门：")
-            @Html.DropDownListFor(model => model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
+            @Html.DropDownListFor(Model=>Model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
 
         </td>
     </tr>
@@ -59,7 +58,7 @@
     </td>
 </tr>
 </table>
-}
+
 
 <script>
     fun();
