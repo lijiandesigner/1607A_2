@@ -375,8 +375,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 Response.Write("<script>alert('修改失败')</script>");
 
             }
+            
+
             var Show = HttpClientHelper.Seng("get", "api/Finance/Emps", null);
             var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(Show);
+            Session["i"]= result;
+
             int pageindex = 1;
             ViewBag.currentindex = 1;
             ViewBag.totaldata = result.Count;
