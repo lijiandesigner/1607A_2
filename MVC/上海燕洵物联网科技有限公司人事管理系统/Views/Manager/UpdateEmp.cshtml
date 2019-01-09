@@ -1,0 +1,104 @@
+﻿@model 上海燕洵物联网科技有限公司人事管理系统.Models.EmpViewModel
+
+@{
+    ViewBag.Title = "员工调职";
+}
+
+<script src="~/Content/jquery-3.1.1.js"></script>
+@Html.BeginForm()
+{
+@Html.HiddenFor(model=>model.Id)
+<table  class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
+    <tr>
+        <td>
+            @Html.Label("员工姓名：")
+            @Html.DisplayFor(model => model.Ename)
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+            @Html.Label("部门名称：")
+           @ViewBag.Bname
+        </td>
+        <td>
+            @Html.Label("调入部门：")
+            @Html.DropDownListFor(model => model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.Label("职务名称：")
+            @ViewBag.Zname
+        </td>
+        <td>
+            @Html.Label("选择职务：")
+            @Html.DropDownListFor(Model => Model.Eduty, ViewBag.position as IEnumerable<SelectListItem>, "请选择")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.Label("预计调入的时间")
+            <input id="Time" type="time" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input id="Btnsave" type="submit" value="调职"/>
+       
+    </td>
+    <td>
+        <input id="Btnfan" type="button" value="返回" onclick="Btnfan()"/>
+    </td>
+</tr>
+</table>
+}
+
+<script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "/Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                }
+                $("[name=Menu]").append(li);
+            }
+
+        })
+
+
+    }
+
+    $("#DepartmentsId").change(function () {
+        var id = $("#DepartmentsId").val();
+        $("#Eduty").empty();
+        var str = '<option value="1" >请选择</option>';
+        $("#Eduty").append(str);
+        $.ajax({
+            url: '/Manager/ErJi',
+            data: { id: id },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                for (var i in data) {
+                    var str = '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                    $("#Eduty").append(str);
+                }
+            }
+        })
+    })
+    function Btnfan() {
+        location.href = "/Manager/GetAllEmp/?pageindex=1";
+    }
+  
+</script>
+
+

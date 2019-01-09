@@ -4,40 +4,36 @@
     ViewBag.Title = "部门详情";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-<h2>GetOneDepart</h2>
+<h2>部门详情</h2>
 
 <div>
-    <h4>DepartmentViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-          部门名称
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BName)
-        </dd>
-
-        <dt>
-           部门描述
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bremark)
-        </dd>
-
-    </dl>
+    <table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
+        <tr>
+            
+            <td>
+                <h3>   @Html.Label("部门名称:")</h3></td>
+            <td> <h3> @Html.DisplayFor(model => model.BName)</h3></td>
+        </tr>
+        <tr>
+            <td><h3> @Html.Label("部门描述:")</h3></td>
+            <td><h3> @Html.DisplayFor(model => model.Bremark)</h3></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <h4> @Html.ActionLink("修改部门", "UpdateDepart", new { id = Model.Id })
+                 @Html.ActionLink("返回部门列表", "ShowDepart")</h4>
+            </td>
+        </tr>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("修改部门", "UpdateDepart", new { id = Model.Id }) |
-    @Html.ActionLink("返回部门列表", "ShowDepart")
-</p>
+
 <script>
     fun();
     function fun() {
         $("[name=Menu]").empty();
         $.ajax({
-            url: "../Login/ShowMenu",
+            url: "/Login/ShowMenu",
             contentType: "application/json",
             dataType: "json",
             success: function (data) {
