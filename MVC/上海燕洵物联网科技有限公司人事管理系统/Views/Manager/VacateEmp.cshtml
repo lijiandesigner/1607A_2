@@ -4,59 +4,42 @@
     ViewBag.Title = "审核请假";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-<h2>VacateEmp</h2>
+
 
 <div>
-    <h4>VacateViewModel</h4>
+    <h4>审核请假</h4>
+    <h3> @Html.ActionLink("返回请假列表", "ShowVacate")</h3>
 
-    <hr />
     @Html.HiddenFor(model => model.Id)
-    <dl class="dl-horizontal">
-        <dt>
-            员工编号
-        </dt>
-
-        <dd id="EmpsId">
-            @Html.DisplayFor(model => model.EmpsId)
-        </dd>
-
-        <dt>
-            员工名称
-        </dt>
-
-        <dd id="Name">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-           请假原因
-        </dt>
-
-        <dd id="Cause">
-            @Html.DisplayFor(model => model.Cause)
-        </dd>
-
-        <dt>
-            请假描述
-        </dt>
-
-        <dd id="Remark">
-            @Html.DisplayFor(model => model.Remark)
-        </dd>
-
-
-
-    </dl>
-    <p>
-        <input id="Btn1" type="button" value="审核通过" onclick="Yes(@Model.Id)" />
-        <input id="Btn2" type="button" value="驳回" onclick="No(@Model.Id)" />
-    </p>
+    <table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
+        <tr>
+            <td> 员工编号</td>
+            <td id="EmpsId"> @Html.DisplayFor(model => model.EmpsId)</td>
+        </tr>
+        <tr>
+            <td>员工名称</td>
+            <td id="Name"> @Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td>请假原因</td>
+            <td id="Cause">@Html.DisplayFor(model => model.Cause)</td>
+        </tr>
+        <tr>
+            <td>请假描述</td>
+            <td id="Remark">@Html.DisplayFor(model => model.Remark)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input id="Btn1" type="button" value="审核通过" onclick="Yes(@Model.Id)" />
+                <input id="Btn2" type="button" value="驳回" onclick="No(@Model.Id)" />
+            </td>
+        </tr>
+    </table>
+   
 </div>
 
-<p>
 
-    @Html.ActionLink("返回请假列表", "ShowVacate")
-</p>
 <script>
     fun();
     function fun() {
