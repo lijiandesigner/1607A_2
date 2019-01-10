@@ -57,7 +57,7 @@
                 }
                 else if (s == StateInfo.待审核)
                 {
-                    <button class="layui-btn layui-btn-radius" onclick="Location.href='/Manager/VacateEmp?id=@item.Id'">审核</button>
+                    <button class="layui-btn layui-btn-radius" onclick="location.href='/Manager/VacateEmp?id=@item.Id'">审核</button>
                 }
                 else
                 {
@@ -93,20 +93,24 @@
         $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
     })
     function BtnUp() {
+        layui.use('layer', function () { 
         if ($("#currentindex").text() != 1) {
             location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
             layer.alert('已经是首页了');
-        }
+            }
+        })
     }
     function BtnDown() {
+        layui.use('layer', function () { 
         if ($("#currentindex").text() != $("#totalpage").text()) {
             location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
             layer.alert('已经是尾页了');
-        }
+            }
+        })
     }
 
     fun();

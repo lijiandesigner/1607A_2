@@ -4,8 +4,8 @@
     ViewBag.Title = "添加员工";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <h2>添加员工</h2>
 
 
@@ -24,7 +24,8 @@
     <div class="form-group">
         @Html.Label("职员性别:", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.RadioButtonFor(model => model.Esex, "男", new { @checked = "checked" })男
+
+           @Html.RadioButtonFor(model => model.Esex, "男", new { @checked = "checked" })男
             @Html.RadioButtonFor(model => model.Esex, "女")女
         </div>
     </div>
@@ -162,19 +163,21 @@
             Etype: $("#Etype").val(),
             TryMoney: $("#TryMoney").val()
         };
-        $.ajax({
-            url: "/Manager/AddEmp",
-            data: { emp: o },
-            type: "post",
-            success: function (data) {
-                layer.open({
-                    content: data
-                    , btn: ['确定']
-                    , yes: function (index, layero) {
-                        location.href = '/Manager/GetAllEmp';
-                    }
-                });
-            }
+        layyi.use('layer', function () {
+            $.ajax({
+                url: "/Manager/AddEmp",
+                data: { emp: o },
+                type: "post",
+                success: function (data) {
+                    layer.open({
+                        content: data
+                        , btn: ['确定']
+                        , yes: function (index, layero) {
+                            location.href = '/Manager/GetAllEmp';
+                        }
+                    });
+                }
+            })
         })
     }
 </script>

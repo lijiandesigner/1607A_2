@@ -15,7 +15,7 @@
     </button>
     <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 </p>
-<table class="layui-table" lay-size="lg">
+<table class="layui-table">
     <tr>
         <th>
             @Html.DisplayName("员工姓名")
@@ -149,6 +149,7 @@
 
     }
     function Del(Id, obj) {
+        layui.use('layer', function () {
         if (confirm("是否开除此员工？")) {
             layui.use('layer', function () { 
             $.ajax({
@@ -159,6 +160,7 @@
                 }
                 })
             })
-        }
+            }
+        })
     }
 </script>

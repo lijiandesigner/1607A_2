@@ -4,13 +4,12 @@
     ViewBag.Title = "审核请假";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 
 <div>
-    <h4>审核请假</h4>
-    <h3> @Html.ActionLink("返回请假列表", "ShowVacate")</h3>
 
+    <i class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; "  onclick="location.href='/Manager/ShowVacate'"></i>
     @Html.HiddenFor(model => model.Id)
     <table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
         <tr>
@@ -32,8 +31,8 @@
         <tr>
             <td></td>
             <td>
-                <input id="Btn1" type="button" value="审核通过" onclick="Yes(@Model.Id)" />
-                <input id="Btn2" type="button" value="驳回" onclick="No(@Model.Id)" />
+                <button class="layui-btn" onclick="Yes(@Model.Id)">审核通过</button>
+                <button class="layui-btn layui-btn-danger" onclick="No(@Model.Id)">驳回</button>
             </td>
         </tr>
     </table>
