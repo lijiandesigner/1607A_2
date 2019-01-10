@@ -4,43 +4,49 @@
     ViewBag.Title = "显示部门信息";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <h2>显示部门信息</h2>
 
 <p>
-    @Html.ActionLink("新增部门", "AddDepart")
+    <button class="layui-btn" onclick="location.href='/Manager/AddDepart'">
+        <i class="layui-icon">&#xe608</i>新增部门
+    </button>
+  
     <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("部门名称")
-        </th>
-        <th>
-            @Html.Label("部门描述")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="layui-table" lay-size="lg">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bremark)
-            </td>
-            <td>
-                @Html.ActionLink("修改", "UpdateDepart", new { id = item.Id }) |
-                @Html.ActionLink("详情", "GetOneDepart", new { id = item.Id }) |
-                <a href="#" onclick="Del(@item.Id,this)">删除</a>
-
-            </td>
+            <th>
+                @Html.Label("部门名称")
+            </th>
+            <th>
+                @Html.Label("部门描述")
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bremark)
+                </td>
+                <td>
+                    <button  class="layui-btn layui-btn-radius"  onclick="location.href='/Manager/UpdateDepart?id=@item.Id'">修改</button>
+                    <button class="layui-btn layui-btn-radius layui-btn-normal" onclick="location.href='/Manager/GetOneDepart?id=@item.Id'">详情</button>
+                    <button class="layui-btn layui-btn-radius layui-btn-danger" onclick="Del(@item.Id,this)">删除</button>
 
+
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 <p>
     <span>
@@ -51,8 +57,13 @@
         <span>页</span>
 
     </span>
-    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
-    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+    <button class="layui-btn" onclick="BtnUp()">
+        <i class="layui-icon">上一页</i>
+    </button>
+    <button class="layui-btn" onclick="BtnDown()">
+        <i class="layui-icon">下一页</i>
+    </button>
+   
 </p>
 <script>
     $(function () {
@@ -95,13 +106,16 @@
 
     }
     function Del(id, obj) {
-        $.ajax({
-            url: "/Manager/DeleteDepart?Id=" + id,
-            success: function (data) {
-                layer.alert(data);
-                $(obj).parent().parent().remove();
-            }
-        })
+        layui.use('layer', function () {
+            $.ajax({
+                url: "/Manager/DeleteDepart?Id=" + id,
+                success: function (data) {
+                    layer.alert(data);
+                    $(obj).parent().parent().remove();
+                }
+            })
+        }
+            )
     }
 </script>
 

@@ -16,7 +16,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取所有员工的工资详细
         /// </summary>
         /// <returns>list集合</returns>
-        [Authorize(Users = "万耀祖")]
         public ActionResult GetAllMoney()
         {
             var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney",null);
