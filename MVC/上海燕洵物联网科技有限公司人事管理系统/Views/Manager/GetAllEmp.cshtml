@@ -6,13 +6,16 @@
 
 <h2>员工信息</h2>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <p>
-    @Html.ActionLink("员工入职", "AddEmp")
+   
+    <button class="layui-btn" onclick="location.href='/Manager/AddEmp'">
+        <i class="layui-icon">&#xe608</i>新增员工
+    </button>
     <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 </p>
-<table class="table">
+<table class="layui-table" lay-size="lg">
     <tr>
         <th>
             @Html.DisplayName("员工姓名")
@@ -76,8 +79,9 @@
             </td>
 
             <td>
-                @Html.ActionLink("员工调职", "UpdateEmp", new { id = item.Id }) |
-                <a href="#" onclick="Del(@item.Id,this)">开除员工</a>
+                <button class="layui-btn layui-btn-radius" onclick="location.href='/Manager/UpdateEmp?id=@item.Id'">员工调职</button>
+                <button class="layui-btn layui-btn-radius layui-btn-danger" onclick="Del(@item.Id,this)">开除员工</button>
+
             </td>
         </tr>
     }
@@ -92,8 +96,12 @@
         <span>页</span>
 
     </span>
-    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
-    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+    <button class="layui-btn" onclick="BtnUp()">
+        <i class="layui-icon">上一页</i>
+    </button>
+    <button class="layui-btn" onclick="BtnDown()">
+        <i class="layui-icon">下一页</i>
+    </button>
 </p>
 <script>
     $(function () {
@@ -104,7 +112,8 @@
             location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
-            layer.alert('已经是首页了');
+            alert('已经是首页了');
+            location.href = "/Manager/GetAllEmp?pageindex=1";
         }
     }
     function BtnDown() {
@@ -112,7 +121,8 @@
             location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
-            layer.alert('已经是尾页了');
+            alert('已经是尾页了');
+            location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#totalpage").text()));
         }
     }
 </script>
@@ -139,19 +149,16 @@
 
     }
     function Del(Id, obj) {
-        layer.confirm('是否开除此员工？',
-            {
-                btn: ['确定', '取消']
-                , yes: function (index, layero) {
-                    $.ajax({
-                        url: "/Manager/DeleteEmp?Id=" + Id,
-                        success: function (data) {
-                            layer.alert(data);
-                            $(obj).parent().parent().remove();
-                        }
-                    })
-                }, btn2: function (index) {
+        if (confirm("是否开除此员工？")) {
+            layui.use('layer', function () { 
+            $.ajax({
+                url: "/Manager/DeleteEmp?Id=" + Id,
+                success: function (data) {
+                    alert(data);
+                    $(obj).parent().parent().remove();
                 }
+                })
             })
+        }
     }
 </script>
