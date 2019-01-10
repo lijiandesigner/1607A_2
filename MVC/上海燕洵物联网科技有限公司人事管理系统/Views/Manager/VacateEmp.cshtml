@@ -71,6 +71,7 @@
             Remark: $("#Remark").text().trim(),
             VacateState: 2
         };
+        layui.use('layer', function () { 
         $.ajax({
             uri: "/Manager/VacateEmp",
             data: { vacate: o },
@@ -79,6 +80,7 @@
                 layer.alert(data);
                 location.href = '/Manager/ShowVacate';
             }
+        })
         })
 
 
@@ -92,14 +94,16 @@
             Remark: $("#Remark").text().trim(),
             VacateState: 3
         };
-        $.ajax({
-            uri: "/Manager/VacateEmp",
-            data: { vacate: o },
-            type: "post",
-            success: function (data) {
-                layer.alert(data);
-                location.href = '/Manager/ShowVacate';
-            }
+        layui.use('layer', function () { 
+            $.ajax({
+                uri: "/Manager/VacateEmp",
+                data: { vacate: o },
+                type: "post",
+                success: function (data) {
+                    layer.alert(data);
+                    location.href = '/Manager/ShowVacate';
+                }
+            })
         })
     }
 </script>
