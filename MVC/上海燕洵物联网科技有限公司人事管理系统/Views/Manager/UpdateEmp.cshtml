@@ -119,10 +119,15 @@
             data: { emp: o, Transferdate: $("#Text1").val() },
             type: "post",
             success: function (data) {
-                layer.alert(data);  
+                layer.open({
+                    content: data
+                    , btn: ['确定']
+                    , yes: function (index, layero) {
+                        location.href = '/Manager/GetAllEmp';
+                    }
+                });
             }
         })
-        location.href = '/Manager/GetAllEmp';
     }
 
 </script>

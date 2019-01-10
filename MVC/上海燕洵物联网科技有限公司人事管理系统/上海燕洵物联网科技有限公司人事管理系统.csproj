@@ -220,7 +220,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\snw.png" />
+    <Content Include="images\万耀祖 .jpg" />
+    <Content Include="images\华家铮 .jpg" />
+    <Content Include="images\王杰 .jpg" />
+    <Content Include="images\张坤敏 .jpg" />
+    <Content Include="images\史宁伟 .jpg" />
     <Content Include="images\loggeduser.png" />
     <Content Include="images\logo.PNG" />
     <Content Include="js\bootstrap-datetimepicker.min.js" />

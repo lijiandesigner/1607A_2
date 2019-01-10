@@ -5,6 +5,8 @@
     ViewBag.Title = "显示员工请假信息";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 <h2>显示员工请假信息</h2>
 <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 <table class="table">
@@ -16,7 +18,7 @@
             员工姓名
         </th>
         <th>
-           请假原因
+            请假原因
         </th>
         <th>
             请假描述
@@ -129,7 +131,7 @@
         $.ajax({
             url: "/Manager/DeleteVacate?Id=" + Id,
             success: function (data) {
-                alert(data);
+                layer.alert(data);
                 $(obj).parent().parent().remove();
                 $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
             }
