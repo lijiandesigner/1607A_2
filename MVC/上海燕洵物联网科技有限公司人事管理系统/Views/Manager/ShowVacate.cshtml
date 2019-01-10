@@ -97,8 +97,7 @@
             location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
-            alert('已经是首页了');
-            location.href = "/Manager/ShowVacate?pageindex=1";
+            layer.alert('已经是首页了');
         }
     }
     function BtnDown() {
@@ -106,8 +105,7 @@
             location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
-            alert('已经是尾页了');
-            location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#totalpage").text()));
+            layer.alert('已经是尾页了');
         }
     }
 

@@ -16,7 +16,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取所有员工的工资详细
         /// </summary>
         /// <returns>list集合</returns>
-        [Authorize(Users = "万耀祖")]
         public ActionResult GetAllMoney()
         {
             var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney",null);
@@ -57,7 +56,14 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             vacate.EmpsId = Convert.ToInt32(Session["EmpsId"]);
             string str = JsonConvert.SerializeObject(vacate);
             string result = HttpClientHelper.Seng("post", "api/Finance/Vacatefinance",str);
-            return Content("<script>alert("+result+"),location.href='/login/Show'</script>");
+            if (result.Contains("成功"))
+            {
+                return Content("提交成功,等待审核");
+            }
+            else
+            {
+                return Content("提交失败,等待审核");
+            }
         }
 
         /// <summary>

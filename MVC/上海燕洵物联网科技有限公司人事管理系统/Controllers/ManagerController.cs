@@ -163,11 +163,11 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("post", "api/ManagerAPI/AddEmp", emps);
             if (str.Contains("成功"))
             {
-                return Content("<script>alert('添加成功'),location.href='/login/Show'</script>");
+                return Content("添加成功");
             }
             else
             {
-                return Content("<script>alert('添加失败'),location.href='/login/Show'</script>");
+                return Content("添加失败");
             }           
         }
         /// <summary>
