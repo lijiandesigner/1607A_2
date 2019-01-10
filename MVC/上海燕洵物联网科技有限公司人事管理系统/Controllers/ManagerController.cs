@@ -41,19 +41,16 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         [HttpPost]
         public ActionResult AddDepart(DepartmentViewModel department)
         {
-
             string str = JsonConvert.SerializeObject(department);
             string str1 = HttpClientHelper.Seng("post", "api/ManagerAPI/AddDepart", str);
             if (str1.Contains("成功"))
             {
-                Response.Write("<script>alert('添加成功')</script>");
+                return Content("添加成功");
             }
             else
             {
-                Response.Write("<script>alert('添加失败')</script>");
+                return Content("添加失败");
             }
-           
-            return View();
         }
         /// <summary>
         /// 修改部门
@@ -75,14 +72,12 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/UpdateDepart", jsonstr);
             if (str.Contains("成功"))
             {
-                Response.Write("<script>alert('修改成功')</script>");
+                return Content("修改成功");
             }
             else
             {
-                Response.Write("<script>alert('修改失败')</script>");
-                
+                return Content("修改失败");
             }
-            return View();
         }
         /// <summary>
         /// 获取一个部门信息
@@ -179,7 +174,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 根据部门查看员工
         /// </summary>
         /// <returns>list集合</returns>
-
         public List<EmpViewModel> SearchEmp(int id)
         {
             string str = HttpClientHelper.Seng("get", "api/ManagerAPI/SearchEmp?id=" + id, null);
@@ -304,7 +298,6 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         public ActionResult DeleteVacate(int id)
         {
             string str = HttpClientHelper.Seng("delete","api/ManagerAPI/DeleteVacate?id="+id,null);
-           
             if(str.Contains("成功"))
             {
                return  Content("删除成功");
@@ -364,30 +357,19 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string str = HttpClientHelper.Seng("put", "api/ManagerAPI/UpdateEmp", jsonstr);
             if (str.Contains("1"))
             {
-                Response.Write("<script>alert('修改成功')</script>");
                 TransferViewModel transfer = new TransferViewModel();
                 transfer.Ename = emp.Ename;
                 transfer.Transfertype = "调职";
                 transfer.Transferdate = Transferdate;
                 string str1 = JsonConvert.SerializeObject(transfer);
                 string strtran= HttpClientHelper.Seng("post", "api/ManagerAPI/AddTranfer", str1);
+                return Content("修改成功");
             }
             else
             {
-                Response.Write("<script>alert('修改失败')</script>");
+                return Content("修改失败");
 
             }
-            
-
-            var Show = HttpClientHelper.Seng("get", "api/Finance/Emps", null);
-            var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(Show);
-            Session["i"]= result;
-
-            int pageindex = 1;
-            ViewBag.currentindex = 1;
-            ViewBag.totaldata = result.Count;
-            ViewBag.totalpage = Math.Round((result.Count() * 1.0) / 5);
-            return View("GetAllEmp",result.Skip((pageindex - 1) * 5).Take(5).ToList());
            
         }
     }

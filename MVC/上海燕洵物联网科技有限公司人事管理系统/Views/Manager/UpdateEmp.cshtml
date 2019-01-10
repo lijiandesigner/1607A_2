@@ -5,37 +5,39 @@
 }
 
 
-<script src="~/Content/jquery-3.1.1.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 <a href="~/My97DatePicker/My97DatePicker.htm"></a>
 <script src="~/My97DatePicker/lang/en.js"></script>
 <script src="~/My97DatePicker/config.js"></script>
 <script src="~/My97DatePicker/calendar.js"></script>
 <script src="~/My97DatePicker/WdatePicker.js"></script>
 
-@Html.HiddenFor(model=>model.Id)
-<table  class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
+@Html.HiddenFor(model => model.Id)
+<table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
     <tr>
         <td>
             @Html.Label("员工姓名：")
-            @ViewBag.Ename
+            <span id="Ename">@ViewBag.Ename</span>
         </td>
-        
+
     </tr>
     <tr>
         <td>
             @Html.Label("部门名称：")
-           @ViewBag.Bname
+            <span id="Bname">@ViewBag.Bname</span>
         </td>
         <td>
             @Html.Label("调入部门：")
-            @Html.DropDownListFor(Model=>Model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
+            @Html.DropDownListFor(Model => Model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
 
         </td>
     </tr>
     <tr>
         <td>
             @Html.Label("职务名称：")
-            @ViewBag.Zname
+            <span id="Zname">@ViewBag.Zname</span>
         </td>
         <td>
             @Html.Label("选择职务：")
@@ -50,13 +52,13 @@
     </tr>
     <tr>
         <td>
-            <input id="Btnsave" type="submit" value="调职"/>
-       
-    </td>
-    <td>
-        <input id="Btnfan" type="button" value="返回" onclick="location.href = '/Manager/GetAllEmp?pageindex=1'"/>
-    </td>
-</tr>
+            <input id="Btnsave" type="submit" onclick="UpdateEmp()" value="调职" />
+
+        </td>
+        <td>
+            <input id="Btnfan" type="button" value="返回" onclick="location.href = '/Manager/GetAllEmp?pageindex=1'" />
+        </td>
+    </tr>
 </table>
 
 
@@ -103,7 +105,26 @@
     function Btnfan() {
         location.href = "/Manager/GetAllEmp?pageindex=1";
     }
-  
+    function UpdateEmp() {
+        var o = {
+            Id: $("#Id").val(),
+            Ename: $('#Ename').text(),
+            Bname: $('#Bname').text(),
+            DepartmentsId: $('#DepartmentsId').val(),
+            Zname: $('#Zname').text(),
+            Eduty: $('#Eduty').val()
+        };
+        $.ajax({
+            url: "/Manager/UpdateEmp",
+            data: { emp: o, Transferdate: $("#Text1").val() },
+            type: "post",
+            success: function (data) {
+                layer.alert(data);  
+            }
+        })
+        location.href = '/Manager/GetAllEmp';
+    }
+
 </script>
 
 

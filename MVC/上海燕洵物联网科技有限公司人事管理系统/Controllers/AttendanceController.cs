@@ -49,11 +49,11 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 result = HttpClientHelper.Seng("post", "api/AttendanceAPI/Punchcard", json);
                 if (result.Contains("成功"))
                 {
-                    Response.Write("<script>layer.alert('打卡成功')</script>");
+                    return Content("打卡成功");
                 }
                 else
                 {
-                    Response.Write("<script>layer.alert('打卡失败')</script>");
+                    return Content("打卡失败");
                 }
             }
             else if(pun.Signoutdate==null)
@@ -63,14 +63,17 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
                 result = HttpClientHelper.Seng("put", "api/AttendanceAPI/UptPunchcard", json);
                 if (result.Contains("成功"))
                 {
-                    Response.Write("<script>alert('打卡成功')</script>");
+                    return Content("打卡成功");
                 }
                 else
                 {
-                    Response.Write("<script>alert('打卡失败')</script>");
+                    return Content("打卡失败");
                 }
+            }
+            else
+            {
+                return Content("你已打过卡,不能重新打卡");
             }            
-            return View();
         }
         /// <summary>
         /// 显示个人工资方法

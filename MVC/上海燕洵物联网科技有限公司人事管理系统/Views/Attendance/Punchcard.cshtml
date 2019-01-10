@@ -8,15 +8,12 @@
 <link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
 <script src="~/Areas/layer/layer.js"></script>
 <div>
-    @using (Html.BeginForm())
-    {
 
         <p style="text-align:center;margin-top:200px;"> <span style="margin-right:50px">员工号</span> <input id="Text1" type="text" style="width:200px;" name="Id" value="@Session["EmpsId"]" /></p>
 
         <p style="text-align:center;margin-top:100px">
-            <input class="btn btn-primary" id="Button1" type="submit" value="打卡" />
+            <input class="btn btn-primary" id="Button1" onclick="Puncharted()" type="submit" value="打卡" />
         </p>
-    }
 </div>
 <script>
     fun();
@@ -37,6 +34,16 @@
 
         })
 
+    }
+    function Puncharted() {
+        $.ajax({
+            url: "/Attendance/Punchcard",
+            data: { Id: $("#Text1").val() },
+            type: "post",
+            success: function (data) {
+                layer.alert(data);
+            }
+        })
     }
 </script>
 
