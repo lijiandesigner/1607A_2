@@ -4,68 +4,87 @@
     ViewBag.Title = "Vacatefinance";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 <h4>员工请假</h4>
 
-@using (Html.BeginForm("Vacatefinance", "Finance", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("请假人", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Text1" type="text" name="Name" value="@Session["Name"]" />
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("请假原因", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.RadioButtonFor(model => model.Cause, "事假", new { @checked = "checked" })事假
-                @Html.RadioButtonFor(model => model.Cause, "产假", new { @checked = "checked" })产假
-                @Html.RadioButtonFor(model => model.Cause, "丧假", new { @checked = "checked" })丧假
-                @Html.RadioButtonFor(model => model.Cause, "病假", new { @checked = "checked" })病假
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Remark)
-                @Html.ValidationMessageFor(model => model.Remark)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="提交" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("请假人", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="Text1" type="text" name="Name" value="@Session["Name"]" />
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
     </div>
-}
-    <script>
-        fun();
-        function fun() {
-            $("[name=Menu]").empty();
-            $.ajax({
-                url: "../Login/ShowMenu",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                    var li = '';
-                    for (var i in data) {
-                        li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
-                    }
-                    $("[name=Menu]").append(li);
+
+    <div class="form-group">
+        @Html.Label("请假原因", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.RadioButtonFor(model => model.Cause, "事假", new { @checked = "checked" })事假
+            @Html.RadioButtonFor(model => model.Cause, "产假", new { @checked = "checked" })产假
+            @Html.RadioButtonFor(model => model.Cause, "丧假", new { @checked = "checked" })丧假
+            @Html.RadioButtonFor(model => model.Cause, "病假", new { @checked = "checked" })病假
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Remark)
+            @Html.ValidationMessageFor(model => model.Remark)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="提交" onclick="AddVacate()" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+<script>
+    fun();
+    function fun() {
+        $("[name=Menu]").empty();
+        $.ajax({
+            url: "../Login/ShowMenu",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var li = '';
+                for (var i in data) {
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
+                $("[name=Menu]").append(li);
+            }
 
-            })
+        })
 
 
-        }
-    </script>
+    }
+    function AddVacate() {
+        var arr = [];
+        $("[Name=Cause]:checked").each(function () {
+            arr.push($(this).val());
+        })
+        var o = {
+            Name: $("#Text1").val(),
+            Cause: arr.toString(),
+            Remark: $("#Remark").val()
+        };
+        $.ajax({
+            url: "/Finance/Vacatefinance",
+            data: { vacate: o },
+            type: "post",
+            success: function (data) {
+                location.href = '/Login/show';
+            }
+        })
+    }
+</script>
 

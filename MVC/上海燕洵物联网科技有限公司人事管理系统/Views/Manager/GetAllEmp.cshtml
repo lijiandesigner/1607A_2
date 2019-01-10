@@ -6,6 +6,8 @@
 
 <h2>员工信息</h2>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 <p>
     @Html.ActionLink("员工入职", "AddEmp")
     <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
@@ -102,8 +104,7 @@
             location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
-            alert('已经是首页了');
-            location.href = "/Manager/GetAllEmp?pageindex=1";
+            layer.alert('已经是首页了');
         }
     }
     function BtnDown() {
@@ -111,8 +112,7 @@
             location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
-            alert('已经是尾页了');
-            location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#totalpage").text()));
+            layer.alert('已经是尾页了');
         }
     }
 </script>
@@ -139,14 +139,19 @@
 
     }
     function Del(Id, obj) {
-        if (confirm("是否开除此员工？")) {
-            $.ajax({
-                url: "/Manager/DeleteEmp?Id=" + Id,
-                success: function (data) {
-                    alert(data);
-                    $(obj).parent().parent().remove();
+        layer.confirm('是否开除此员工？',
+            {
+                btn: ['确定', '取消']
+                , yes: function (index, layero) {
+                    $.ajax({
+                        url: "/Manager/DeleteEmp?Id=" + Id,
+                        success: function (data) {
+                            layer.alert(data);
+                            $(obj).parent().parent().remove();
+                        }
+                    })
+                }, btn2: function (index) {
                 }
             })
-        }
     }
 </script>
