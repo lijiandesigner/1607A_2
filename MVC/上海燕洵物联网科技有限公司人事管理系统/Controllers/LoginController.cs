@@ -31,7 +31,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             string result= HttpClientHelper.Seng("get","api/login/login/?name="+UserName+"&pwd="+UserPwd+" ",null);
             if (result!="null")
             {
-                FormsAuthentication.SetAuthCookie(UserName, true);
+               // FormsAuthentication.SetAuthCookie(UserName, true);
                 var list = JsonConvert.DeserializeObject<AdminViewModel>(result);
                 Session["Name"] = list.UserName;
                 Session["permission"] = list.Permission;
