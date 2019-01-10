@@ -9,7 +9,7 @@
 <link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
 <script src="~/Areas/layer/layer.js"></script>
 
-
+<button class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/ShowDepart'"></button>
 @Html.AntiForgeryToken()
 @Html.HiddenFor(model => model.Id)
 <div class="form-horizontal">
@@ -40,9 +40,7 @@
 </div>
 
 
-<div>
-    @Html.ActionLink("返回部门列表", "ShowDepart")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

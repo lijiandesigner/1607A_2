@@ -9,12 +9,8 @@
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui/layui.js"></script>
 
-
-
-
-
 <div class="form-horizontal">
-
+    <i class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/ShowDepart'"></i>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -35,15 +31,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button class="layui-layer-btn" onclick="AddDepart()">添加</button>
+            <button class="layui-btn layui-btn-normal" onclick="AddDepart()">添加</button>
         </div>
     </div>
 </div>
 
 
-<div>
-    @Html.ActionLink("返回部门列表", "ShowDepart")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -70,18 +64,18 @@
 
     }
     function AddDepart() {
-        layui.use('layer', function () { 
-        var o = {
-            BName: $("#BName").val(),
-            Bremark: $("#Bremark").val()
-        }
-        $.ajax({
-            url: "/Manager/AddDepart",
-            data: { department: o },
-            type: "post",
-            success: function (data) {
-                layer.alert(data);
+        layui.use('layer', function () {
+            var o = {
+                BName: $("#BName").val(),
+                Bremark: $("#Bremark").val()
             }
+            $.ajax({
+                url: "/Manager/AddDepart",
+                data: { department: o },
+                type: "post",
+                success: function (data) {
+                    layer.alert(data);
+                }
             })
         })
     }
