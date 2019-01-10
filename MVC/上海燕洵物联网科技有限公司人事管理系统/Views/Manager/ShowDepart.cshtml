@@ -4,6 +4,8 @@
     ViewBag.Title = "显示部门信息";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 <h2>显示部门信息</h2>
 
 <p>
@@ -21,22 +23,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bremark)
-        </td>
-        <td>
-            @Html.ActionLink("修改", "UpdateDepart", new { id=item.Id }) |
-            @Html.ActionLink("详情", "GetOneDepart", new { id=item.Id }) |
-           <a href="#" onclick="Del(@item.Id,this)">删除</a>
-        
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bremark)
+            </td>
+            <td>
+                @Html.ActionLink("修改", "UpdateDepart", new { id = item.Id }) |
+                @Html.ActionLink("详情", "GetOneDepart", new { id = item.Id }) |
+                <a href="#" onclick="Del(@item.Id,this)">删除</a>
+
+            </td>
+        </tr>
+    }
 
 </table>
 <p>
@@ -48,8 +51,8 @@
         <span>页</span>
 
     </span>
-    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()"/>
-    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()"/>
+    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
+    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
 </p>
 <script>
     $(function () {
@@ -97,7 +100,7 @@
         $.ajax({
             url: "/Manager/DeleteDepart?Id=" + id,
             success: function (data) {
-                alert(data);
+                layer.alert(data);
                 $(obj).parent().parent().remove();
             }
         })

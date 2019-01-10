@@ -4,7 +4,8 @@
     ViewBag.Title = "审核请假";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 
 <div>
     <h4>审核请假</h4>
@@ -36,7 +37,7 @@
             </td>
         </tr>
     </table>
-   
+
 </div>
 
 
@@ -61,22 +62,23 @@
 
 
     }
-    
+
     function Yes(id) {
         var o = {
-            Id:id,
+            Id: id,
             EmpsId: $("#EmpsId").text().trim(),
             Name: $("#Name").text().trim(),
             Cause: $("#Cause").text().trim(),
             Remark: $("#Remark").text().trim(),
-            VacateState:2
+            VacateState: 2
         };
         $.ajax({
             uri: "/Manager/VacateEmp",
-            data: { vacate: o},
-            type:"post",
+            data: { vacate: o },
+            type: "post",
             success: function (data) {
-                alert(data);
+                layer.alert(data);
+                location.href = '/Manager/ShowVacate';
             }
         })
 
@@ -96,7 +98,8 @@
             data: { vacate: o },
             type: "post",
             success: function (data) {
-                alert(data);
+                layer.alert(data);
+                location.href = '/Manager/ShowVacate';
             }
         })
     }
