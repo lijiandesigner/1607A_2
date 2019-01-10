@@ -10,6 +10,7 @@ namespace BLL
     public class FinanceBll
     {
         FinanceDal FinanceDal = new FinanceDal();
+        ManagerDal Managerdal = new ManagerDal();
         /// <summary>
         /// 显示所有员工工资
         /// </summary>
@@ -35,7 +36,12 @@ namespace BLL
         /// <returns></returns>
         public int Dimission(Dimission dimission)
         {
-           return FinanceDal.Dimission(dimission);
+            int result=FinanceDal.Dimission(dimission);
+            if (result>0)
+            {
+                Managerdal.DeleteEmp(dimission.EmpsId);
+            }
+            return result;
         }
     }
 }

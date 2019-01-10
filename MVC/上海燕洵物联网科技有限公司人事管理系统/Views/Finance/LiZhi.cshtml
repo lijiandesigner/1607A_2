@@ -10,10 +10,10 @@
 <script src="~/My97DatePicker/calendar.js"></script>
 <script src="~/My97DatePicker/config.js"></script>
 <link href="~/My97DatePicker/开发包/skin/WdatePicker.css" rel="stylesheet" />
+<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Areas/layer/layer.js"></script>
 
-@using (Html.BeginForm("LiZhi","Finance",FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+
 
     <div class="form-horizontal">
         <h4>员工离职</h4>
@@ -94,11 +94,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="提交" class="btn btn-default" />
+                <input type="submit" value="提交" onclick="AddLiZhi()" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
+
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
@@ -106,7 +106,7 @@
     function fun() {
         $("[name=Menu]").empty();
         $.ajax({
-            url: "../Login/ShowMenu",
+            url: "/Login/ShowMenu",
             contentType: "application/json",
             dataType: "json",
             success: function (data) {
@@ -116,6 +116,35 @@
                     li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
+            }
+
+        })
+    }
+    function AddLiZhi() {
+        var arr = [];
+        $("[name=LeaveType]:checked").each(function () {
+            arr.push($(this).val());
+        })
+        var rea = [];
+        $("[name=Reason]:checked").each(function () {
+            rea.push($(this).val());
+        })
+        var o = {
+            Name: $("[name=Name]").val(),
+            LeaveType: arr.toString(),
+            Yleavedate: $("[name=Yleavedate]").val(),
+            Xsettledate: $("[name=Xsettledate]").val(),
+            Applydate: $("[name=Applydate]").val(),
+            LeaveReason: rea.toString(),
+            Lastworkdate: $("[name=Lastworkdate]").val(),
+            Remark: $("#Remark").val()
+        };
+        $.ajax({
+            url: "/Finance/LiZhi",
+            data: { dimission: o, reason: rea, Name: o.Name },
+            type: "post",
+            success: function (data) {
+                layer.alert(data);
             }
 
         })
