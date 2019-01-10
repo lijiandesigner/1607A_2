@@ -3,39 +3,85 @@
     Layout = null;
 }
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-    <title>Signin Template for Bootstrap</title>
-    <!-- Bootstrap core CSS -->
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="~/Content/signin.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-    <script src="~/Areas/layer/layer.js"></script>
+    <title>HTML5响应式用户登录界面模板</title>
+    <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+    <meta name="author" content="Vincent Garreau" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="~/Login/css/reset.css" rel="stylesheet" />
+    <link href="~/Login/css/style.css" rel="stylesheet" />
 </head>
-<body class="text-center">
-    <form class="form-signin" method="post" action="/Login/GetoneLogin">
-        <img class="mb-4" src="~/images/logo.PNG" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">上海燕讯物联网有限公司</h1>
-        <label for="inputEmail" class="sr-only">账号:</label>
-        <input type="text" name="UserName" id="inputEmail" class="form-control" placeholder="请输入您的帐号" required autofocus>
-        <label for="inputPassword" class="sr-only">密码:</label>
-        <input type="password" name="UserPwd" id="inputPassword" class="form-control" placeholder="请输入您的密码" required>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me">记住密码
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-    </form>
+<body>
+    <div id="particles-js">
+        <form action="~/Login/GetoneLogin" method="post">
+            <div class="login">
+                <div class="login-top">
+                    登录
+                </div>
+                <div class="login-center clearfix">
+                    <div class="login-center-img"><img src="img/name.png" /></div>
+                    <div class="login-center-input">
+                        <input type="text" name="UserName" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" />
+                        <div class="login-center-input-text">用户名</div>
+                    </div>
+                </div>
+                <div class="login-center clearfix">
+                    <div class="login-center-img"><img src="img/password.png" /></div>
+                    <div class="login-center-input">
+                        <input type="password" name="UserPwd" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" />
+                        <div class="login-center-input-text">密码</div>
+                    </div>
+                </div>
+                <input type="submit"  value="登录" class="login-button" style="margin-left:50px;"/>
+            </div>
+        </form>
+        <div class="sk-rotating-plane"></div>
+    </div>
+    <!-- scripts -->
+
+    <script src="~/Login/js/particles.min.js"></script>
+    <script src="~/Login/js/app.js"></script>
+    <script type="text/javascript">
+        function hasClass(elem, cls) {
+            cls = cls || '';
+            if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+            return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
+        }
+
+        function addClass(ele, cls) {
+            if (!hasClass(ele, cls)) {
+                ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
+            }
+        }
+
+        function removeClass(ele, cls) {
+            if (hasClass(ele, cls)) {
+                var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
+                while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+                    newClass = newClass.replace(' ' + cls + ' ', ' ');
+                }
+                ele.className = newClass.replace(/^\s+|\s+$/g, '');
+            }
+        }
+        document.querySelector(".login-button").onclick = function () {
+            addClass(document.querySelector(".login"), "active")
+            setTimeout(function () {
+                addClass(document.querySelector(".sk-rotating-plane"), "active")
+                document.querySelector(".login").style.display = "none"
+            }, 800)
+            setTimeout(function () {
+                removeClass(document.querySelector(".login"), "active")
+                removeClass(document.querySelector(".sk-rotating-plane"), "active")
+                document.querySelector(".login").style.display = "block"
+
+            }, 5000)
+        }
+    </script>
+    <div style="text-align:center;">
+    </div>
 </body>
 </html>
 

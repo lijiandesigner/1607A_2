@@ -284,6 +284,13 @@
     <Content Include="js\select2.min.js" />
     <Content Include="js\toggles.min.js" />
     <Content Include="js\wysihtml5-0.3.0.min.js" />
+    <Content Include="Login\css\reset.css" />
+    <Content Include="Login\css\style.css" />
+    <Content Include="Login\img\bg.jpg" />
+    <Content Include="Login\img\name.png" />
+    <Content Include="Login\img\password.png" />
+    <Content Include="Login\js\app.js" />
+    <Content Include="Login\js\particles.min.js" />
     <Content Include="My97DatePicker\calendar.js" />
     <Content Include="My97DatePicker\config.js" />
     <Content Include="My97DatePicker\lang\en.js" />
