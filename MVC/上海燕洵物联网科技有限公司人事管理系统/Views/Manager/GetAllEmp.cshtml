@@ -149,18 +149,22 @@
 
     }
     function Del(Id, obj) {
+
         layui.use('layer', function () {
-        if (confirm("是否开除此员工？")) {
-            layui.use('layer', function () { 
-            $.ajax({
-                url: "/Manager/DeleteEmp?Id=" + Id,
-                success: function (data) {
-                    alert(data);
-                    $(obj).parent().parent().remove();
-                }
+            layer.confirm('是否开除此员工?',
+                {
+                    btn: ['确定', '取消']
+                    , yes: function (index, layero) {
+                        $.ajax({
+                            url: "/Manager/DeleteEmp?Id=" + Id,
+                            success: function (data) {
+                                alert(data);
+                                $(obj).parent().parent().remove();
+                            }
+                        })
+                    }, btn2: function (index) {
+                    }
                 })
-            })
-            }
         })
     }
 </script>
