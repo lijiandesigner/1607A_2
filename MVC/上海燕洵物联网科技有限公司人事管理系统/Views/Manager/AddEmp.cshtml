@@ -163,7 +163,7 @@
             Etype: $("#Etype").val(),
             TryMoney: $("#TryMoney").val()
         };
-        layyi.use('layer', function () {
+        layui.use('layer', function () {
             $.ajax({
                 url: "/Manager/AddEmp",
                 data: { emp: o },
