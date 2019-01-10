@@ -5,11 +5,11 @@
     ViewBag.Title = "显示员工请假信息";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <h2>显示员工请假信息</h2>
 <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
-<table class="table">
+<table class="layui-table">
     <tr>
         <th>
             员工编号
@@ -53,20 +53,20 @@
             <td>
                 @if (s == StateInfo.审核通过)
                 {
-                    @:已通过
+                   <i>已通过</i> 
                 }
                 else if (s == StateInfo.待审核)
                 {
-                    @Html.ActionLink("审批", "VacateEmp", new { id = item.Id })
+                    <button class="layui-btn layui-btn-radius" onclick="Location.href='/Manager/VacateEmp?id=@item.Id'">审核</button>
                 }
                 else
                 {
-                    @:已驳回
+                   <i>已驳回</i>
 
                 }
             </td>
             <td>
-                <a href="#" onclick="Del(@item.Id,this)">删除</a>
+                <button class="layui-btn layui-btn-radius layui-btn-danger" onclick="Del(@item.Id,this)">删除</button>
             </td>
         </tr>
     }
@@ -81,8 +81,12 @@
         <span>页</span>
 
     </span>
-    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
-    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+    <button class="layui-btn" onclick="BtnUp()">
+        <i class="layui-icon">上一页</i>
+    </button>
+    <button class="layui-btn" onclick="BtnDown()">
+        <i class="layui-icon">下一页</i>
+    </button>
 </p>
 <script>
     $(function () {
@@ -128,6 +132,7 @@
 
     }
     function Del(Id, obj) {
+        layui.use('layer', function () {
         $.ajax({
             url: "/Manager/DeleteVacate?Id=" + Id,
             success: function (data) {
@@ -136,6 +141,7 @@
                 $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
             }
 
+            })
         })
     }
 </script>

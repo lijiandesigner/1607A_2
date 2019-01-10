@@ -5,9 +5,11 @@
     ViewBag.Title = "显示员工请假信息";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <h2>显示个人请假信息</h2>
 <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
-<table class="table">
+<table class="layui-table" lay-size="lg">
     <tr>
         <th>
             员工编号
@@ -24,7 +26,7 @@
         <th>
             请假状态
         </th>
-       
+
     </tr>
 
     @foreach (var item in Model)
@@ -47,8 +49,8 @@
                 @s
             </td>
 
-           
-           
+
+
         </tr>
     }
 
@@ -62,8 +64,12 @@
         <span>页</span>
 
     </span>
-    <input id="BtnUp" type="button" value="上一页" onclick="BtnUp()" />
-    <input id="BtnDown" type="button" value="下一页" onclick="BtnDown()" />
+    <button class="layui-btn" onclick="BtnUp()">
+        <i class="layui-icon">上一页</i>
+    </button>
+    <button class="layui-btn" onclick="BtnDown()">
+        <i class="layui-icon">下一页</i>
+    </button>
 </p>
 <script>
     $(function () {
@@ -109,6 +115,7 @@
 
     }
     function Del(Id, obj) {
+        layui.use('layer', function () {
         $.ajax({
             url: "/Manager/DeleteVacate?Id=" + Id,
             success: function (data) {
@@ -117,6 +124,7 @@
                 $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
             }
 
+            })
         })
     }
 </script>

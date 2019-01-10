@@ -4,105 +4,107 @@
     ViewBag.Title = "添加员工";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <h2>添加员工</h2>
 
-@using (Html.BeginForm("AddEmp", "Manager",FormMethod.Post))
+@using (Html.BeginForm("AddEmp", "Manager", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.Label("职员姓名:", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Ename)
-            @Html.ValidationMessageFor(model => model.Ename)
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("职员性别:", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.RadioButtonFor(model => model.Esex, "男", new { @checked = "checked" })男
-            @Html.RadioButtonFor(model => model.Esex, "女")女
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("职员姓名:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Ename)
+                @Html.ValidationMessageFor(model => model.Ename)
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.Label("部门:", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model=>model.DepartmentsId,ViewBag.Showdepart as IEnumerable<SelectListItem>,"请选择")
-           
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("身份证号:", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Papersnum)
-            @Html.ValidationMessageFor(model => model.Papersnum)
+        <div class="form-group">
+            @Html.Label("职员性别:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.Esex, "男", new { @checked = "checked" })男
+                @Html.RadioButtonFor(model => model.Esex, "女")女
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.Label("部门:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
 
-    <div class="form-group">
-        @Html.Label("联系电话:", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Ephone)
-            @Html.ValidationMessageFor(model => model.Ephone)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(Model=>Model.Eduty,ViewBag.position as IEnumerable<SelectListItem>,"请选择")
+        <div class="form-group">
+            @Html.Label("身份证号:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Papersnum)
+                @Html.ValidationMessageFor(model => model.Papersnum)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("个人邮箱", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
+        <div class="form-group">
+            @Html.Label("联系电话:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Ephone)
+                @Html.ValidationMessageFor(model => model.Ephone)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("合同类型", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <select id="Select1" name="Tracttype">
-                <option>实习合同</option>
-                <option>劳动合同</option>
-            </select>
+        <div class="form-group">
+            @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(Model => Model.Eduty, ViewBag.position as IEnumerable<SelectListItem>, "请选择")
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("员工类型", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <select id="Select1" name="Etype">
-                <option>全职</option>
-                <option>兼职</option>
-                <option>实习</option>
-                <option>外派</option>
-            </select>
+        <div class="form-group">
+            @Html.Label("个人邮箱", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("工资", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.TryMoney)
-            @Html.ValidationMessageFor(model => model.TryMoney)
+        <div class="form-group">
+            @Html.Label("合同类型", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Select1" name="Tracttype">
+                    <option>实习合同</option>
+                    <option>劳动合同</option>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="确定" class="btn btn-default" />
+        <div class="form-group">
+            @Html.Label("员工类型", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Select1" name="Etype">
+                    <option>全职</option>
+                    <option>兼职</option>
+                    <option>实习</option>
+                    <option>外派</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("工资", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TryMoney)
+                @Html.ValidationMessageFor(model => model.TryMoney)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="layui-layer-btn">确定</button>
+            </div>
         </div>
     </div>
-</div>
 }
 
 <div>
@@ -117,7 +119,7 @@
         $.ajax({
             url: '/Manager/ErJi',
             data: { id: id },
-            type:"post",
+            type: "post",
             dataType: "json",
             success: function (data) {
                 for (var i in data) {

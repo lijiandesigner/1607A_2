@@ -4,14 +4,17 @@
     ViewBag.Title = "部门详情";
 }
 <script src="~/Content/jquery-3.1.1.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <h2>部门详情</h2>
 
 <div>
     <table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
         <tr>
-            
+
             <td>
-                <h3>   @Html.Label("部门名称:")</h3></td>
+                <h3>   @Html.Label("部门名称:")</h3>
+            </td>
             <td> <h3> @Html.DisplayFor(model => model.BName)</h3></td>
         </tr>
         <tr>
@@ -21,8 +24,10 @@
         <tr>
             <td></td>
             <td>
-                <h4> @Html.ActionLink("修改部门", "UpdateDepart", new { id = Model.Id })
-                 @Html.ActionLink("返回部门列表", "ShowDepart")</h4>
+                <h4>
+                    @Html.ActionLink("修改部门", "UpdateDepart", new { id = Model.Id })
+                    @Html.ActionLink("返回部门列表", "ShowDepart")
+                </h4>
             </td>
         </tr>
     </table>

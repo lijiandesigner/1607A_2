@@ -6,39 +6,39 @@
 
 <h2>添加部门信息</h2>
 <script src="~/Content/jquery-3.1.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 
 
 
 
 
-    <div class="form-horizontal">
+<div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("添加部门名称：", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.BName)
-                @Html.ValidationMessageFor(model => model.BName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("添加部门描述", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Bremark)
-                @Html.ValidationMessageFor(model => model.Bremark)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="添加部门" onclick="AddDepart()" class="btn btn-default" />
-            </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("添加部门名称：", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.BName)
+            @Html.ValidationMessageFor(model => model.BName)
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.Label("添加部门描述", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Bremark)
+            @Html.ValidationMessageFor(model => model.Bremark)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="layui-layer-btn" onclick="AddDepart()">添加</button>
+        </div>
+    </div>
+</div>
 
 
 <div>
@@ -70,6 +70,7 @@
 
     }
     function AddDepart() {
+        layui.use('layer', function () { 
         var o = {
             BName: $("#BName").val(),
             Bremark: $("#Bremark").val()
@@ -81,6 +82,7 @@
             success: function (data) {
                 layer.alert(data);
             }
+            })
         })
     }
 </script>
