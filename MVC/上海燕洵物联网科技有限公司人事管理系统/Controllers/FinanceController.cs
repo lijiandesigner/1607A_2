@@ -77,13 +77,15 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// <param name="reason"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult LiZhi(DimissionViewModel dimission,string[] reason)
+        public ActionResult LiZhi(DimissionViewModel dimission,string[] reason,string name)
         {
+            var list = HttpClientHelper.Seng("get", "api/Finance/Emps", null);
+            var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(list);
             dimission.LeaveReason= string.Join(",",reason);
-            dimission.EmpsId = Convert.ToInt32( Session["EmpsId"]);
+            dimission.EmpsId = result.Where(a=>a.Ename==name).FirstOrDefault().Id;
             var str= JsonConvert.SerializeObject(dimission);
-            string result = HttpClientHelper.Seng("post", "api/Finance/Dimission",str);
-            return Content("<script>alert(" + result + "),location.href='/login/Show'</script>");
+            string result1 = HttpClientHelper.Seng("post", "api/Finance/Dimission",str);
+            return Content("<script>alert(" + result1 + "),location.href='/login/Show'</script>");
         }
     }
 }

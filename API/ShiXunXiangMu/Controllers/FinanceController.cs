@@ -76,11 +76,11 @@ namespace ShiXunXiangMu.Controllers
             int n = FinanceBll.Dimission(dimission);
             if (n>0)
             {
-                return "提交成功";
+                return "办理离职成功!员工信息已移除!";
             }
             else
             {
-                return "提交失败";
+                return "办理离职失败";
             }
         }
 
