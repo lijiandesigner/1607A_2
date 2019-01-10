@@ -9,7 +9,7 @@
 <h2>部门详情</h2>
 
 <div>
-    <button class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/ShowDepart'"></button>
+    <i class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/ShowDepart'"></i>
     <table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
         <tr>
 
@@ -26,7 +26,7 @@
             <td></td>
             <td>
                 <h4>
-                    @Html.ActionLink("修改部门", "UpdateDepart", new { id = Model.Id })
+                    <button class="layui-btn layui-btn-normal" onclick="location.href='/Manager/UpdateDepart?id=@Model.Id'">修改部门</button>
                 </h4>
             </td>
         </tr>

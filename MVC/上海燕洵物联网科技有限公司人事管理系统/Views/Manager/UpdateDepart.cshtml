@@ -6,15 +6,15 @@
 
 <h2>修改部门信息</h2>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 
-<button class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/ShowDepart'"></button>
-@Html.AntiForgeryToken()
+
 @Html.HiddenFor(model => model.Id)
 <div class="form-horizontal">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
+    <i class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/ShowDepart'"></i>
 
     <div class="form-group">
         @Html.Label("部门名称", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,7 +34,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="修改" onclick="AddDepart()" class="btn btn-default" />
+            <button class="layui-btn layui-btn-normal" onclick="AddDepart()">修改部门</button>
         </div>
     </div>
 </div>
@@ -72,6 +72,7 @@
             BName: $("#BName").val(),
             Bremark: $("#Bremark").val()
         }
+        layui.use('layer', function () { 
         $.ajax({
             url: "/Manager/UpdateDepart",
             data: { department: o },
@@ -79,6 +80,7 @@
             success: function (data) {
                 layer.alert(data);
             }
+        })
         })
     }
 </script>
