@@ -19,7 +19,5 @@ namespace Model
         public string Applydate { get; set; }
         public string LeaveReason { get; set; }
         public string Lastworkdate { get; set; }
-
-        public virtual Emp Emps { get; set; }
     }
 }
