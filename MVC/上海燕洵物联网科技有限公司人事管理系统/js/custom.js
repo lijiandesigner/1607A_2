@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
    "use strict";
 
    // Toggle Left Menu
-   jQuery('.leftpanel .nav-parent > a').live('click', function() {
+   jQuery('.leftpanel .nav-parent > a').on('click', function() {
 
       var parent = jQuery(this).parent();
       var sub = parent.find('> ul');

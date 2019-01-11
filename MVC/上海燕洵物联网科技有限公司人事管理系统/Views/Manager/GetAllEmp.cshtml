@@ -112,8 +112,9 @@
             location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) - 1);
         }
         else {
-            alert('已经是首页了');
-            location.href = "/Manager/GetAllEmp?pageindex=1";
+            layui.use('layer', function () {
+                layer.alert('已经是首页了');
+            })
         }
     }
     function BtnDown() {
@@ -121,8 +122,9 @@
             location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#currentindex").text()) + 1);
         }
         else {
-            alert('已经是尾页了');
-            location.href = "/Manager/GetAllEmp?pageindex=" + Number(Number($("#totalpage").text()));
+            layui.use('layer', function () {
+                layer.alert('已经是尾页了');
+            })
         }
     }
 </script>

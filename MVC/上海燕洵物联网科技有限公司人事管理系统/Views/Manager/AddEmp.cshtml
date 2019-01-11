@@ -3,13 +3,12 @@
 @{
     ViewBag.Title = "添加员工";
 }
-<script src="~/Scripts/jquery-3.3.1.js"></script>
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui/layui.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>添加员工</h2>
 
-
-<form class="layui-form" action="" style="width:500px;">
+<form class="layui-form" method="post" style="width:500px;">
     <i class="layui-icon layui-icon-return" style="font-size: 30px;color: #1E9FFF; " onclick="location.href='/Manager/GetAllEmp'"></i>
     <div class="form-horizontal">
         <hr />
@@ -17,104 +16,112 @@
         <div class="form-group">
             @Html.Label("职员姓名:", htmlAttributes: new { @class = "control-label col-md-2" })
             @*<div class="col-md-10">
-            @Html.TextBoxFor(model => model.Ename)
-            @Html.ValidationMessageFor(model => model.Ename)
-        </div>*@
+                    @Html.TextBoxFor(model => model.Ename)
+                    @Html.ValidationMessageFor(model => model.Ename)
+                </div>*@
 
-               <div class="layui-input-block">
-                      <input id="Ename" type="text" name="Ename" required lay-verify="required" placeholder="请输入员工名称" autocomplete="off" class="layui-input">
-                
+            <div class="layui-input-block">
+                <input id="Ename" type="text" name="Ename" required lay-verify="required" placeholder="请输入员工名称" autocomplete="off" class="layui-input">
+
             </div>
 
 
 
         </div>
 
-                <div class="form-group">
-                    @Html.Label("职员性别:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="layui-input-block">
-                        <input id="Esex" type="radio" name="sex" value="男" title="男">
-                        <input type="radio" name="sex" value="女" title="女" checked>
+        <div class="form-group">
+            @Html.Label("职员性别:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="layui-input-block">
+                <input id="Esex" type="radio" name="sex" value="男" title="男">
+                <input type="radio" name="sex" value="女" title="女" checked>
 
-                    </div>
+            </div>
 
-                </div>
-                <div class="form-group">
-                    @Html.Label("部门:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="layui-input-block">
-                        @Html.DropDownListFor(model => model.DepartmentsId, ViewBag.Showdepart as IEnumerable<SelectListItem>, "请选择")
+        </div>
+        <div class="form-group">
+            @Html.Label("部门:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="layui-input-block">
 
-                    </div>
-                </div>
+                <select id="DepartmentsId" lay-filter="test">
+                    <option value="">请选择</option>
+                    @foreach (SelectListItem item in ViewBag.Showdepart as IEnumerable<SelectListItem>)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    @Html.Label("身份证号:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    @*<div class="col-md-10">
-            @Html.TextBoxFor(model => model.Papersnum)
-            @Html.ValidationMessageFor(model => model.Papersnum)
-        </div>*@ <div class="layui-input-block">
-                        <input id="Papersnum" type="text" name="Papersnum" required lay-verify="required" placeholder="请输入身份证号" autocomplete="off" class="layui-input">
+        <div class="form-group">
+            @Html.Label("身份证号:", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Papersnum)
+                    @Html.ValidationMessageFor(model => model.Papersnum)
+                </div>*@ <div class="layui-input-block">
+                <input id="Papersnum" type="text" name="Papersnum" required lay-verify="required" placeholder="请输入身份证号" autocomplete="off" class="layui-input">
 
-                    </div>
+            </div>
 
-                </div>
+        </div>
 
-                <div class="form-group">
-                    @Html.Label("联系电话:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    @*<div class="col-md-10">
-            @Html.TextBoxFor(model => model.Ephone)
-            @Html.ValidationMessageFor(model => model.Ephone)
-        </div>*@ <div class="layui-input-block">
-                        <input id="Ephone" type="text" name="Ephone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+        <div class="form-group">
+            @Html.Label("联系电话:", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Ephone)
+                    @Html.ValidationMessageFor(model => model.Ephone)
+                </div>*@ <div class="layui-input-block">
+                <input id="Ephone" type="text" name="Ephone" required lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
 
-                    </div>
+            </div>
 
-                </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="layui-input-block">
-                                @Html.DropDownListFor(Model => Model.Eduty, ViewBag.position as IEnumerable<SelectListItem>, "请选择")
-                            </div>
-                        </div>
+        <div class="form-group layui-form" lay-filter="test1">
+            @Html.Label("职务名称:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="layui-input-block">
+                <select id="Eduty" lay-filter="test2">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.Label("个人邮箱", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @*<div class="col-md-10">
-            @Html.TextBoxFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>*@<div class="layui-input-block">
-                                <input id="Email" type="text" name="Email" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+        <div class="form-group">
+            @Html.Label("个人邮箱", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>*@<div class="layui-input-block">
+                <input id="Email" type="text" name="Email" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
 
-                            </div>
-                        </div>
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.Label("合同类型", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @*<div class="col-md-10">
+        <div class="form-group">
+            @Html.Label("合同类型", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
                     <select id="Tracttype" name="Tracttype">
                         <option>实习合同</option>
                         <option>劳动合同</option>
                     </select>
                 </div>*@
-                            <div class="layui-input-block">
-                                <select id="Tracttype" name="Tracttype" lay-verify="required">
-                                    <option></option>
-                                    <option>实习合同</option>
+            <div class="layui-input-block">
+                <select id="Tracttype" name="Tracttype" lay-verify="required">
+                    <option></option>
+                    <option>实习合同</option>
 
-                                    <option>劳动合同</option>
+                    <option>劳动合同</option>
 
 
 
-                                </select>
+                </select>
 
-                            </div>
+            </div>
 
-                        </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.Label("员工类型", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @*<div class="col-md-10">
+        <div class="form-group">
+            @Html.Label("员工类型", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
                     <select id="Etype" name="Etype">
                         <option>全职</option>
                         <option>兼职</option>
@@ -122,56 +129,57 @@
                         <option>外派</option>
                     </select>
                 </div>*@<div class="layui-input-block">
-                                <select id="Etype" name="Etype" lay-verify="required">
+                <select id="Etype" name="Etype" lay-verify="required">
 
-                                    <option></option>
+                    <option></option>
 
-                                    <option>全职</option>
+                    <option>全职</option>
 
-                                    <option>兼职</option>
+                    <option>兼职</option>
 
-                                    <option>实习</option>
+                    <option>实习</option>
 
-                                    <option>外派</option>
+                    <option>外派</option>
 
 
 
-                                </select>
+                </select>
 
-                            </div>
+            </div>
 
-                        </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.Label("工资", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @*<div class="col-md-10">
-                                @Html.TextBoxFor(model => model.TryMoney)
-                                @Html.ValidationMessageFor(model => model.TryMoney)
-                            </div>*@<div class="layui-input-block">
-                                <input id="TryMoney" type="text" name="TryMoney" required lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input">
+        <div class="form-group">
+            @Html.Label("工资", htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
+                    @Html.TextBoxFor(model => model.TryMoney)
+                    @Html.ValidationMessageFor(model => model.TryMoney)
+                </div>*@<div class="layui-input-block">
+                <input id="TryMoney" type="text" name="TryMoney" required lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input">
 
-                            </div>
-                        </div>
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
 
-                                <button class="layui-btn layui-btn-normal" onclick="AddEmp()">添加</button>
-                            </div>
-                        </div>
-                    </div>
+                <button class="layui-btn layui-btn-normal" type="button" onclick="AddEmp()">添加</button>
+            </div>
+        </div>
+    </div>
 </form>
-   
+
 <script>
-        layui.use('form', function () {
-            var from = layui.from;
-        })
-        $("[name=DepartmentsId]").change(function () {
-            var id = $("#DepartmentsId").val();
+    layui.use(['form', 'layer', 'jquery'], function () {
+        var form = layui.form, layer = layui.layer, $ = layui.jquery;
+
+        form.on("select(test)", function (data) {
+            var id = data.value;
+            $("#DepartmentsId").val(id);
             $("#Eduty").empty();
             var str = '<option value="1" >请选择</option>';
             $("#Eduty").append(str);
-            
+
             $.ajax({
                 url: '/Manager/ErJi',
                 data: { id: id },
@@ -182,18 +190,24 @@
                         var str = '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
                         $("#Eduty").append(str);
                     }
-                }
-            
-        })
-        })
-   
+                    form.render('select', 'test1');
 
-       
+                }
+
+            })
+        })
+        form.on("select(test2)", function (data) {
+            var id = data.value;
+            $("#Eduty").val(id);
+        })
+
+
+
         fun();
         function fun() {
             $("[name=Menu]").empty();
             $.ajax({
-                url: "../Login/ShowMenu",
+                url: "/Login/ShowMenu",
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
@@ -209,34 +223,40 @@
 
 
         }
-        function AddEmp() {
-            var o = {
-                DepartmentsId: $("#DepartmentsId").val(),
-                Ename: $("#Ename").val(),
-                Esex: $("#Esex").prop("checked") ? "男" : "女",
-                Papersnum: $("#Papersnum").val(),
-                Ephone: $("#Ephone").val(),
-                Eduty: $("#Eduty").val(),
-                Email: $("#Email").val(),
-                Tracttype: $("#Tracttype").val(),
-                Etype: $("#Etype").val(),
-                TryMoney: $("#TryMoney").val()
-            };
-            layui.use('layer', function () {
-                $.ajax({
-                    url: "/Manager/AddEmp",
-                    data: { emp: o },
-                    type: "post",
-                    success: function (data) {
-                        layer.open({
-                            content: data
-                            , btn: ['确定']
-                            , yes: function (index, layero) {
-                                location.href = '/Manager/GetAllEmp';
-                            }
-                        });
-                    }
-                })
-            })
-        }
- </script>
+       
+    })
+    function AddEmp() {
+        layui.use('layer', function () {           
+                    var o = {
+                        DepartmentsId: $("#DepartmentsId").val(),
+                        Ename: $("#Ename").val(),
+                        Esex: $("#Esex").prop("checked") ? "男" : "女",
+                        Papersnum: $("#Papersnum").val(),
+                        Ephone: $("#Ephone").val(),
+                        Eduty: $("#Eduty").val(),
+                        Email: $("#Email").val(),
+                        Tracttype: $("#Tracttype").val(),
+                        Etype: $("#Etype").val(),
+                        TryMoney: $("#TryMoney").val()
+                    };
+                    $.ajax({
+                        url: "/Manager/AddEmp",
+                        data: { emp: o },
+                        type: "post",
+                        success: function (data) {
+                            layer.open({
+                                content: data
+                                , btn: ['确定']
+                                , yes: function (index, layero) {
+                                    location.href = '/Manager/GetAllEmp';
+                                }
+                            });
+                        }
+                    })
+            
+        })
+        
+    }
+
+
+</script>
