@@ -93,22 +93,22 @@
         $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
     })
     function BtnUp() {
-        layui.use('layer', function () { 
-        if ($("#currentindex").text() != 1) {
-            location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
-        }
-        else {
-            layer.alert('已经是首页了');
+        layui.use('layer', function () {
+            if ($("#currentindex").text() != 1) {
+                location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
+            }
+            else {
+                layer.alert('已经是首页了');
             }
         })
     }
     function BtnDown() {
-        layui.use('layer', function () { 
-        if ($("#currentindex").text() != $("#totalpage").text()) {
-            location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
-        }
-        else {
-            layer.alert('已经是尾页了');
+        layui.use('layer', function () {
+            if ($("#currentindex").text() != $("#totalpage").text()) {
+                location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
+            }
+            else {
+                layer.alert('已经是尾页了');
             }
         })
     }
