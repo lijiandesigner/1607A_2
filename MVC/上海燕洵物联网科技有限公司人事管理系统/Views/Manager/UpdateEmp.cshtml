@@ -6,8 +6,8 @@
 
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
-<script src="~/Areas/layer/layer.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <a href="~/My97DatePicker/My97DatePicker.htm"></a>
 <script src="~/My97DatePicker/lang/en.js"></script>
 <script src="~/My97DatePicker/config.js"></script>
@@ -46,24 +46,35 @@
     </tr>
     <tr>
         <td>
-            @Html.Label("预计调入的时间")
-
-            <input id="Text1" class="Wdate" name="Transferdate" type="text" onclick="WdatePicker()" />
+            @Html.Label("预计调入的时间")            
+        </td>
+        <td>
+            <input name="Transferdate" class="layui-input" id="Text1" type="text" placeholder="预计调入的时间">
         </td>
     </tr>
     <tr>
         <td>
-            <input id="Btnsave" type="submit" onclick="UpdateEmp()" value="调职" />
-
+            @*<input id="Btnsave" class="" type="submit" onclick="UpdateEmp()" value="调职" />*@
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" class="layui-btn layui-btn-normal" onclick="UpdateEmp()">调职</button>
+            </div>
         </td>
         <td>
-            <input id="Btnfan" type="button" value="返回" onclick="location.href = '/Manager/GetAllEmp?pageindex=1'" />
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" class="layui-btn layui-btn-normal" onclick="location.href = '/Manager/GetAllEmp?pageindex=1'">返回</button>
+             </div>
         </td>
     </tr>
 </table>
 
 
 <script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#Text1'
+          })   
+        });
     fun();
     function fun() {
         $("[name=Menu]").empty();
@@ -106,25 +117,30 @@
     function Btnfan() {
         location.href = "/Manager/GetAllEmp?pageindex=1";
     }
-    function UpdateEmp() {
-        var o = {
-            Id: $("#Id").val(),
-            Ename: $('#Ename').text(),
-            Bname: $('#Bname').text(),
-            DepartmentsId: $('#DepartmentsId').val(),
-            Zname: $('#Zname').text(),
-            Eduty: $('#Eduty').val()
-        };
-        $.ajax({
-            url: "/Manager/UpdateEmp",
-            data: { emp: o, Transferdate: $("#Text1").val() },
-            type: "post",
-            success: function (data) {
-                layer.alert(data);
-                location.href = '/Manager/GetAllEmp';
-            }
-        })
-    }
+   
+        function UpdateEmp() {
+            var o = {
+                Id: $("#Id").val(),
+                Ename: $('#Ename').text(),
+                Bname: $('#Bname').text(),
+                DepartmentsId: $('#DepartmentsId').val(),
+                Zname: $('#Zname').text(),
+                Eduty: $('#Eduty').val()
+            };
+            layui.use('layer', function () {
+            $.ajax({
+                url: "/Manager/UpdateEmp",
+                data: { emp: o, Transferdate: $("#Text1").val() },
+                type: "post",
+                success: function (data) {
+                    layer.alert(data);
+                    location.href = '/Manager/GetAllEmp';
+                }
+                })
+            })
+        }
+   
+    
     
 
 </script>
