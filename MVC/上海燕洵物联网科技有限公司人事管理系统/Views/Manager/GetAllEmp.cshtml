@@ -160,7 +160,7 @@
                         $.ajax({
                             url: "/Manager/DeleteEmp?Id=" + Id,
                             success: function (data) {
-                                alert(data);
+                                layer.alert(data);
                                 $(obj).parent().parent().remove();
                             }
                         })

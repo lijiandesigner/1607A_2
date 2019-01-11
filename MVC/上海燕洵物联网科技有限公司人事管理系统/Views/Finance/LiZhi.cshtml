@@ -12,142 +12,191 @@
 <link href="~/My97DatePicker/开发包/skin/WdatePicker.css" rel="stylesheet" />
 <link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
 <script src="~/Areas/layer/layer.js"></script>
+<script src="~/layui/layui.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
 
 
-
+<form class="layui-form" action="" style="width:1100px;">
     <div class="form-horizontal">
-        <h4>员工离职</h4>
+        <h2>员工离职</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-        <div class="form-group">
-            @Html.Label("离职员工", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Text1" type="text" name="Name" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">离职员工</label>
+         <div class="layui-input-block">
+                <input id="Name" type="text" name="Name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">离职意愿</label>
+
+            <div class="layui-input-block">
+                <input id="Radio1" type="radio" name="LeaveType" value="主动" title="主动">
+                <input id="Radio1" type="radio" name="LeaveType" value="被动" title="被动" checked>
+                <input id="Radio1" type="radio" name="LeaveType" value="其他" title="其他">
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("离职意愿", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Radio1" type="radio" name="LeaveType" value="主动" />主动
-                <input id="Radio1" type="radio" name="LeaveType" value="被动" />被动
-                <input id="Radio1" type="radio" name="LeaveType" value="其他" />其他
-                @Html.ValidationMessageFor(model => model.LeaveType, "", new { @class = "text-danger" })
-            </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">预计离职时间</label>
+           
+      <div class="layui-input-block">
+    <input name="Yleavedate" class="layui-input" id="test1" type="text" placeholder="请输入时间">
+    @Html.ValidationMessageFor(model => model.Yleavedate, "", new { @class = "text-danger" })
+</div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("预计离职日期", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Text1" class="Wdate" name="Yleavedate" type="text" onclick="WdatePicker()" />
-                @Html.ValidationMessageFor(model => model.Yleavedate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("薪资结算日期", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Text1" class="Wdate" name="Xsettledate" type="text" onclick="WdatePicker()" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">薪资结算时间</label>
+           
+            <div class="layui-input-block">
+                <input name="Xsettledate" class="layui-input" id="test2" type="text" placeholder="请输入时间">
                 @Html.ValidationMessageFor(model => model.Xsettledate, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("申请日期", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Text1" class="Wdate" name="Applydate" type="text" onclick="WdatePicker()" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请日期</label>
+           
+            <div class="layui-input-block">
+                <input name="Applydate" class="layui-input" id="test3" type="text" placeholder="请输入时间">
                 @Html.ValidationMessageFor(model => model.Applydate, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("离职原因", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Checkbox1" type="checkbox" name="Reason" value="薪资福利" />薪资福利
-                <input id="Checkbox1" type="checkbox" name="Reason" value="工作环境" />工作环境
-                <input id="Checkbox1" type="checkbox" name="Reason" value="工作时间" />工作时间
-                <input id="Checkbox1" type="checkbox" name="Reason" value="家庭原因" />家庭原因
-                <input id="Checkbox1" type="checkbox" name="Reason" value="晋升机会" />晋升机会
-                <input id="Checkbox1" type="checkbox" name="Reason" value="被动离职" />被动离职
-                <input id="Checkbox1" type="checkbox" name="Reason" value="退休" />退休
-                @Html.ValidationMessageFor(model => model.LeaveReason, "", new { @class = "text-danger" })
+        <div class="layui-form-item">
+            <label class="layui-form-label">离职原因</label>
+           
+            <div class="layui-input-block">
+                <input type="checkbox" name="Reason" value="薪资福利" title="薪资福利">
+                <input type="checkbox" name="Reason" value="工作环境" title="工作环境">
+                <input type="checkbox" name="Reason" value="工作时间" title="工作时间">
+                <input type="checkbox" name="Reason" value="家庭原因" title="家庭原因">
+                <input type="checkbox" name="Reason" value="晋升机会" title="晋升机会">
+                <input type="checkbox" name="Reason" value="被动离职" title="被动离职">
+                <input type="checkbox" name="Reason" value="退休" title="退休">
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("最后工作日期", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="Text1" class="Wdate" name="Lastworkdate" type="text" onclick="WdatePicker()" />
-                @Html.ValidationMessageFor(model => model.Lastworkdate, "", new { @class = "text-danger" })
-            </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">最后工作日期</label>
+           
+      <div class="layui-input-block">
+    <input name="Lastworkdate" class="layui-input" id="test4" type="text" placeholder="请输入时间">
+    @Html.ValidationMessageFor(model => model.Lastworkdate, "", new { @class = "text-danger" })
+</div>
+
         </div>
 
-        <div class="form-group">
-            @Html.Label("备注", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+          
+        <div class="layui-input-block">
+                <textarea id="Remark" name="Remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="提交" onclick="AddLiZhi()" class="btn btn-default" />
+                <button type="button" class="layui-btn layui-btn-normal" onclick="AddLiZhi()">添加</button>
             </div>
         </div>
     </div>
+    </form>
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#test1'
+               
+               
+               
+
+            });
+            laydate.render({
+                elem: '#test2'
 
 
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script>
-    fun();
-    function fun() {
-        $("[name=Menu]").empty();
-        $.ajax({
-            url: "/Login/ShowMenu",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                var li = '';
-                for (var i in data) {
-                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+
+
+            });
+            laydate.render({
+                elem: '#test3'
+
+
+
+
+            });
+            laydate.render({
+                elem: '#test4'
+
+
+
+
+            });
+        })
+
+        layui.use('form', function () {
+            var from = layui.from;
+        })
+        fun();
+        function fun() {
+            $("[name=Menu]").empty();
+            $.ajax({
+                url: "/Login/ShowMenu",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var li = '';
+                    for (var i in data) {
+                        li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    }
+                    $("[name=Menu]").append(li);
                 }
-                $("[name=Menu]").append(li);
-            }
 
-        })
-    }
-    function AddLiZhi() {
-        var arr = [];
-        $("[name=LeaveType]:checked").each(function () {
-            arr.push($(this).val());
-        })
-        var rea = [];
-        $("[name=Reason]:checked").each(function () {
-            rea.push($(this).val());
-        })
-        var o = {
-            Name: $("[name=Name]").val(),
-            LeaveType: arr.toString(),
-            Yleavedate: $("[name=Yleavedate]").val(),
-            Xsettledate: $("[name=Xsettledate]").val(),
-            Applydate: $("[name=Applydate]").val(),
-            LeaveReason: rea.toString(),
-            Lastworkdate: $("[name=Lastworkdate]").val(),
-            Remark: $("#Remark").val()
-        };
-        $.ajax({
-            url: "/Finance/LiZhi",
-            data: { dimission: o, reason: rea, Name: o.Name },
-            type: "post",
-            success: function (data) {
-                layer.alert(data);
-            }
+            })
+        }
+        function AddLiZhi() {
+            var arr = [];
+            $("[name=LeaveType]:checked").each(function () {
+                arr.push($(this).val());
+            })
+            var rea = [];
+            $("[name=Reason]:checked").each(function () {
+                rea.push($(this).val());
+            })
+            var o = {
+                Name: $("[name=Name]").val(),
+                LeaveType: arr.toString(),
+                Yleavedate: $("[name=Yleavedate]").val(),
+                Xsettledate: $("[name=Xsettledate]").val(),
+                Applydate: $("[name=Applydate]").val(),
+                LeaveReason: rea.toString(),
+                Lastworkdate: $("[name=Lastworkdate]").val(),
+                Remark: $("#Remark").val()
+            };
+            layui.use('layer', function () {
+            $.ajax({
+                url: "/Finance/LiZhi",
+                data: { dimission: o, reason: rea, Name: o.Name },
+                type: "post",
+                success: function (data) {
+                    layer.alert(data);
+                }
+            })
+            })
+        }
 
-        })
-    }
-</script>
+
+
+       
+
+    </script>
 

@@ -106,16 +106,23 @@
 
     }
     function Del(id, obj) {
+
         layui.use('layer', function () {
-            $.ajax({
-                url: "/Manager/DeleteDepart?Id=" + id,
-                success: function (data) {
-                    layer.alert(data);
-                    $(obj).parent().parent().remove();
-                }
-            })
-        }
-            )
+            layer.confirm('确定删除该部门?',
+                {
+                    btn: ['确定', '取消']
+                    , yes: function (index, layero) {
+                        $.ajax({
+                            url: "/Manager/DeleteDepart?Id=" + id,
+                            success: function (data) {
+                              layer.alert(data);
+                                $(obj).parent().parent().remove();
+                            }
+                        })
+                    }, btn2: function (index) {
+                    }
+                })
+        })
     }
 </script>
 
