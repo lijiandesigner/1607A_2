@@ -489,7 +489,6 @@
     <Content Include="Views\Attendance\VacateAttendance.cshtml" />
     <Content Include="Views\Manager\ShowVacate.cshtml" />
     <Content Include="Views\Manager\UptPunchcard.cshtml" />
-    <Content Include="Views\Finance\ShowMoney.cshtml" />
     <Content Include="Views\Manager\VacateEmp.cshtml" />
     <Content Include="Views\Finance\LiZhi.cshtml" />
     <Content Include="Views\Manager\GetOneDepart.cshtml" />
