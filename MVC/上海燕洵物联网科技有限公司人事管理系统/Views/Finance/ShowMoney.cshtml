@@ -15,44 +15,52 @@
 
 <h4>职员个人信息</h4>
 <hr />
-<table class="table-hover" style=" width:500px;height:350px;margin-left:400px;">
-    <tr>
-        <td>@Html.DisplayName("职员姓名:")</td>
-        <td>@Html.DisplayFor(model => model.Ename)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("职员姓名:")</td>
-        <td>@Html.DisplayFor(model => model.Esex)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("身份证号:")</td>
-        <td>@Html.DisplayFor(model => model.Papersnum)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("手机号:")</td>
-        <td>@Html.DisplayFor(model => model.Ephone)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("职务名称:")</td>
-        <td>@Html.DisplayFor(model => model.Eduty)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("邮箱地址:")</td>
-        <td>@Html.DisplayFor(model => model.Email)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("合同类型:")</td>
-        <td>@Html.DisplayFor(model => model.Tracttype)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("员工类型:")</td>
-        <td>@Html.DisplayFor(model => model.Etype)</td>
-    </tr>
-    <tr>
-        <td>@Html.DisplayName("部门名称:")</td>
-        <td>@Html.DisplayFor(model => model.BName)</td>
-    </tr>
-</table>
+<div>
+    <div style="width:40%;height:100%;float:left;margin-left:100px;">
+
+        <img src="~/images/@Session["Name"] .jpg" style="height:400px;width:400px; margin-left:100px;" />
+    </div>
+    <div style="width:30%; height:100%;float:left">
+        <table class="table-hover" style=" width:500px;height:400px;">
+            <tr>
+                <td>@Html.DisplayName("职员姓名:")</td>
+                <td>@Html.DisplayFor(model => model.Ename)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("职员性别:")</td>
+                <td>@Html.DisplayFor(model => model.Esex)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("身份证号:")</td>
+                <td>@Html.DisplayFor(model => model.Papersnum)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("手机号:")</td>
+                <td>@Html.DisplayFor(model => model.Ephone)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("职务名称:")</td>
+                <td>@Html.DisplayFor(model => model.Eduty)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("邮箱地址:")</td>
+                <td>@Html.DisplayFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("合同类型:")</td>
+                <td>@Html.DisplayFor(model => model.Tracttype)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("员工类型:")</td>
+                <td>@Html.DisplayFor(model => model.Etype)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayName("部门名称:")</td>
+                <td>@Html.DisplayFor(model => model.BName)</td>
+            </tr>
+        </table>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -10,7 +10,8 @@ namespace Model
     {
         public int Id { get; set; }
         public string Pname { get; set; }
-        public int DepartmentsId { get; set; }
+        public int DepartmentsId { get; set; }
+
         public virtual Department Departments { get; set; }
     }
 }
