@@ -44,7 +44,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             var pun = punchcards.Where(c => c.EmpsId == Id&&(Convert.ToDateTime(c.Signindate).ToShortDateString()==DateTime.Now.ToShortDateString()||Convert.ToDateTime(c.Signoutdate).ToShortDateString()==DateTime.Now.ToShortDateString())).FirstOrDefault();
             if (pun == null)
             {
-                PunchcardViewModel punchcard = new PunchcardViewModel() { EmpsId = Id, Signindate = DateTime.Now.ToString() };
+                PunchcardViewModel punchcard = new PunchcardViewModel() { EmpsId = Id, Signindate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") };
                 string json = JsonConvert.SerializeObject(punchcard);
                 result = HttpClientHelper.Seng("post", "api/AttendanceAPI/Punchcard", json);
                 if (result.Contains("成功"))

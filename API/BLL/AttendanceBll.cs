@@ -81,25 +81,40 @@ namespace BLL
             //正常下班
             if (date >= Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 11:30:00")&&date<=Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 13:30:00"))
             {
-                punchcard.AttenState = 1;
+                if (punchcard.AttenState == 1)
+                {
+                    punchcard.AttenState = 1;
+                }
             }
             //正常下班
             else if (date >= Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 18:00:00") && date <= Convert.ToDateTime(DateTime.Now.AddDays(1).ToShortDateString() + " 00:00:00"))
             {
-                punchcard.AttenState = 1;
+                if (punchcard.AttenState==1)
+                {
+                    punchcard.AttenState = 1;
+                }
             }
             //早退
             else if (date < Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 11:30:00")&&date> Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 08:00:00"))
             {
-                punchcard.AttenState = 3;
+                if (punchcard.AttenState == 1)
+                {
+                    punchcard.AttenState = 3;
+                }
             }
             else if (date<Convert.ToDateTime(DateTime.Now.ToShortDateString()+" 18:00:00")&&date> Convert.ToDateTime(DateTime.Now.ToShortDateString() + " 13:30:00"))
             {
-                punchcard.AttenState = 3;
+                if (punchcard.AttenState == 1)
+                {
+                    punchcard.AttenState = 3;
+                }
             }
             else
             {
-                punchcard.AttenState = 5;
+                if (punchcard.AttenState == 1)
+                {
+                    punchcard.AttenState = 3;
+                }
             }
             return dal.UptPunchcard(punchcard);
         }
