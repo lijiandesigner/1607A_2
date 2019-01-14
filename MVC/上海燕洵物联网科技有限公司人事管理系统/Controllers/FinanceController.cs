@@ -23,10 +23,19 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             return View(list);
         }
         /// <summary>
+        /// 获取图表信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetChartsMoney()
+        {
+            var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney", null);
+            return Content(result);
+        }
+        /// <summary>
         /// 显示职工信息
         /// </summary>
         /// <returns>list集合</returns>
-        
+
         public ActionResult ShowMoney()
         {
            var list = HttpClientHelper.Seng("get", "api/Finance/Emps", null);

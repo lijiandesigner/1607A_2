@@ -12,10 +12,12 @@
     <script src="~/Content/jquery-3.1.1.js"></script>
     <link href="~/css/style.default.css" rel="stylesheet" />
     <link href="~/css/helvetica.css.html" rel="stylesheet">
+    <link href="~/Areas/layer/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Areas/layer/layer.js"></script>
 
 </head>
 <body>
-
+    <input id="txtId" type="hidden" style="width:200px;" name="Id" value="@Session["EmpsId"]" />
     <section>
         <div class="leftpanel">
             <div class="logopanel">
@@ -25,9 +27,7 @@
 
             <div class="leftpanelinner">
                 <h5 class="sidebartitle">导航菜单</h5>
-                <ul name="Menu" class="nav nav-pills nav-stacked nav-bracket">
-
-                </ul>
+                <ul name="Menu" class="nav nav-pills nav-stacked nav-bracket"></ul>
             </div>
             <!-- leftpanelinner -->
         </div>
@@ -38,6 +38,9 @@
 
                 <div class="header-right">
                     <ul class="headermenu">
+                        <li class="layui-anim-scaleSpring" style="cursor:pointer;font-size:15px;color:white;list-style: none;display: inline-block;line-height: 30px;text-align: center; width:80px; height:30px;border-radius:10px;background-color:white;color:black;margin-top:10px ;border:1px solid black" onclick="Puncharted()">
+                            打卡
+                        </li>
                         <li>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -103,6 +106,16 @@
             });
 
         });
+        function Puncharted() {
+            $.ajax({
+                url: "/Attendance/Punchcard",
+                data: { Id: $("#txtId").val() },
+                type: "post",
+                success: function (data) {
+                    layer.alert(data);
+                }
+            })
+        }
     </script>
 
     @Scripts.Render("~/bundles/jquery")

@@ -9,13 +9,13 @@
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui/layui.js"></script>
 <p>
-   
+
     <button class="layui-btn" onclick="location.href='/Manager/AddEmp'">
         <i class="layui-icon">&#xe608</i>新增员工
     </button>
     <span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 </p>
-<table class="layui-table">
+@*<table class="layui-table">
     <tr>
         <th>
             @Html.DisplayName("员工姓名")
@@ -86,7 +86,70 @@
         </tr>
     }
 
-</table>
+</table>*@
+<div class="container" style="width:1200px;height:580px;margin:0 auto;background-color:#f2f2f2">
+
+    @foreach (var item in Model)
+    {
+        <table class="col-lg-4" style="width:350px;height:250px;float:left;background-color:#ffffff;margin-left:20px;margin-top:30px;">
+            <tr>
+                <td colspan="5">
+                    <img src="~/images/@item.Ename .jpg"  style="width:100px;height:100px;" />
+                    <div style="margin-left:20px;"> @item.BName</div>
+
+                </td>
+                <td>
+                    <div style="float:right"><input value="@item.Id" name="ckItem" type="checkbox" /></div>
+                    <div> @item.Ename</div>
+                    <div>
+                        @item.Esex
+                    </div>
+                    <div>
+                        @item.Papersnum
+                    </div>
+                    <div>
+                        @item.Ephone
+                    </div>
+                    <div>
+                        @item.Ephone
+                    </div>
+                    <div>
+                        @item.Eduty
+                    </div>
+                    <div>
+                        @item.Email
+                    </div>
+                    <div>
+                        @item.Tracttype
+                    </div>
+                    <div>
+                        @item.Etype
+                    </div>
+                    <div>
+                        <button class="layui-btn layui-btn-radius" onclick="location.href='/Manager/UpdateEmp?id=@item.Id'">员工调职</button>
+                        <button class="layui-btn layui-btn-radius layui-btn-danger" onclick="Del(@item.Id,this)">开除员工</button>
+                    </div>
+                    @*<input id="Checkbox1" type="checkbox" style="float:right" />*@
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <p>
     <span>
         <span>当前第</span>

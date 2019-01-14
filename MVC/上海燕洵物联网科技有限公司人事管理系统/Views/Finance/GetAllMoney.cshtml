@@ -1,7 +1,21 @@
 ﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PaymessageViewModel>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/js/Chart.bundle.js"></script>
 
+<script src="~/js/utils.js"></script>
+<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
 <h4>员工工资列表</h4>
+<div id="container" style="width:60%;margin-left:300px">
+    <canvas id="canvas"></canvas>
+</div>
+
+
 <table class="table">
     <tr>
         <th>
@@ -61,9 +75,10 @@
     function fun() {
         $("[name=Menu]").empty();
         $.ajax({
-            url: "../Login/ShowMenu",
+            url: "/Login/ShowMenu",
             contentType: "application/json",
             dataType: "json",
+            async: false,
             success: function (data) {
                 console.log(data);
                 var li = '';
@@ -77,4 +92,50 @@
 
 
     }
+    var arr = [];
+    var Chartdata = [];
+    $.ajax({
+        url: "/Finance/GetChartsMoney",
+        dataType: "json",
+        contentType: "application/json",
+        async: false,
+        success: function (data) {
+            for (var i in data) {
+                arr.push(data[i].EmpName);
+                Chartdata.push(data[i].PresentMoney);
+            }
+
+        }
+    })
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: arr,
+        datasets: [{
+            label: '员工工资信息',
+            backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: Chartdata
+        }]
+
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: ''
+                }
+            }
+        });
+
+    };
 </script>

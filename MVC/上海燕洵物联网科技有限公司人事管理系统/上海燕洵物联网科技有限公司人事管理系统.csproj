@@ -153,6 +153,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,6 +221,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\Puncharted.jpg" />
     <Content Include="images\万耀祖 .jpg" />
     <Content Include="images\华家铮 .jpg" />
     <Content Include="images\王杰 .jpg" />
@@ -233,6 +235,7 @@
     <Content Include="js\bootstrap-wizard.min.js" />
     <Content Include="js\bootstrap-wysihtml5.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\Chart.bundle.js" />
     <Content Include="js\charts.js" />
     <Content Include="js\chosen.jquery.min.js" />
     <Content Include="js\ckeditor\adapters\jquery.js" />
@@ -283,6 +286,7 @@
     <Content Include="js\retina.min.js" />
     <Content Include="js\select2.min.js" />
     <Content Include="js\toggles.min.js" />
+    <Content Include="js\utils.js" />
     <Content Include="js\wysihtml5-0.3.0.min.js" />
     <Content Include="layui\css\layui.css" />
     <Content Include="layui\css\layui.mobile.css" />
@@ -496,6 +500,7 @@
     <Content Include="Views\Manager\GetAllEmp.cshtml" />
     <Content Include="Views\Manager\UpdateEmp.cshtml" />
     <Content Include="Views\Emps\ShowVacate.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
