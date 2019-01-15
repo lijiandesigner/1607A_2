@@ -104,7 +104,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             List<VacateViewModel> list1 = list.Where(c => c.EmpsId == id).ToList();
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list1.Count();
-            ViewBag.totalpage = Math.Round((list1.Count() * 1.0) / 5);
+            ViewBag.totalpage = (Math.Floor((list1.Count() * 1.0) / 5))+1;
             return View(list1.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         public enum Staticinfo

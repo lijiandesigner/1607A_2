@@ -6,7 +6,24 @@
 
 <h2>打卡记录</h2>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<table class="table">
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<script src="~/js/Chart.bundle.js"></script>
+
+<script src="~/js/utils.js"></script>
+<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
+
+<div id="container" style="width:35%;float:right;margin-top:70px">
+    <canvas id="canvas"></canvas>
+</div>
+<span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
+<table class="table" style="margin-top:50px; width:800px;">
     <tr>
         <th>
             员工编号
@@ -27,57 +44,95 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmpsId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Emps.Ename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Signindate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Signoutdate)
-        </td>
-        <td>
-            @if (item.AttenState == 1)
-            {
-                @:正常工作
-            }
-            else if (item.AttenState == 2)
-            {
-                @:迟到
-            }
-            else if (item.AttenState == 3)
-            {
-                @:早退
-            }
-            else if (item.AttenState == 4)
-            {
-                @:旷工
-            }
-            else
-            {
-                @:未打卡
-            }
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emps.Ename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Signindate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Signoutdate)
+            </td>
+            <td>
+                @if (item.AttenState == 1)
+                {
+                    @:正常工作
+                }
+                else if (item.AttenState == 2)
+                {
+                    @:迟到
+                }
+                else if (item.AttenState == 3)
+                {
+                    @:早退
+                }
+                else if (item.AttenState == 4)
+                {
+                    @:旷工
+                }
+                else
+                {
+                    @:未打卡
+                }
+            </td>
+        </tr>
     }
 
 </table>
+<p>
+    <span>
+        <span>当前第</span>
+        <span id="currentindex">@ViewBag.currentindex</span>
+        <span>页，总共</span>
+        <span id="totalpage">@ViewBag.totalpage</span>
+        <span>页</span>
 
+    </span>
+    <button class="layui-btn" onclick="BtnUp()">
+        <i class="layui-icon">上一页</i>
+    </button>
+    <button class="layui-btn" onclick="BtnDown()">
+        <i class="layui-icon">下一页</i>
+    </button>
+</p>
 @*<ul class="pagination" style="margin-left:300px">
-    <li><a href="#">上一页</a></li>
-    @for (int i = 1; i < Convert.ToInt32(ViewBag.ZongSize); i++)
-    {
-        <li><a href="#">@i</a></li>
-    }
-    <li><a href="#">下一页</a></li>
-</ul>
-<span>当前页 @Session["pageIndex"]</span>*@
+        <li><a href="#">上一页</a></li>
+        @for (int i = 1; i < Convert.ToInt32(ViewBag.ZongSize); i++)
+        {
+            <li><a href="#">@i</a></li>
+        }
+        <li><a href="#">下一页</a></li>
+    </ul>
+    <span>当前页 @Session["pageIndex"]</span>*@
 
 <script>
+    $(function () {
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+    })
+    function BtnUp() {
+        layui.use('layer', function () {
+            if ($("#currentindex").text() != 1) {
+                location.href = "/Attendance/GetAllAttend?pageindex=" + Number(Number($("#currentindex").text()) - 1);
+            }
+            else {
+                layer.alert('已经是首页了');
+            }
+        })
+    }
+    function BtnDown() {
+        layui.use('layer', function () {
+            if ($("#currentindex").text() != $("#totalpage").text()) {
+                location.href = "/Attendance/GetAllAttend?pageindex=" + Number(Number($("#currentindex").text()) + 1);
+            }
+            else {
+                layer.alert('已经是尾页了');
+            }
+        })
+    }
     fun();
     function fun() {
         $("[name=Menu]").empty();
@@ -85,10 +140,11 @@
             url: "../Login/showmenu",
             contentType: "application/json",
             dataType: "json",
+            async: false,
             success: function (data) {
                 var li = '';
                 for (var i in data) {
-                    li += '  <li><a href="'+data[i].href+'"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
+                    li += '  <li><a href="' + data[i].href + '"><i class="fa fa-edit"></i><span>' + data[i].PermissionName + '</span></a></li>';
                 }
                 $("[name=Menu]").append(li);
 
@@ -98,4 +154,67 @@
         })
 
     }
+    var arr = ['正常', '迟到', '旷工', '早退', '未打卡'];
+    var Chartdata = [];
+    var Color = [
+        '#66FFFF', '#ffce56', '#ff6384', '#36a2eb', '#cc65fe',
+    ]
+    var zc = 0, cd = 0, kg = 0, zt = 0, wdk = 0;
+    $.ajax({
+        url: "/Attendance/GetChartsAttend",
+        dataType: "json",
+        contentType: "application/json",
+        async: false,
+        success: function (data) {
+            for (var i in data) {
+                if (data[i].AttenState == 1) {
+                    zc = zc + 1;
+                }
+                else if (data[i].AttenState == 2) {
+                    cd = cd + 1;
+                }
+                else if (data[i].AttenState == 4) {
+                    zt = zt + 1;
+                }
+                else if (data[i].AttenState == 3) {
+                    kg = kg + 1;
+                }
+                else {
+                    wdk = wdk + 1;
+                }
+            }
+            Chartdata = [zc, cd, kg, zt, wdk];
+        }
+    })
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: arr,
+        datasets: [{
+            label: '员工打卡信息',
+            backgroundColor: Color,
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: Chartdata
+        }]
+
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'pie',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: ''
+                }
+            }
+        });
+
+    };
 </script>

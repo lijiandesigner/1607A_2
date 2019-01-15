@@ -95,7 +95,7 @@
     function BtnUp() {
         layui.use('layer', function () {
             if ($("#currentindex").text() != 1) {
-                location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
+                location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) - 1);
             }
             else {
                 layer.alert('已经是首页了');
@@ -105,7 +105,7 @@
     function BtnDown() {
         layui.use('layer', function () {
             if ($("#currentindex").text() != $("#totalpage").text()) {
-                location.href = "/Emps/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
+                location.href = "/Manager/ShowVacate?pageindex=" + Number(Number($("#currentindex").text()) + 1);
             }
             else {
                 layer.alert('已经是尾页了');
@@ -135,15 +135,22 @@
     }
     function Del(Id, obj) {
         layui.use('layer', function () {
-        $.ajax({
-            url: "/Manager/DeleteVacate?Id=" + Id,
-            success: function (data) {
-                layer.alert(data);
-                $(obj).parent().parent().remove();
-                $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
-            }
-
-            })
+            layer.confirm('确认删除吗？', {
+                btn: ['确定', '取消'] //可以无限个按钮
+            }, function (index, layero) {
+                $.ajax({
+                    url: "/Manager/DeleteVacate?Id=" + Id,
+                    success: function (data) {
+                        layer.alert(data);
+                        $("#totaldata").text(Number(Number($("#totaldata").text()) - 1))
+                        location.reload();
+                    }
+                })
+                }, function (index) {
+                    
+            });
+        
         })
+        
     }
 </script>

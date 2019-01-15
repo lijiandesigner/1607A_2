@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<上海燕洵物联网科技有限公司人事管理系统.Models.PaymessageViewModel>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
 <script src="~/js/Chart.bundle.js"></script>
 
 <script src="~/js/utils.js"></script>
@@ -15,7 +17,7 @@
     <canvas id="canvas"></canvas>
 </div>
 
-
+<span>总记录数<span id="totaldata">@ViewBag.totaldata</span>条</span>
 <table class="table">
     <tr>
         <th>
@@ -70,7 +72,46 @@
     }
 
 </table>
+<p>
+    <span>
+        <span>当前第</span>
+        <span id="currentindex">@ViewBag.currentindex</span>
+        <span>页，总共</span>
+        <span id="totalpage">@ViewBag.totalpage</span>
+        <span>页</span>
+
+    </span>
+    <button class="layui-btn" onclick="BtnUp()">
+        <i class="layui-icon">上一页</i>
+    </button>
+    <button class="layui-btn" onclick="BtnDown()">
+        <i class="layui-icon">下一页</i>
+    </button>
+</p>
 <script>
+    $(function () {
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+    })
+    function BtnUp() {
+        layui.use('layer', function () {
+            if ($("#currentindex").text() != 1) {
+                location.href = "/Finance/GetAllMoney?pageindex=" + Number(Number($("#currentindex").text()) - 1);
+            }
+            else {
+                layer.alert('已经是首页了');
+            }
+        })
+    }
+    function BtnDown() {
+        layui.use('layer', function () {
+            if ($("#currentindex").text() != $("#totalpage").text()) {
+                location.href = "/Finance/GetAllMoney?pageindex=" + Number(Number($("#currentindex").text()) + 1);
+            }
+            else {
+                layer.alert('已经是尾页了');
+            }
+        })
+    }
     fun();
     function fun() {
         $("[name=Menu]").empty();

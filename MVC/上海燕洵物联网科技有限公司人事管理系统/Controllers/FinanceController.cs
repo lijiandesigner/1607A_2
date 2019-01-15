@@ -16,11 +16,14 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
         /// 获取所有员工的工资详细
         /// </summary>
         /// <returns>list集合</returns>
-        public ActionResult GetAllMoney()
+        public ActionResult GetAllMoney(int pageindex=1)
         {
             var result = HttpClientHelper.Seng("get", "api/Finance/GetAllMoney",null);
             var list = JsonConvert.DeserializeObject<List<PaymessageViewModel>>(result);
-            return View(list);
+            ViewBag.currentindex = pageindex;
+            ViewBag.totaldata = list.Count();
+            ViewBag.totalpage = Math.Round((list.Count() * 1.0) / 5);
+            return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
         /// 获取图表信息

@@ -139,17 +139,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 <p>
     <span>
         <span>当前第</span>
@@ -168,7 +157,7 @@
 </p>
 <script>
     $(function () {
-        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 6)));
     })
     function BtnUp() {
         if ($("#currentindex").text() != 1) {

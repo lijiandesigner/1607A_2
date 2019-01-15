@@ -118,7 +118,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(list);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = result.Count;
-            ViewBag.totalpage = Math.Round((result.Count() * 1.0) / 6);
+            ViewBag.totalpage = Math.Ceiling((result.Count() * 1.0) / 6);
             return View(result.Skip((pageindex - 1) * 6).Take(6).ToList());
            
         }
