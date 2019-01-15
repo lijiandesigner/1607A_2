@@ -25,7 +25,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             List<DepartmentViewModel> list = JsonConvert.DeserializeObject<List<DepartmentViewModel>>(str);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count;
-            ViewBag.totalpage = Math.Round((list.Count() * 1.0) / 5);
+            ViewBag.totalpage = (Math.Floor((list.Count() * 1.0) / 5))+1;
             return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
@@ -118,7 +118,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             var result = JsonConvert.DeserializeObject<List<TempFinanceViewModel>>(list);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = result.Count;
-            ViewBag.totalpage = Math.Ceiling((result.Count() * 1.0) / 6);
+            ViewBag.totalpage = (Math.Floor((result.Count() * 1.0) / 6))+1;
             return View(result.Skip((pageindex - 1) * 6).Take(6).ToList());
            
         }
@@ -287,7 +287,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             List<VacateViewModel> list = JsonConvert.DeserializeObject<List<VacateViewModel>>(str).OrderBy(c=>c.VacateState).ToList();
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count();
-            ViewBag.totalpage = Math.Round((list.Count() * 1.0)/ 5);
+            ViewBag.totalpage = (Math.Floor((list.Count() * 1.0)/ 5))+1;
             return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>

@@ -157,7 +157,7 @@
 </p>
 <script>
     $(function () {
-        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 6)));
+        $("#totalpage").text(Math.floor((Number($("#totaldata").text()) / 6))+1);
     })
     function BtnUp() {
         if ($("#currentindex").text() != 1) {

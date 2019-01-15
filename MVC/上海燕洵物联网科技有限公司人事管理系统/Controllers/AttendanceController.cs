@@ -26,7 +26,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             var pun = JsonConvert.DeserializeObject<List<PunchcardViewModel>>(json);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = pun.Count();
-            ViewBag.totalpage = Math.Round((pun.Count() * 1.0) / 5);
+            ViewBag.totalpage = Math.Floor((pun.Count() * 1.0) / 5)+1;
             return View(pun.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>

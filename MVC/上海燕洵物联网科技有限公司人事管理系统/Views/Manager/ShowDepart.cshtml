@@ -67,7 +67,7 @@
 </p>
 <script>
     $(function () {
-        $("#totalpage").text(Math.ceil((Number($("#totaldata").text()) / 5)));
+        $("#totalpage").text(Math.floor((Number($("#totaldata").text()) / 5))+1);
     })
     function BtnUp() {
         if ($("#currentindex").text() != 1) {

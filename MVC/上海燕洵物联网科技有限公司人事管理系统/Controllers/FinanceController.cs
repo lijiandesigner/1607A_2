@@ -22,7 +22,7 @@ namespace 上海燕洵物联网科技有限公司人事管理系统.Controllers
             var list = JsonConvert.DeserializeObject<List<PaymessageViewModel>>(result);
             ViewBag.currentindex = pageindex;
             ViewBag.totaldata = list.Count();
-            ViewBag.totalpage = Math.Round((list.Count() * 1.0) / 5);
+            ViewBag.totalpage = Math.Floor((list.Count() * 1.0) / 5)+1;
             return View(list.Skip((pageindex - 1) * 5).Take(5).ToList());
         }
         /// <summary>
