@@ -7,6 +7,7 @@ namespace DAL.Migrations
     {
         public override void Up()
         {
+            AlterColumn("dbo.")
         }
         
         public override void Down()

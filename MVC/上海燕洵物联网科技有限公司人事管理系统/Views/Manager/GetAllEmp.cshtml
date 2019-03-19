@@ -213,7 +213,7 @@
                             url: "/Manager/DeleteEmp?Id=" + Id,
                             success: function (data) {
                                 layer.alert(data);
-                                $(obj).parent().parent().remove();
+                                $(obj).parent().parent().parent().remove();
                             }
                         })
                     }, btn2: function (index) {
